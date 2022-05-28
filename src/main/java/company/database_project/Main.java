@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
         SQL_connection.storeUsers();
         SQL_connection.storeCustomers();
-        //--------------------------
+        SQL_connection.storeDrink();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Company Database");

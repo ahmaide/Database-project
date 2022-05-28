@@ -78,6 +78,7 @@ public class SQL_connection {
         while (rs.next()){
             Drinks.list.put(rs.getString(1), new Drinks(rs.getString(1), rs.getString(2),
                     rs.getString(3), Double.parseDouble(rs.getString(4))));
+            System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3));
         }
         rs.close();
         stmt.close();
