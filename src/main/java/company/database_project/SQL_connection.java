@@ -2,6 +2,7 @@ package company.database_project;
 
 import java.sql.*;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Properties;
 
 public class SQL_connection {
@@ -84,5 +85,41 @@ public class SQL_connection {
         stmt.close();
         con.close();
     }
+
+    public static void storeEmployee() throws SQLException, ClassNotFoundException {
+        Driver.active = new HashMap<Integer, Driver>();
+        Driver.list = new HashMap<Integer, Driver>();
+        Seller.active = new HashMap<Integer, Seller>();
+        Seller.list = new HashMap<Integer, Seller>();
+        connectDB();
+        String sql = "select * from worker";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()){
+            boolean activity = false;
+            if(rs.getString(6)=="1")
+                activity = true;
+            if(rs.getString(5).toLowerCase(Locale.ROOT) == "driver"){
+                Driver d = new Driver(Integer.parseInt(rs.getString(1)), rs.getString(2), Integer.parseInt(rs.getString(3)),
+                        Integer.parseInt(rs.getString(4)), activity, rs.getString(7), rs.getString(8));
+                Driver.list.put(d.getWorker_id(), d);
+                if (activity)
+                    Driver.active.put(d.getWorker_id(), d);
+            }
+            else if(rs.getString(5).toLowerCase(Locale.ROOT) == "sales"){
+                Seller s = new Seller(Integer.parseInt(rs.getString(1)), rs.getString(2), Integer.parseInt(rs.getString(3)),
+                        Integer.parseInt(rs.getString(4)), activity, rs.getString(7), rs.getString(8));
+                Seller.list.put(s.getWorker_id(), s);
+                if (activity)
+                    Seller.active.put(s.getWorker_id(), s);
+            }
+            System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(5));
+        }
+        rs.close();
+        stmt.close();
+        con.close();
+    }
+
+
 
 }
