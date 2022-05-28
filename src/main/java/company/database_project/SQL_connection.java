@@ -99,14 +99,14 @@ public class SQL_connection {
             boolean activity = false;
             if(rs.getString(6)=="1")
                 activity = true;
-            if(rs.getString(5).toLowerCase(Locale.ROOT) == "driver"){
+            if(rs.getString(5).equals("driver")){
                 Driver d = new Driver(Integer.parseInt(rs.getString(1)), rs.getString(2), Integer.parseInt(rs.getString(3)),
                         Integer.parseInt(rs.getString(4)), activity, rs.getString(7), rs.getString(8));
                 Driver.list.put(d.getWorker_id(), d);
                 if (activity)
                     Driver.active.put(d.getWorker_id(), d);
             }
-            else if(rs.getString(5).toLowerCase(Locale.ROOT) == "sales"){
+            else if(rs.getString(5).equals("sales")){
                 Seller s = new Seller(Integer.parseInt(rs.getString(1)), rs.getString(2), Integer.parseInt(rs.getString(3)),
                         Integer.parseInt(rs.getString(4)), activity, rs.getString(7), rs.getString(8));
                 Seller.list.put(s.getWorker_id(), s);
