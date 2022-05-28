@@ -71,6 +71,11 @@
                                        </font>
                                     </Label>
                   <Label layoutX="33.0" layoutY="248.0" prefHeight="21.0" prefWidth="187.0" />
+                  <Button layoutX="284.0" layoutY="296.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="67.0" style="-fx-background-color: #f5e082;" text="Exit" textAlignment="CENTER">
+                     <font>
+                        <Font name="Britannic Bold" size="16.0" />
+                     </font>
+                  </Button>
                                  </children>
                               </AnchorPane>
                           </items>

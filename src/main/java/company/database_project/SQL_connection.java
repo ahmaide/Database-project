@@ -120,6 +120,4 @@ public class SQL_connection {
         con.close();
     }
 
-
-
 }
