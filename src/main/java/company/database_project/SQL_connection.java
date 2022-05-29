@@ -120,4 +120,33 @@ public class SQL_connection {
         con.close();
     }
 
+    public static void storeMachines() throws SQLException, ClassNotFoundException {
+        Stored_machine.list = new HashMap<String, Stored_machine>();
+        Sold_machine.list = new HashMap<String, Sold_machine>();
+        connectDB();
+        String sql = "select m.machine_id, m.type_id, m.shipment_id, sm.warehouse_name " +
+                "from machine m, stored_machine sm where m.machine_id = sm.machine_id;";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()){
+            Stored_machine.list.put(rs.getString(1), new Stored_machine(rs.getString(1),
+                    rs.getString(2), Integer.parseInt(rs.getString(3)), rs.getString(4)));
+            System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(4));
+        }
+
+        sql = "select m.machine_id, m.type_id, m.shipment_id, sm.customer_id " +
+                "from machine m, sold_machine sm where m.machine_id = sm.machine_id;";
+        stmt = con.createStatement();
+        rs = stmt.executeQuery(sql);
+        while (rs.next()){
+            Sold_machine.list.put(rs.getString(1), new Sold_machine(rs.getString(1),
+                    rs.getString(2), Integer.parseInt(rs.getString(3)), Integer.parseInt(rs.getString(4))));
+            System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(4));
+        }
+
+        rs.close();
+        stmt.close();
+        con.close();
+    }
+
 }
