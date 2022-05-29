@@ -121,8 +121,8 @@ public class SQL_connection {
     }
 
     public static void storeMachines() throws SQLException, ClassNotFoundException {
-        Stored_machine.list = new HashMap<String, Stored_machine>();
-        Sold_machine.list = new HashMap<String, Sold_machine>();
+        Stored_machine.list = new HashMap<String, Machine>();
+        Sold_machine.list = new HashMap<String, Machine>();
         connectDB();
         String sql = "select m.machine_id, m.type_id, m.shipment_id, sm.warehouse_name " +
                 "from machine m, stored_machine sm where m.machine_id = sm.machine_id;";

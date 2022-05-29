@@ -1,16 +1,21 @@
 package company.database_project;
 
+import java.util.Map;
+
 public class Arranged_Order extends Order {
 
     String machine_id;
     String delivery_date;
     boolean passed;
     boolean checked;
+    public static Map<Integer, Order> not_Passed;
+    public static Map<Integer, Order> not_Checked;
+    public static Map<Integer, Order> checked_list;
 
     public Arranged_Order(int order_id, String order_date, String machine_type, String pay_method, double discount, int customer_id,
            int worker_id, String machine_id, String delivery_date, boolean passed, boolean checked) {
 
-        super(order_id, order_date, machine_type, pay_method, discount, customer_id, worker_id);
+        super(order_id, order_date, machine_type, pay_method, discount, customer_id, worker_id, true);
         this.machine_id = machine_id;
         this.delivery_date = delivery_date;
         this.passed = passed;

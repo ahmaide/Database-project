@@ -10,9 +10,12 @@ public class Order {
     private double discount;
     private int customer_id;
     private int worker_id;
+    private boolean arranged;
     public static Map<Integer, Order> notSet;
+    public static int last;
 
-    public Order(int order_id, String order_date, String machine_type, String pay_method, double discount, int customer_id, int worker_id) {
+    public Order(int order_id, String order_date, String machine_type, String pay_method, double discount, int customer_id, int worker_id,
+                 boolean arranged) {
         this.order_id = order_id;
         this.order_date = order_date;
         this.machine_type = machine_type;
@@ -20,6 +23,7 @@ public class Order {
         this.discount = discount;
         this.customer_id = customer_id;
         this.worker_id = worker_id;
+        this.arranged = arranged;
     }
 
     public int getOrder_id() {
@@ -76,5 +80,13 @@ public class Order {
 
     public void setWorker_id(int worker_id) {
         this.worker_id = worker_id;
+    }
+
+    public boolean isArranged() {
+        return arranged;
+    }
+
+    public void setArranged(boolean arranged) {
+        this.arranged = arranged;
     }
 }
