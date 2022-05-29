@@ -1,5 +1,7 @@
 package company.database_project;
 
+import java.util.Map;
+
 public class Order {
     private int order_id;
     private String order_date;
@@ -8,6 +10,7 @@ public class Order {
     private double discount;
     private int customer_id;
     private int worker_id;
+    public static Map<Integer, Order> notSet;
 
     public Order(int order_id, String order_date, String machine_type, String pay_method, double discount, int customer_id, int worker_id) {
         this.order_id = order_id;
