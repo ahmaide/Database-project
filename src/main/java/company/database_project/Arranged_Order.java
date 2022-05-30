@@ -4,9 +4,9 @@ import java.util.Map;
 
 public class Arranged_Order extends Order {
 
-    String machine_id;
-    String delivery_date;
-    boolean passed;
+    private String machine_id;
+    private String delivery_date;
+    private boolean passed;
     public static Map<Integer, Order> not_Passed;
     public static Map<Integer, Order> passed_list;
 

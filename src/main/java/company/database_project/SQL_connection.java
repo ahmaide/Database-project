@@ -149,6 +149,21 @@ public class SQL_connection {
         con.close();
     }
 
+    public static void storeDelivery() throws SQLException, ClassNotFoundException {
+        Delivery.list = new HashMap<String, Delivery>();
+        connectDB();
+        String sql = "select * from delivery";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()){
+            Delivery.list.put(rs.getString(1), new Delivery(rs.getString(1), Integer.parseInt(rs.getString(2)),
+                    Double.parseDouble(rs.getString(3)), rs.getString(4)));
+        }
+        rs.close();
+        stmt.close();
+        con.close();
+    }
+
     public static void storeOrders() throws SQLException, ClassNotFoundException {
         Order.notSet = new HashMap<Integer, Order>();
         Arranged_Order.not_Passed = new HashMap<Integer, Order>();
@@ -185,6 +200,7 @@ public class SQL_connection {
                     rs.getString(2), rs.getString(3), rs.getString(4), Double.parseDouble(rs.getString(5)),
                     Integer.parseInt(rs.getString(6)), Integer.parseInt(rs.getString(7)), rs.getString(8),
                     rs.getString(9), passed);
+            Delivery.list.get(o.getDelivery_date()).addToOrders(o);
             if (passed)
                 Arranged_Order.passed_list.put(o.getOrder_id(), o);
             else
@@ -221,5 +237,6 @@ public class SQL_connection {
         String d [] = date.split("");
         return Integer.parseInt(d[0])*10000 + Integer.parseInt(d[1])*100 + Integer.parseInt(d[2]);
     }
+
 
 }

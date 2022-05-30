@@ -5,25 +5,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Delivery {
-    private int date;
+    private String date;
     private int worker_id;
     private double expences;
     private Map<Integer, Order> orders;
+    private String city;
     public static Map<String, Delivery> list;
     public static ArrayList<Integer> months;
 
-    public Delivery(int date, int worker_id, double expences) {
+    public Delivery(String date, int worker_id, double expences, String city) {
         this.date = date;
         this.worker_id = worker_id;
         this.expences = expences;
         this.orders = new HashMap<Integer, Order>();
+        this.city = city;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -47,11 +49,19 @@ public class Delivery {
         return orders;
     }
 
-    public void addToOrders(Map<Integer, Order> orders, Order o) {
+    public void addToOrders(Order o) {
         this.orders.put(o.getOrder_id(), o);
     }
 
     public void deleteFromOrders(int order){
         this.orders.remove(order);
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

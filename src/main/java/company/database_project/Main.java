@@ -16,6 +16,7 @@ public class Main extends Application {
         SQL_connection.storeDrink();
         SQL_connection.storeEmployee();
         SQL_connection.storeMachines();
+        SQL_connection.storeDelivery();
         SQL_connection.storeOrders();
         SQL_connection.storeType_of_machine();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
