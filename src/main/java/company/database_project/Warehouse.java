@@ -10,15 +10,15 @@ public class Warehouse {
     private String address;
     private String type_building;
     private int floors;
-    private Map<String, Stored_machine> machines_list;
-    public static ArrayList<company.database_project.Warehouse> list;
+    private Map<String, Machine> machines_list;
+    public static Map<String, Warehouse> list;
 
     public Warehouse(String name, String address, String type_building, int floors) {
         this.name = name;
         this.address = address;
         this.type_building = type_building;
         this.floors = floors;
-        this.machines_list = new HashMap<String, Stored_machine>();
+        this.machines_list = new HashMap<String, Machine>();
     }
 
     public String getName() {
@@ -53,11 +53,11 @@ public class Warehouse {
         this.floors = floors;
     }
 
-    public Map<String, Stored_machine> getMachines_list() {
+    public Map<String, Machine> getMachines_list() {
         return machines_list;
     }
 
-    public void addToMachines_list(Stored_machine machine) {
+    public void addToMachines_list(Machine machine) {
         this.machines_list.put(machine.machine_id, machine);
     }
 

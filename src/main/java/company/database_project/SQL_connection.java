@@ -54,6 +54,22 @@ public class SQL_connection {
         con.close();
     }
 
+    public static void storeWarehouse() throws SQLException, ClassNotFoundException {
+        Warehouse.list = new HashMap<String, Warehouse>();
+        connectDB();
+        String sql = "select * from warehouse";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()){
+            Warehouse.list.put(rs.getString(1), new Warehouse(rs.getString(1), rs.getString(2),
+                    rs.getString(3), Integer.parseInt(rs.getString(4))));
+            System.out.println(rs.getString(1) + " " + rs.getString(2));
+        }
+        rs.close();
+        stmt.close();
+        con.close();
+    }
+
     public static void storeCustomers() throws SQLException, ClassNotFoundException {
         Customer.list = new HashMap<Integer, Customer>();
         connectDB();
@@ -132,6 +148,7 @@ public class SQL_connection {
             Stored_machine.list.put(rs.getString(1), new Stored_machine(rs.getString(1),
                     rs.getString(2), Integer.parseInt(rs.getString(3)), rs.getString(4)));
             System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(4));
+            Warehouse.list.get(rs.getString(4)).addToMachines_list(Stored_machine.list.get(rs.getString(1)));
         }
 
         sql = "select m.machine_id, m.type_id, m.shipment_id, sm.customer_id " +
