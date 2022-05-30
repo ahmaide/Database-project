@@ -70,6 +70,23 @@ public class SQL_connection {
         con.close();
     }
 
+    public static void storeShipment() throws SQLException, ClassNotFoundException {
+        Shipment.list = new HashMap<Integer, Shipment>();
+        connectDB();
+        String sql = "select * from shipment";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()){
+            Shipment.list.put(Integer.parseInt(rs.getString(1)), new Shipment(Integer.parseInt(rs.getString(1)),
+                    Integer.parseInt(rs.getString(2)), rs.getString(3), rs.getString(4),
+                    Double.parseDouble(rs.getString(5))));
+            System.out.println(rs.getString(1) + " " + rs.getString(2));
+        }
+        rs.close();
+        stmt.close();
+        con.close();
+    }
+
     public static void storeCustomers() throws SQLException, ClassNotFoundException {
         Customer.list = new HashMap<Integer, Customer>();
         connectDB();
@@ -149,6 +166,7 @@ public class SQL_connection {
                     rs.getString(2), Integer.parseInt(rs.getString(3)), rs.getString(4)));
             System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(4));
             Warehouse.list.get(rs.getString(4)).addToMachines_list(Stored_machine.list.get(rs.getString(1)));
+            Shipment.list.get(Integer.parseInt(rs.getString(3))).addToMachines_list(Stored_machine.list.get(rs.getString(1)));
         }
 
         sql = "select m.machine_id, m.type_id, m.shipment_id, sm.customer_id " +
@@ -159,6 +177,7 @@ public class SQL_connection {
             Sold_machine.list.put(rs.getString(1), new Sold_machine(rs.getString(1),
                     rs.getString(2), Integer.parseInt(rs.getString(3)), Integer.parseInt(rs.getString(4))));
             System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(4));
+            Shipment.list.get(Integer.parseInt(rs.getString(3))).addToMachines_list(Sold_machine.list.get(rs.getString(1)));
         }
 
         rs.close();

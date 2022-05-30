@@ -12,6 +12,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
         SQL_connection.storeUsers();
+        SQL_connection.storeWarehouse();
+        SQL_connection.storeShipment();
         SQL_connection.storeCustomers();
         SQL_connection.storeDrink();
         SQL_connection.storeEmployee();
