@@ -204,4 +204,9 @@ public class SQL_connection {
         con.close();
     }
 
+    public static int convertDate(String date){
+        String d [] = date.split("");
+        return Integer.parseInt(d[0])*10000 + Integer.parseInt(d[1])*100 + Integer.parseInt(d[2]);
+    }
+
 }

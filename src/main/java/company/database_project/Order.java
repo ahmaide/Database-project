@@ -1,5 +1,6 @@
 package company.database_project;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Order {
@@ -13,6 +14,7 @@ public class Order {
     private boolean arranged;
     public static Map<Integer, Order> notSet;
     public static int last;
+    public static ArrayList<Integer> months;
 
     public Order(int order_id, String order_date, String machine_type, String pay_method, double discount, int customer_id, int worker_id,
                  boolean arranged) {
