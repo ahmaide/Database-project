@@ -151,9 +151,8 @@ public class SQL_connection {
 
     public static void storeOrders() throws SQLException, ClassNotFoundException {
         Order.notSet = new HashMap<Integer, Order>();
-        Arranged_Order.not_Checked = new HashMap<Integer, Order>();
         Arranged_Order.not_Passed = new HashMap<Integer, Order>();
-        Arranged_Order.checked_list = new HashMap<Integer, Order>();
+        Arranged_Order.passed_list = new HashMap<Integer, Order>();
 
         connectDB();
         String sql = "select * from orders where arranged = false";
@@ -174,28 +173,19 @@ public class SQL_connection {
         stmt = con.createStatement();
         rs = stmt.executeQuery(sql);
         while(rs.next()){
-            boolean passed, checked;
+            boolean passed;
             if(rs.getString(10) == "0"){
                 passed = false;
-                checked = false;
             }
             else{
                 passed = true;
-                if(rs.getString(11) == "0")
-                    checked = false;
-                else
-                    checked = true;
             }
             Arranged_Order o = new Arranged_Order(Integer.parseInt(rs.getString(1)),
                     rs.getString(2), rs.getString(3), rs.getString(4), Double.parseDouble(rs.getString(5)),
                     Integer.parseInt(rs.getString(6)), Integer.parseInt(rs.getString(7)), rs.getString(8),
-                    rs.getString(9), passed, checked);
-            if (passed){
-                if (checked)
-                    Arranged_Order.checked_list.put(o.getOrder_id(), o);
-                else
-                    Arranged_Order.not_Checked.put(o.getOrder_id(), o);
-            }
+                    rs.getString(9), passed);
+            if (passed)
+                Arranged_Order.passed_list.put(o.getOrder_id(), o);
             else
                 Arranged_Order.not_Passed.put(o.getOrder_id(), o);
         }
