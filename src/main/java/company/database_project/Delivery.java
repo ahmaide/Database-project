@@ -50,4 +50,8 @@ public class Delivery {
     public void addToOrders(Map<Integer, Order> orders, Order o) {
         this.orders.put(o.getOrder_id(), o);
     }
+
+    public void deleteFromOrders(int order){
+        this.orders.remove(order);
+    }
 }
