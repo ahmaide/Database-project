@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.LoginController">
                      <children>
                         <SplitPane dividerPositions="0.31994459833795014" layoutX="-8.0" prefHeight="342.0" prefWidth="724.0">
                           <items>
@@ -24,7 +24,7 @@
 
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <Button layoutX="196.0" layoutY="295.0" mnemonicParsing="false" style="-fx-background-color: #f5e082;" text="Log In" textAlignment="CENTER">
+                                    <Button fx:id="login_Button" layoutX="196.0" layoutY="295.0" mnemonicParsing="false" onAction="#loginTry" style="-fx-background-color: #f5e082;" text="Log In" textAlignment="CENTER">
                                        <font>
                                           <Font name="Britannic Bold" size="16.0" />
                                        </font>
@@ -39,8 +39,8 @@
                                           <Font name="Britannic Bold" size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="32.0" layoutY="145.0" />
-                                    <PasswordField layoutX="32.0" layoutY="210.0" />
+                                    <TextField fx:id="username_box" layoutX="32.0" layoutY="145.0" />
+                                    <PasswordField fx:id="password_box" layoutX="32.0" layoutY="210.0" />
                                     <Label layoutX="21.0" layoutY="48.0" text="Espresso soft drinks company sales software">
                                        <font>
                                           <Font name="Broadway" size="19.0" />
@@ -70,8 +70,8 @@
                                           <Font name="System Bold" size="20.0" />
                                        </font>
                                     </Label>
-                  <Label layoutX="33.0" layoutY="248.0" prefHeight="21.0" prefWidth="187.0" />
-                  <Button layoutX="284.0" layoutY="296.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="67.0" style="-fx-background-color: #f5e082;" text="Exit" textAlignment="CENTER">
+                  <Label fx:id="error_text" layoutX="33.0" layoutY="248.0" prefHeight="21.0" prefWidth="187.0" textFill="#ff0400b2" />
+                  <Button fx:id="exit_button" layoutX="284.0" layoutY="296.0" mnemonicParsing="false" onAction="#exit" prefHeight="29.0" prefWidth="67.0" style="-fx-background-color: #f5e082;" text="Exit" textAlignment="CENTER">
                      <font>
                         <Font name="Britannic Bold" size="16.0" />
                      </font>
