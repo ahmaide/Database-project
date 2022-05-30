@@ -4,21 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Type_of_machine {
+public class Machine_type {
     private String id;
     private double price;
     private String cups;
     private String color;
-    private int n_types;
     private Map<String, Drinks> drink_list;
-    public static Map<String, Type_of_machine> list;
+    public static Map<String, Machine_type> list;
 
-    public Type_of_machine(String id, double price, String cups,String color,int n_types) {
+    public Machine_type(String id, double price, String cups, String color) {
         this.id = id;
         this.price = price;
         this.cups = cups;
         this.color = color;
-        this.n_types = n_types;
         this.drink_list = new HashMap<String, Drinks>();
     }
 
@@ -52,14 +50,6 @@ public class Type_of_machine {
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public int getN_types() {
-        return n_types;
-    }
-
-    public void setN_types(int n_types) {
-        this.n_types = n_types;
     }
 
     public Map<String, Drinks> getDrink_list() {

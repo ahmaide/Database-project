@@ -2,7 +2,7 @@ package company.database_project;
 
 import java.util.Map;
 
-public class Driver extends  Employee{
+public class Driver extends Employee{
 
     public static Map<Integer, Driver> active;
     public static Map<Integer, Driver> list;

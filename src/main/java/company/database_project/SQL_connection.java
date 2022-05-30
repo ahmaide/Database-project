@@ -168,8 +168,9 @@ public class SQL_connection {
         }
 
         sql = "select o.order_id, o.order_date, o.type_id, o.pay_method, o.discount, o.customer_id, o.worker_id, " +
-                " ao.delivery_date, ao.machine_id, ao.passed, ao.checked from orders o, arranged_orders ao  " +
+                " ao.delivery_date, ao.machine_id, ao.passed from orders o, arranged_orders ao  " +
                 "    where o.order_id = ao.order_id";
+
         stmt = con.createStatement();
         rs = stmt.executeQuery(sql);
         while(rs.next()){
@@ -188,6 +189,28 @@ public class SQL_connection {
                 Arranged_Order.passed_list.put(o.getOrder_id(), o);
             else
                 Arranged_Order.not_Passed.put(o.getOrder_id(), o);
+        }
+        rs.close();
+        stmt.close();
+        con.close();
+    }
+
+    public static void storeType_of_machine() throws SQLException, ClassNotFoundException {
+        Machine_type.list = new HashMap<String, Machine_type>();
+        connectDB();
+        String sql = "select * from machine_type";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()){
+            Machine_type.list.put(rs.getString(1), new Machine_type(rs.getString(1), Double.parseDouble(rs.getString(2)),
+                    rs.getString(3), rs.getString(4)));
+        }
+
+        sql = "select * from drink_machine";
+        stmt = con.createStatement();
+        rs = stmt.executeQuery(sql);
+        while (rs.next()){
+            Machine_type.list.get(rs.getString(1)).addToDrink_list(Drinks.list.get(rs.getString(2)));
         }
         rs.close();
         stmt.close();
