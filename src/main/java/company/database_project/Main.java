@@ -11,6 +11,19 @@ import java.sql.SQLException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
+        storeAll();
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Company Database");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+    public static void storeAll() throws SQLException, ClassNotFoundException {
         SQL_connection.storeUsers();
         SQL_connection.storeWarehouse();
         SQL_connection.storeShipment();
@@ -21,15 +34,6 @@ public class Main extends Application {
         SQL_connection.storeMachines();
         SQL_connection.storeDelivery();
         SQL_connection.storeOrders();
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Company Database");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 
 
