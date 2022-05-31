@@ -5,27 +5,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Machine_type {
-    private String id;
+    private String type_id;
     private double price;
     private String cups;
     private String color;
     private Map<String, Drinks> drink_list;
     public static Map<String, Machine_type> list;
 
-    public Machine_type(String id, double price, String cups, String color) {
-        this.id = id;
+    public Machine_type(String type_id, double price, String cups, String color) {
+        this.type_id = type_id;
         this.price = price;
         this.cups = cups;
         this.color = color;
         this.drink_list = new HashMap<String, Drinks>();
     }
 
-    public String getId() {
-        return id;
+    public String getType_id() {
+        return type_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setType_id(String type_id) {
+        this.type_id = type_id;
     }
 
     public double getPrice() {
