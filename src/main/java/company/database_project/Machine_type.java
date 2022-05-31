@@ -9,6 +9,7 @@ public class Machine_type {
     private double price;
     private String cups;
     private String color;
+    private int last =0;
     private Map<String, Drinks> drink_list;
     public static Map<String, Machine_type> list;
 
@@ -62,6 +63,14 @@ public class Machine_type {
 
     public void removeFromDrink_list(String drink){
         this.drink_list.remove(drink);
+    }
+
+    public int getLast() {
+        return last;
+    }
+
+    public void setLast(int last) {
+        this.last = last;
     }
 }
 
