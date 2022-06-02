@@ -2,7 +2,7 @@ package company.database_project;
 
 import java.sql.*;
 import java.util.HashMap;
-import java.util.Locale;
+import java.util.Date;
 import java.util.Properties;
 
 public class SQL_connection {
@@ -269,9 +269,10 @@ public class SQL_connection {
         con.close();
     }
 
-    public static int convertDate(String date){
-        String d [] = date.split("");
-        return Integer.parseInt(d[0])*10000 + Integer.parseInt(d[1])*100 + Integer.parseInt(d[2]);
+    public static String dateToday(){
+        Date d = new Date();
+        String s = Integer.toString(d.getYear() + 1900) + "-" + Integer.toString(d.getMonth()) + "-" + Integer.toString(d.getDay());
+        return s;
     }
 
 
