@@ -115,7 +115,7 @@ public class SettingsController implements Initializable {
 
     public void displayDeactive(ActionEvent e) throws IOException {
         if(Users.currentUser.getUsername().toLowerCase(Locale.ROOT).equals("ahmaide")){
-            error_text.setText("That is the Initial account you have it can't be deleted");
+            error_text.setText("That is the Initial account you have it can't be deactivated");
         }
         else {
             SQL_connection.m=1;
