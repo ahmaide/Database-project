@@ -14,6 +14,7 @@ public class SQL_connection {
     private static String port = "3306"; // port that mysql uses
     private static String dbName = "final_project"; //database on mysql to connect to
     private static Connection con;
+    public static int m =0;
 
     public static void ExecuteStatement(String SQL) throws SQLException {
 
@@ -47,7 +48,7 @@ public class SQL_connection {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()){
-            Users.list.put(rs.getString(1).toLowerCase(Locale.ROOT), new Users(rs.getString(1), rs.getString(2)));
+            Users.list.put(rs.getString(1), new Users(rs.getString(1), rs.getString(2)));
             System.out.println(rs.getString(1) + " " + rs.getString(2));
         }
         rs.close();

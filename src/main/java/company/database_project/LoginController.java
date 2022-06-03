@@ -61,8 +61,8 @@ public class LoginController implements Initializable {
                 error_text.setText("Password is empty!");
             }
             else{
-                if(Users.list.containsKey(username_box.getText().toLowerCase(Locale.ROOT))){
-                    if(Users.list.get(username_box.getText().toLowerCase(Locale.ROOT)).getPassword().equals(password_box.getText()) ){
+                if(Users.list.containsKey(username_box.getText())){
+                    if(Users.list.get(username_box.getText()).getPassword().equals(password_box.getText()) ){
                         Users.currentUser = Users.list.get(username_box.getText());
                         Parent root = FXMLLoader.load(getClass().getResource("settings.fxml"));
                         stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
