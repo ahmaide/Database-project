@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.SettingsController">
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.SettingsController">
     <children>
             <Button fx:id="back" layoutX="23.0" layoutY="299.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="67.0" style="-fx-background-color: #f5e082;" text="Back" textAlignment="CENTER">
                 <font>
@@ -30,12 +26,12 @@
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="change_password" layoutX="14.0" layoutY="203.0" mnemonicParsing="false"  prefHeight="29.0" prefWidth="204.0" style="-fx-background-color: #f5e082;" text="Change password" textAlignment="CENTER">
+      <Button fx:id="change_password" layoutX="14.0" layoutY="203.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="204.0" style="-fx-background-color: #f5e082;" text="Change password" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="back1" layoutX="566.0" layoutY="14.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="19.0" style="-fx-background-color: #f5e082;" text="X" textAlignment="CENTER">
+      <Button layoutX="566.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" prefHeight="22.0" prefWidth="19.0" style="-fx-background-color: #f5e082;" text="X" textAlignment="CENTER" fx:id="x">
          <font>
             <Font name="Calibri" size="12.0" />
          </font>
@@ -77,7 +73,7 @@
             </Label>
             <PasswordField fx:id="new_password" prefHeight="31.0" prefWidth="211.0" />
             <Label fx:id="error2" prefHeight="32.0" prefWidth="139.0" text="Password is incorrect" />
-            <Button fx:id="addAcocount" mnemonicParsing="false"  prefHeight="29.0" prefWidth="122.0" style="-fx-background-color: #f5e082;" text="Add account" textAlignment="CENTER">
+            <Button fx:id="addAcocount" mnemonicParsing="false" prefHeight="29.0" prefWidth="122.0" style="-fx-background-color: #f5e082;" text="Add account" textAlignment="CENTER">
                <font>
                   <Font name="Britannic Bold" size="16.0" />
                </font>
@@ -105,7 +101,7 @@
             </Label>
             <PasswordField fx:id="reenterNewPassword" prefHeight="31.0" prefWidth="211.0" />
             <Label fx:id="error3" prefHeight="32.0" prefWidth="139.0" text="Password is incorrect" />
-            <Button fx:id="changePassword" mnemonicParsing="false"  prefHeight="29.0" prefWidth="156.0" style="-fx-background-color: #f5e082;" text="Change Password" textAlignment="CENTER">
+            <Button fx:id="changePassword" mnemonicParsing="false" prefHeight="29.0" prefWidth="156.0" style="-fx-background-color: #f5e082;" text="Change Password" textAlignment="CENTER">
                <font>
                   <Font name="Britannic Bold" size="16.0" />
                </font>

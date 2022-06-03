@@ -1,5 +1,6 @@
 package company.database_project;
 
+import java.util.Locale;
 import java.util.Map;
 
 public class Users {
@@ -9,7 +10,7 @@ public class Users {
     public static Users currentUser;
 
     public Users(String username, String password){
-        this.username = username;
+        this.username = username.toLowerCase(Locale.ROOT);
         this.password = password;
     }
 

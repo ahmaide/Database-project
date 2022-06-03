@@ -3,6 +3,7 @@ package company.database_project;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Properties;
 
 public class SQL_connection {
@@ -46,7 +47,7 @@ public class SQL_connection {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()){
-            Users.list.put(rs.getString(1), new Users(rs.getString(1), rs.getString(2)));
+            Users.list.put(rs.getString(1).toLowerCase(Locale.ROOT), new Users(rs.getString(1), rs.getString(2)));
             System.out.println(rs.getString(1) + " " + rs.getString(2));
         }
         rs.close();

@@ -1,5 +1,6 @@
 package company.database_project;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -9,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,7 +32,7 @@ public class SettingsController implements Initializable {
     private Button change_password;
 
     @FXML
-    private Button back1;
+    private Button x;
 
     @FXML
     private VBox deactive_box;
@@ -94,5 +96,10 @@ public class SettingsController implements Initializable {
             n.setManaged(false);
         }
         change_password_box.setManaged(false);
+    }
+
+    public void exit(ActionEvent e){
+        Stage stage = (Stage) pane.getScene().getWindow();
+        stage.close();
     }
 }
