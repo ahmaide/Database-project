@@ -6,6 +6,7 @@ public class Users {
     private String username;
     private String password;
     public static Map<String, Users> list;
+    public static Users currentUser;
 
     public Users(String username, String password){
         this.username = username;

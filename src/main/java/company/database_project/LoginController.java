@@ -58,6 +58,7 @@ public class LoginController implements Initializable {
                 if(Users.list.containsKey(username_box.getText())){
                     if(Users.list.get(username_box.getText()).getPassword().equals(password_box.getText()) ){
                         System.out.println("It is Trueeeeeeee!");
+                        Users.currentUser = Users.list.get(username_box.getText());
                     }
                     else {
                         error_text.setText("Wrong password");
