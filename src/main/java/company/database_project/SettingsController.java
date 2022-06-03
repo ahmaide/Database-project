@@ -7,10 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -18,6 +15,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -154,4 +152,52 @@ public class SettingsController implements Initializable {
         stage2.show();
     }
 
+    public void addNewUser(ActionEvent e) throws SQLException, ClassNotFoundException {
+        String p1 = password_to_add.getText();
+        String u = new_username.getText();
+        String p2 = new_user_password.getText();
+
+        if(p1.equals("") || p2.equals("") || u.equals("")){
+            new_user_error.setText("All fields should be filled");
+        }
+        else{
+            if(p1.equals(Users.currentUser.getPassword())){
+                if(u.length()<1 || p2.length()<4){
+                    new_user_error.setText("Unaccepted username or password");
+                }
+                else if(Users.list.containsKey(u))
+                    new_user_error.setText("This username already exists");
+                else{
+                    new_user_error.setText("");
+                    SQL_connection.addNewUser(u, p2);
+                    SQL_connection.m=0;
+                    stage2 = (Stage) pane3.getScene().getWindow();
+                    stage2.close();
+                }
+            }
+            else
+                new_user_error.setText("Wrong password");
+        }
+    }
+
+    public void deactivate(ActionEvent e) throws SQLException, ClassNotFoundException, IOException {
+        String p = password_deactive.getText();
+        if(Users.currentUser.getPassword().equals(p)){
+            Users u = Users.currentUser;
+            deactivate_error.setText("");
+            SQL_connection.removeUser(u.getUsername());
+            u = null;
+            stage2 = (Stage) pane2.getScene().getWindow();
+            stage2.close();
+            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+            stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            SQL_connection.m = 0;
+            stage.setScene(scene);
+            stage.show();
+        }
+        else{
+            deactivate_error.setText("Password is incorrect");
+        }
+    }
 }

@@ -277,5 +277,22 @@ public class SQL_connection {
         return s;
     }
 
+    public static void addNewUser(String username, String password) throws SQLException, ClassNotFoundException {
+        Users.list.put(username, new Users(username, password));
+        connectDB();
+        ExecuteStatement("insert into users(username, password0) " +
+                "values('" + username + "', '" + password +"');");
+        con.close();
+
+    }
+
+    public static void removeUser(String username) throws SQLException, ClassNotFoundException {
+        Users u = Users.list.get(username);
+        Users.list.remove(u);
+        connectDB();
+        ExecuteStatement("delete from users where username ='" + username +"'; ");
+        con.close();
+
+    }
 
 }
