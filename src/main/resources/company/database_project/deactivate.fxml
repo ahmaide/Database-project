@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="pane2" prefHeight="205.0" prefWidth="371.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.SettingsController">
+   <children>
+      <Label fx:id="error1" layoutX="14.0" layoutY="90.0" prefHeight="31.0" prefWidth="139.0" text="Password is incorrect" textFill="#d31414" />
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="45.0" prefWidth="311.0" text="Enter your password to deactiviate">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="password_deactive" layoutX="14.0" layoutY="59.0" prefHeight="31.0" prefWidth="211.0" />
+      <Button fx:id="deactive3" layoutX="14.0" layoutY="121.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="122.0" style="-fx-background-color: #f5e082;" text="Deactive" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="334.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit2" prefHeight="22.0" prefWidth="19.0" style="-fx-background-color: #f5e082;" text="X" textAlignment="CENTER" fx:id="x2">
+         <font>
+            <Font name="Calibri" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

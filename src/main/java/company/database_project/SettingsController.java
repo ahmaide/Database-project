@@ -2,8 +2,11 @@ package company.database_project;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -11,13 +14,24 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
     @FXML
     private AnchorPane pane;
+
+    @FXML
+    private AnchorPane pane2;
+
+    @FXML
+    private AnchorPane pane3;
+
+    @FXML
+    private AnchorPane pane4;
 
     @FXML
     private Button back;
@@ -35,71 +49,80 @@ public class SettingsController implements Initializable {
     private Button x;
 
     @FXML
-    private VBox deactive_box;
+    private Stage stage;
 
     @FXML
-    private PasswordField password_deactive;
+    private Stage stage2;
 
-    @FXML
-    private Label error1;
-
-    @FXML
-    private Button deactive3;
-
-    @FXML
-    private VBox new_account_box;
-
-    @FXML
-    private PasswordField password_box1;
-
-    @FXML
-    private TextField new_username;
-
-    @FXML
-    private PasswordField new_password;
-
-    @FXML
-    private Label error2;
-
-    @FXML
-    private Button addAcocount;
-
-    @FXML
-    private VBox change_password_box;
-
-    @FXML
-    private PasswordField currentPassword_fornew;
-
-    @FXML
-    private PasswordField newPassword2;
-
-    @FXML
-    private PasswordField reenterNewPassword;
-
-    @FXML
-    private Label error3;
-
-    @FXML
-    private Button changePassword;
+    static int m=0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for(Node n : deactive_box.getChildren()){
-            n.setManaged(false);
-        }
-        deactive_box.setManaged(false);
-        for(Node n : new_account_box.getChildren()){
-            n.setManaged(false);
-        }
-        new_account_box.setManaged(false);
-        for(Node n : change_password_box.getChildren()){
-            n.setManaged(false);
-        }
-        change_password_box.setManaged(false);
+
     }
 
     public void exit(ActionEvent e){
-        Stage stage = (Stage) pane.getScene().getWindow();
+        stage = (Stage) pane.getScene().getWindow();
         stage.close();
+    }
+
+
+    public void exit2(ActionEvent e){
+        stage2 = (Stage) pane2.getScene().getWindow();
+        stage2.close();
+        m=0;
+    }
+
+    public void exit3(ActionEvent e){
+        stage2 = (Stage) pane3.getScene().getWindow();
+        stage2.close();
+        m=0;
+    }
+
+    public void exit4(ActionEvent e){
+        stage2 = (Stage) pane4.getScene().getWindow();
+        stage2.close();
+        m=0;
+    }
+
+    public void back(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void displayDeactive(ActionEvent e) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("deactivate.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage2 = new Stage();
+        stage2.setScene(scene);
+        stage2.setTitle("Deactiviate");
+        stage2. initStyle(StageStyle. UNDECORATED);
+        stage2.show();
+        m=1;
+    }
+
+    public void displayNewAccount(ActionEvent e) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newUser.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage2 = new Stage();
+        stage2.setScene(scene);
+        stage2.setTitle("Add new Account");
+        stage2. initStyle(StageStyle. UNDECORATED);
+        stage2.show();
+        m=2;
+    }
+
+    public void displayChangePassword(ActionEvent e) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("changePassword.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage2 = new Stage();
+        stage2.setScene(scene);
+        stage2.setTitle("Change Password");
+        stage2. initStyle(StageStyle. UNDECORATED);
+        stage2.show();
+        m=3;
     }
 }
