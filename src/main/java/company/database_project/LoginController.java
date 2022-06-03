@@ -64,7 +64,7 @@ public class LoginController implements Initializable {
                 if(Users.list.containsKey(username_box.getText())){
                     if(Users.list.get(username_box.getText()).getPassword().equals(password_box.getText()) ){
                         Users.currentUser = Users.list.get(username_box.getText());
-                        Parent root = FXMLLoader.load(getClass().getResource("settings.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("mainPage.fxml"));
                         stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
                         Scene scene = new Scene(root);
                         stage.setScene(scene);

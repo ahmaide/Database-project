@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="368.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.SettingsController">
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.SettingsController">
     <children>
-            <Button fx:id="back" layoutX="23.0" layoutY="299.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="67.0" style="-fx-background-color: #f5e082;" text="Back" textAlignment="CENTER">
+            <Button fx:id="back" layoutX="20.0" layoutY="306.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="67.0" style="-fx-background-color: #f5e082;" text="Back" textAlignment="CENTER">
                 <font>
                     <Font name="Britannic Bold" size="16.0" />
                 </font>
@@ -17,26 +17,26 @@
                     <Font name="Calibri Light" size="40.0" />
                 </font>
             </Label>
-      <Button fx:id="deactive" layoutX="14.0" layoutY="113.0" mnemonicParsing="false" onAction="#displayDeactive" prefHeight="29.0" prefWidth="204.0" style="-fx-background-color: #f5e082;" text="Deactivate Account" textAlignment="CENTER">
+      <Button fx:id="deactive" layoutX="20.0" layoutY="113.0" mnemonicParsing="false" onAction="#displayDeactive" prefHeight="29.0" prefWidth="204.0" style="-fx-background-color: #f5e082;" text="Deactivate Account" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="newAccount" layoutX="14.0" layoutY="157.0" mnemonicParsing="false" onAction="#displayNewAccount" prefHeight="29.0" prefWidth="204.0" style="-fx-background-color: #f5e082;" text="Add A new Account" textAlignment="CENTER">
+      <Button fx:id="newAccount" layoutX="260.0" layoutY="113.0" mnemonicParsing="false" onAction="#displayNewAccount" prefHeight="29.0" prefWidth="204.0" style="-fx-background-color: #f5e082;" text="Add A new Account" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="change_password" layoutX="14.0" layoutY="203.0" mnemonicParsing="false" onAction="#displayChangePassword" prefHeight="29.0" prefWidth="204.0" style="-fx-background-color: #f5e082;" text="Change password" textAlignment="CENTER">
+      <Button fx:id="change_password" layoutX="500.0" layoutY="113.0" mnemonicParsing="false" onAction="#displayChangePassword" prefHeight="29.0" prefWidth="204.0" style="-fx-background-color: #f5e082;" text="Change password" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button layoutX="323.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" prefHeight="22.0" prefWidth="19.0" style="-fx-background-color: #f5e082;" text="X" textAlignment="CENTER" fx:id="x">
+      <Button layoutX="695.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" prefHeight="22.0" prefWidth="19.0" style="-fx-background-color: #f5e082;" text="X" textAlignment="CENTER" fx:id="x">
          <font>
             <Font name="Calibri" size="12.0" />
          </font>
       </Button>
-      <Label fx:id="error_text" layoutX="14.0" layoutY="241.0" prefHeight="29.0" prefWidth="348.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
+      <Label fx:id="error_text" layoutX="14.0" layoutY="171.0" prefHeight="29.0" prefWidth="348.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
     </children>
 </AnchorPane>
