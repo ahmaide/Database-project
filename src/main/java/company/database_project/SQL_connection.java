@@ -292,7 +292,6 @@ public class SQL_connection {
         connectDB();
         ExecuteStatement("delete from users where username ='" + username +"'; ");
         con.close();
-
     }
 
     public static void changePassword(String password) throws SQLException, ClassNotFoundException {

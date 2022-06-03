@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="370.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.MainPageController">
+    <children>
+        <ImageView fitHeight="353.0" fitWidth="238.0" layoutX="14.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../Images/logo.jpg" />
+            </image>
+        </ImageView>
+      <Label layoutX="277.0" layoutY="36.0" text="Espresso soft drinks company sales software">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+         <textFill>
+            <RadialGradient centerX="1.0" centerY="0.5" proportional="false" radius="0.5">
+               <stops>
+                  <Stop color="#f5e082" />
+                  <Stop color="#f5e082" offset="0.006711409395973154" />
+                  <Stop color="BLACK" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Label>
+      <Button layoutX="695.0" layoutY="14.0" mnemonicParsing="false"  prefHeight="22.0" prefWidth="19.0" style="-fx-background-color: #f5e082;" text="X" textAlignment="CENTER" fx:id="x">
+         <font>
+            <Font name="Calibri" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="Vwarehouses" layoutX="277.0" layoutY="80.0" mnemonicParsing="false"  prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Warehouses" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="Vdriks" layoutX="488.0" layoutY="80.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Drinks" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="Vorders" layoutX="488.0" layoutY="200.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Orders" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="Vcustomers" layoutX="277.0" layoutY="200.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Customers" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="Vdeliveries" layoutX="277.0" layoutY="260.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Deliveries" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="Vshipments" layoutX="488.0" layoutY="140.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Shipments" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="Vtypes" layoutX="277.0" layoutY="140.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Types of Machines" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="Vemployees" layoutX="488.0" layoutY="260.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Employees" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="settings" layoutX="499.0" layoutY="324.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="81.0" style="-fx-background-color: #f5e082;" text="Settings" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="signOut" layoutX="598.0" layoutY="324.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="81.0" style="-fx-background-color: #f5e082;" text="Sign out" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>
