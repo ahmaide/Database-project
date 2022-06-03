@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -198,6 +197,28 @@ public class SettingsController implements Initializable {
         }
         else{
             deactivate_error.setText("Password is incorrect");
+        }
+    }
+
+    public void changePassword(ActionEvent e) throws SQLException, ClassNotFoundException {
+        String cp = currentPassword_fornew.getText();
+        String cn = newPassword2.getText();
+        if(Users.currentUser.getPassword().equals(cp)){
+            if(cn.length()<4)
+                newPassword_error.setText("New password is too short");
+            else{
+                newPassword_error.setText("");
+                SQL_connection.changePassword(cn);
+                SQL_connection.m=0;
+                stage2 = (Stage) pane4.getScene().getWindow();
+                stage2.close();
+            }
+        }
+        else {
+            if (cp.equals(""))
+                newPassword_error.setText("Please enter a password");
+            else
+                newPassword_error.setText("Password is incorrect");
         }
     }
 }

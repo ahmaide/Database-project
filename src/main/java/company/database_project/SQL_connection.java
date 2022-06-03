@@ -295,4 +295,12 @@ public class SQL_connection {
 
     }
 
+    public static void changePassword(String password) throws SQLException, ClassNotFoundException {
+        Users.currentUser.setPassword(password);
+        connectDB();
+        ExecuteStatement("update users set password0 = '" + password + "' where username = '"
+                + Users.currentUser.getUsername() + "';");
+        con.close();
+    }
+
 }
