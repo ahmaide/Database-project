@@ -273,7 +273,7 @@ public class SQL_connection {
 
     public static String dateToday(){
         Date d = new Date();
-        String s = Integer.toString(d.getYear() + 1900) + "-" + Integer.toString(d.getMonth()) + "-" + Integer.toString(d.getDay());
+        String s = Integer.toString(d.getYear() + 1900) + "=" + Integer.toString(d.getMonth() + 1) + "=" + Integer.toString(d.getDate());
         return s;
     }
 
