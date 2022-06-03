@@ -41,6 +41,13 @@ public class SQL_connection {
         con = DriverManager.getConnection (dbURL, p);
     }
 
+    public static void checkOrderDates() throws SQLException, ClassNotFoundException {
+        String date = dateToday();
+        connectDB();
+        ExecuteStatement("update arranged_orders set passed = true where delivery_date < '" + date + "' and passed = false;");
+        con.close();
+    }
+
     public static void storeUsers() throws SQLException, ClassNotFoundException {
         Users.list = new HashMap<String, Users>();
         connectDB();

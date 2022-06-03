@@ -27,6 +27,7 @@ public class Main extends Application {
     }
 
     public static void storeAll() throws SQLException, ClassNotFoundException {
+        SQL_connection.checkOrderDates();
         SQL_connection.storeUsers();
         SQL_connection.storeWarehouse();
         SQL_connection.storeShipment();
