@@ -99,7 +99,7 @@ public class WarehouseController implements Initializable {
     private Label delete_label;
 
     @FXML
-    private MenuButton delete_options;
+    private ChoiceBox delete_options;
 
     @FXML
     private Button delete_ok;
@@ -163,7 +163,7 @@ public class WarehouseController implements Initializable {
             error_text.setText("Please select an item from the table");
         else{
             if(Warehouse.current.getMachines_list().size()==0){
-                SQL_connection.deleteWarehouse(Warehouse.current, 1);
+                SQL_connection.deleteWarehouse(Warehouse.current, 1, null);
                 observableList = FXCollections.observableArrayList();
                 for(Map.Entry m : Warehouse.list.entrySet()){
                     observableList.add((Warehouse) m.getValue());
@@ -171,11 +171,29 @@ public class WarehouseController implements Initializable {
                 table.setItems(observableList);
             }
             else{
+                delete_options.getItems().clear();
                 delete_label.setText("Select new warehouse for machines:");
                 delete_ok.setVisible(true);
                 delete_options.setVisible(true);
-
+                for(Map.Entry m : Warehouse.list.entrySet()){
+                    if(!m.getKey().equals(Warehouse.current.getName()))
+                    delete_options.getItems().add(m.getKey());
+                }
             }
+        }
+    }
+
+    public void okDelete(ActionEvent e) throws SQLException, ClassNotFoundException {
+        if(delete_options.getValue()==null)
+            error_text.setText("Choose a warehouse for the machines");
+        else {
+            Warehouse replacment = Warehouse.list.get(delete_options.getValue());
+            SQL_connection.deleteWarehouse(Warehouse.current, 2, replacment);
+            for (Map.Entry m : Warehouse.list.entrySet()) {
+                observableList.add((Warehouse) m.getValue());
+            }
+            table.getItems().remove(Warehouse.current);
+            hideDelete();
         }
     }
 

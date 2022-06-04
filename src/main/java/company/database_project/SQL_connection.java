@@ -1,10 +1,8 @@
 package company.database_project;
 
 import java.sql.*;
-import java.util.HashMap;
+import java.util.*;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Properties;
 
 public class SQL_connection {
     private static String dbURL;
@@ -56,7 +54,6 @@ public class SQL_connection {
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()){
             Users.list.put(rs.getString(1), new Users(rs.getString(1), rs.getString(2)));
-            System.out.println(rs.getString(1) + " " + rs.getString(2));
         }
         rs.close();
         stmt.close();
@@ -71,8 +68,10 @@ public class SQL_connection {
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()){
             if(rs.getString(5).equals("1")) {
+                System.out.println(rs.getString(1));
                 Warehouse.list.put(rs.getString(1), new Warehouse(rs.getString(1), rs.getString(2),
                         rs.getString(3), Integer.parseInt(rs.getString(4))));
+
             }
         }
         rs.close();
@@ -90,7 +89,6 @@ public class SQL_connection {
             Shipment.list.put(Integer.parseInt(rs.getString(1)), new Shipment(Integer.parseInt(rs.getString(1)),
                     Integer.parseInt(rs.getString(2)), rs.getString(3), rs.getString(4),
                     Double.parseDouble(rs.getString(5))));
-            System.out.println(rs.getString(1) + " " + rs.getString(2));
         }
         rs.close();
         stmt.close();
@@ -106,7 +104,6 @@ public class SQL_connection {
         while (rs.next()){
             Customer.list.put(Integer.parseInt(rs.getString(1)), new Customer(Integer.parseInt(rs.getString(1)), rs.getString(2),
                     rs.getString(3), rs.getString(4), Integer.parseInt(rs.getString(5))));
-            System.out.println(rs.getString(1) + " " + rs.getString(2));
         }
         rs.close();
         stmt.close();
@@ -122,7 +119,6 @@ public class SQL_connection {
         while (rs.next()){
             Drinks.list.put(rs.getString(1), new Drinks(rs.getString(1), rs.getString(2),
                     rs.getString(3), Double.parseDouble(rs.getString(4))));
-            System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3));
         }
         rs.close();
         stmt.close();
@@ -156,7 +152,6 @@ public class SQL_connection {
                 if (activity)
                     Seller.active.put(s.getWorker_id(), s);
             }
-            System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(5));
         }
         rs.close();
         stmt.close();
@@ -164,8 +159,8 @@ public class SQL_connection {
     }
 
     public static void storeMachines() throws SQLException, ClassNotFoundException {
-        Stored_machine.list = new HashMap<String, Machine>();
-        Sold_machine.list = new HashMap<String, Machine>();
+        Stored_machine.list = new HashMap<String, Stored_machine>();
+        Sold_machine.list = new HashMap<String, Sold_machine>();
         connectDB();
         String sql = "select m.machine_id, m.type_id, m.shipment_id, sm.warehouse_name " +
                 "from machine m, stored_machine sm where m.machine_id = sm.machine_id;";
@@ -174,7 +169,7 @@ public class SQL_connection {
         while (rs.next()){
             Stored_machine.list.put(rs.getString(1), new Stored_machine(rs.getString(1),
                     rs.getString(2), Integer.parseInt(rs.getString(3)), rs.getString(4)));
-            System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(4));
+            System.out.println(rs.getString(4) + "  " + rs.getString(1));
             Warehouse.list.get(rs.getString(4)).addToMachines_list(Stored_machine.list.get(rs.getString(1)));
             Shipment.list.get(Integer.parseInt(rs.getString(3))).addToMachines_list(Stored_machine.list.get(rs.getString(1)));
         }
@@ -186,7 +181,6 @@ public class SQL_connection {
         while (rs.next()){
             Sold_machine.list.put(rs.getString(1), new Sold_machine(rs.getString(1),
                     rs.getString(2), Integer.parseInt(rs.getString(3)), Integer.parseInt(rs.getString(4))));
-            System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(4));
             Shipment.list.get(Integer.parseInt(rs.getString(3))).addToMachines_list(Sold_machine.list.get(rs.getString(1)));
         }
 
@@ -223,9 +217,6 @@ public class SQL_connection {
             Order.notSet.put(Integer.parseInt(rs.getString(1)), new Order(Integer.parseInt(rs.getString(1)),
                     rs.getString(2), rs.getString(3), rs.getString(4), Double.parseDouble(rs.getString(5)),
                     Integer.parseInt(rs.getString(6)), Integer.parseInt(rs.getString(7)), false));
-
-            System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3)
-            + " " + rs.getString(4) + " " + rs.getString(5) + rs.getString(6));
         }
 
         sql = "select o.order_id, o.order_date, o.type_id, o.pay_method, o.discount, o.customer_id, o.worker_id, " +
@@ -353,7 +344,7 @@ public class SQL_connection {
         Warehouse.list.put(name, new Warehouse(name, address, type, floor));
     }
 
-    public static void deleteWarehouse(Warehouse w, int num) throws SQLException, ClassNotFoundException {
+    public static void deleteWarehouse(Warehouse w, int num, Warehouse replacment) throws SQLException, ClassNotFoundException {
         if(num==1){
             Warehouse.list.remove(w.getName());
             connectDB();
@@ -362,6 +353,16 @@ public class SQL_connection {
             con.close();
         }
         else{
+            for(Map.Entry m : w.getMachines_list().entrySet()){
+                Stored_machine.list.get(m.getKey()).setWarehouse_name(replacment.getName());
+            }
+            Warehouse.list.remove(w.getName());
+            connectDB();
+            ExecuteStatement("update warehouse set activity = false where warehouse_name = '"
+                    + w.getName() + "';");
+            ExecuteStatement("update stored_machine set warehouse_name = '" + replacment.getName() +
+                    "' where warehouse_name = '" + w.getName() + "';");
+            con.close();
 
         }
     }
