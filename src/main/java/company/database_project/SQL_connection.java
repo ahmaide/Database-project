@@ -310,4 +310,60 @@ public class SQL_connection {
         con.close();
     }
 
+    public static void editWarehouse(String name, String address, String type, String floors) throws SQLException, ClassNotFoundException {
+        if (name!=""){
+            connectDB();
+            ExecuteStatement("update warehouse set warehouse_name = '" + name + "' where warehouse_name = '"
+                    + Warehouse.current.getName() + "';");
+            Warehouse.current.setName(name);
+            con.close();
+        }
+        if (address!=""){
+            connectDB();
+            ExecuteStatement("update warehouse set warehouse_address = '" + address + "' where warehouse_name = '"
+                    + Warehouse.current.getName() + "';");
+            Warehouse.current.setAddress(address);
+            con.close();
+        }
+        if (type!=""){
+            connectDB();
+            ExecuteStatement("update warehouse set building_type = '" + type + "' where warehouse_name = '"
+                    + Warehouse.current.getName() + "';");
+            Warehouse.current.setType_building(type);
+            con.close();
+        }
+        if (floors!=""){
+            int floor;
+            floor= Integer.parseInt(floors);
+            connectDB();
+            ExecuteStatement("update warehouse set floors = " + floor + " where warehouse_name = '"
+                    + Warehouse.current.getName() + "';");
+            Warehouse.current.setFloors(floor);
+            con.close();
+        }
+
+    }
+
+    public static void addWarehouse(String name, String address, String type, String floors) throws SQLException, ClassNotFoundException {
+        int floor;
+        floor= Integer.parseInt(floors);
+        connectDB();
+        ExecuteStatement("insert into warehouse values('"+ name +"', '"+ address +"', '"+ type +"', " + floors +", 1);");
+        con.close();
+        Warehouse.list.put(name, new Warehouse(name, address, type, floor));
+    }
+
+    public static void deleteWarehouse(Warehouse w, int num) throws SQLException, ClassNotFoundException {
+        if(num==1){
+            Warehouse.list.remove(w.getName());
+            connectDB();
+            ExecuteStatement("update warehouse set activity = false where warehouse_name = '"
+                    + w.getName() + "';");
+            con.close();
+        }
+        else{
+
+        }
+    }
+
 }

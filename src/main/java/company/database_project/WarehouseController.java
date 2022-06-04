@@ -17,6 +17,7 @@ import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -94,6 +95,15 @@ public class WarehouseController implements Initializable {
     @FXML
     private Button ok;
 
+    @FXML
+    private Label delete_label;
+
+    @FXML
+    private MenuButton delete_options;
+
+    @FXML
+    private Button delete_ok;
+
     private ObservableList<Warehouse> observableList = FXCollections.observableArrayList();
 
     @Override
@@ -107,6 +117,7 @@ public class WarehouseController implements Initializable {
         warehouse_floors.setCellValueFactory(new PropertyValueFactory<Warehouse, Integer>("Floors"));
         table.setItems(observableList);
         hide();
+        hideDelete();
     }
 
     public void back(ActionEvent e) throws IOException {
@@ -125,6 +136,7 @@ public class WarehouseController implements Initializable {
 
     public void editShow(){
         Warehouse.m=1;
+        hideDelete();
         Warehouse.current = table.getSelectionModel().getSelectedItem();
         if(Warehouse.current == null)
             error_text.setText("Please select an item from the table");
@@ -132,6 +144,106 @@ public class WarehouseController implements Initializable {
             show("Edit " + Warehouse.current.getName() + ":");
             System.out.println(Warehouse.current.getName());
             error_text.setText("");
+            ok.setText("Edit");
+        }
+    }
+
+    public void addShow(){
+        Warehouse.m = 3;
+        hideDelete();
+        show("New Warehouse:");
+        error_text.setText("");
+        ok.setText("Add");
+    }
+
+    public void delete() throws SQLException, ClassNotFoundException {
+        hide();
+        Warehouse.current = table.getSelectionModel().getSelectedItem();
+        if(Warehouse.current == null)
+            error_text.setText("Please select an item from the table");
+        else{
+            if(Warehouse.current.getMachines_list().size()==0){
+                SQL_connection.deleteWarehouse(Warehouse.current, 1);
+                observableList = FXCollections.observableArrayList();
+                for(Map.Entry m : Warehouse.list.entrySet()){
+                    observableList.add((Warehouse) m.getValue());
+                }
+                table.setItems(observableList);
+            }
+            else{
+                delete_label.setText("Select new warehouse for machines:");
+                delete_ok.setVisible(true);
+                delete_options.setVisible(true);
+
+            }
+        }
+    }
+
+    public void execute(ActionEvent e) throws SQLException, ClassNotFoundException {
+        if(Warehouse.m==1){
+            boolean num = false;
+            if(floors_text.getText().equals(""))
+                num = true;
+            else {
+                    num = isNumeric(floors_text.getText());
+            }
+
+            if(num){
+                if( floors_text.getText().equals("") || Integer.parseInt(floors_text.getText()) > 0){
+                    if(name_text.getText()!="" || name_text.getText().equals(Warehouse.current.getName()) ||
+                            !Warehouse.list.containsKey(name_text.getText())){
+                        SQL_connection.editWarehouse(name_text.getText(), address_text.getText(),
+                                type_text.getText(), floors_text.getText());
+                        Warehouse.m=0;
+                        hide();
+                        observableList = FXCollections.observableArrayList();
+                        for(Map.Entry m : Warehouse.list.entrySet()){
+                            observableList.add((Warehouse) m.getValue());
+                        }
+                        table.refresh();
+                    }
+                    else{
+                        error_text.setText("This warehouse name already exists");
+                    }
+                }
+                else{
+                    error_text.setText("Please enter a valid floors number");
+                }
+            }
+            else{
+                error_text.setText("Please enter a valid floors number");
+            }
+        }
+        else if(Warehouse.m == 3){
+            if(!name_text.getText().equals("") && !address_text.getText().equals("") &&
+            !type_text.getText().equals("") && !floors_text.getText().equals("")){
+                if(!Warehouse.list.containsKey(name_text.getText())){
+                    if(isNumeric(floors_text.getText())){
+                        if(Integer.parseInt(floors_text.getText()) > 0){
+                            SQL_connection.addWarehouse(name_text.getText(), address_text.getText(),
+                                    type_text.getText(), floors_text.getText());
+                            Warehouse.m=0;
+                            hide();
+                            observableList = FXCollections.observableArrayList();
+                            for(Map.Entry m : Warehouse.list.entrySet()){
+                                observableList.add((Warehouse) m.getValue());
+                            }
+                            table.setItems(observableList);
+                        }
+                        else
+                            error_text.setText("Please enter a valid floors number");
+                    }
+                    else{
+                        error_text.setText("Please enter a valid floors number");
+                    }
+                }
+                else{
+                    error_text.setText("This warehouse name already exists, try another");
+                }
+            }
+            else{
+                error_text.setText("Please fill all fields");
+            }
         }
     }
 
@@ -149,6 +261,12 @@ public class WarehouseController implements Initializable {
         ok.setVisible(false);
     }
 
+    public void hideDelete(){
+        delete_label.setText("");
+        delete_options.setVisible(false);
+        delete_ok.setVisible(false);
+    }
+
     public void show(String title){
         System.out.println(title);
         visible_label.setText(title);
@@ -157,11 +275,26 @@ public class WarehouseController implements Initializable {
         type_label.setText("Type:");
         floors_label.setText("Floors:");
         name_text.setVisible(true);
+        name_text.setText("");
         address_text.setVisible(true);
+        address_text.setText("");
         type_text.setVisible(true);
+        type_text.setText("");
         floors_text.setVisible(true);
+        floors_text.setText("");
         ok.setVisible(true);
-        ok.setText("Edit");
+    }
+
+    public boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
 }

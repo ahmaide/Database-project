@@ -25,7 +25,7 @@
                 <Font name="Britannic Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="delete" layoutX="600.0" layoutY="130.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="157.0" style="-fx-background-color: #f5e082;" text="Delete Warehouse" textAlignment="CENTER">
+        <Button fx:id="delete" layoutX="600.0" layoutY="130.0" mnemonicParsing="false" onAction="#delete" prefHeight="29.0" prefWidth="157.0" style="-fx-background-color: #f5e082;" text="Delete Warehouse" textAlignment="CENTER">
             <font>
                 <Font name="Britannic Bold" size="16.0" />
             </font>
@@ -41,7 +41,7 @@
             </font>
         </Button>
         <Label fx:id="error_text" layoutX="20.0" layoutY="377.0" prefHeight="29.0" prefWidth="523.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
-      <Button fx:id="add" layoutX="600.0" layoutY="239.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="157.0" style="-fx-background-color: #f5e082;" text="New Warehouse" textAlignment="CENTER">
+      <Button fx:id="add" layoutX="600.0" layoutY="239.0" mnemonicParsing="false" onAction="#addShow" prefHeight="29.0" prefWidth="157.0" style="-fx-background-color: #f5e082;" text="New Warehouse" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>
@@ -79,7 +79,7 @@
             <Font size="12.0" />
          </font></Label>
       <TextField fx:id="floors_text" layoutX="612.0" layoutY="344.0" prefHeight="31.0" prefWidth="67.0" />
-      <Button fx:id="ok" layoutX="700.0" layoutY="345.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="57.0" text="Edit" textAlignment="CENTER">
+      <Button fx:id="ok" layoutX="700.0" layoutY="345.0" mnemonicParsing="false" onAction="#execute" prefHeight="29.0" prefWidth="57.0" text="Edit" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>
