@@ -141,7 +141,7 @@ public class WarehouseController implements Initializable {
         if(Warehouse.current == null)
             error_text.setText("Please select a warehouse from the table");
         else {
-            show("Edit " + Warehouse.current.getName() + ":");
+            show2("Edit " + Warehouse.current.getName() + ":");
             System.out.println(Warehouse.current.getName());
             error_text.setText("");
             ok.setText("Edit");
@@ -220,9 +220,7 @@ public class WarehouseController implements Initializable {
 
             if(num){
                 if( floors_text.getText().equals("") || Integer.parseInt(floors_text.getText()) > 0){
-                    if(name_text.getText()!="" || name_text.getText().equals(Warehouse.current.getName()) ||
-                            !Warehouse.list.containsKey(name_text.getText())){
-                        SQL_connection.editWarehouse(name_text.getText(), address_text.getText(),
+                        SQL_connection.editWarehouse(address_text.getText(),
                                 type_text.getText(), floors_text.getText());
                         Warehouse.m=0;
                         hide();
@@ -231,10 +229,6 @@ public class WarehouseController implements Initializable {
                             observableList.add((Warehouse) m.getValue());
                         }
                         table.refresh();
-                    }
-                    else{
-                        error_text.setText("This warehouse name already exists");
-                    }
                 }
                 else{
                     error_text.setText("Please enter a valid floors number");
@@ -306,6 +300,23 @@ public class WarehouseController implements Initializable {
         floors_label.setText("Floors:");
         name_text.setVisible(true);
         name_text.setText("");
+        address_text.setVisible(true);
+        address_text.setText("");
+        type_text.setVisible(true);
+        type_text.setText("");
+        floors_text.setVisible(true);
+        floors_text.setText("");
+        ok.setVisible(true);
+    }
+
+    public void show2(String title){
+        System.out.println(title);
+        visible_label.setText(title);
+        address_label.setText("Address:");
+        name_label.setText("");
+        type_label.setText("Type:");
+        floors_label.setText("Floors:");
+        name_text.setVisible(false);
         address_text.setVisible(true);
         address_text.setText("");
         type_text.setVisible(true);

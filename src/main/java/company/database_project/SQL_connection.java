@@ -301,14 +301,7 @@ public class SQL_connection {
         con.close();
     }
 
-    public static void editWarehouse(String name, String address, String type, String floors) throws SQLException, ClassNotFoundException {
-        if (name!=""){
-            connectDB();
-            ExecuteStatement("update warehouse set warehouse_name = '" + name + "' where warehouse_name = '"
-                    + Warehouse.current.getName() + "';");
-            Warehouse.current.setName(name);
-            con.close();
-        }
+    public static void editWarehouse(String address, String type, String floors) throws SQLException, ClassNotFoundException {
         if (address!=""){
             connectDB();
             ExecuteStatement("update warehouse set warehouse_address = '" + address + "' where warehouse_name = '"
