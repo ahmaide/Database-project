@@ -139,7 +139,7 @@ public class WarehouseController implements Initializable {
         hideDelete();
         Warehouse.current = table.getSelectionModel().getSelectedItem();
         if(Warehouse.current == null)
-            error_text.setText("Please select an item from the table");
+            error_text.setText("Please select a warehouse from the table");
         else {
             show("Edit " + Warehouse.current.getName() + ":");
             System.out.println(Warehouse.current.getName());
@@ -159,13 +159,19 @@ public class WarehouseController implements Initializable {
     public void showMachines(ActionEvent e){
         hideDelete();
         hide();
+        Warehouse.current = table.getSelectionModel().getSelectedItem();
+        if(Warehouse.current==null)
+            error_text.setText("Please select a warehouse from the table");
+        else{
+            error_text.setText("");
+        }
     }
 
     public void delete() throws SQLException, ClassNotFoundException {
         hide();
         Warehouse.current = table.getSelectionModel().getSelectedItem();
         if(Warehouse.current == null)
-            error_text.setText("Please select an item from the table");
+            error_text.setText("Please select a warehouse from the table");
         else{
             if(Warehouse.current.getMachines_list().size()==0){
                 SQL_connection.deleteWarehouse(Warehouse.current, 1, null);
@@ -192,6 +198,7 @@ public class WarehouseController implements Initializable {
         if(delete_options.getValue()==null)
             error_text.setText("Choose a warehouse for the machines");
         else {
+            error_text.setText("");
             Warehouse replacment = Warehouse.list.get(delete_options.getValue());
             SQL_connection.deleteWarehouse(Warehouse.current, 2, replacment);
             observableList = FXCollections.observableArrayList();
