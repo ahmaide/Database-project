@@ -156,6 +156,11 @@ public class WarehouseController implements Initializable {
         ok.setText("Add");
     }
 
+    public void showMachines(ActionEvent e){
+        hideDelete();
+        hide();
+    }
+
     public void delete() throws SQLException, ClassNotFoundException {
         hide();
         Warehouse.current = table.getSelectionModel().getSelectedItem();
@@ -189,11 +194,11 @@ public class WarehouseController implements Initializable {
         else {
             Warehouse replacment = Warehouse.list.get(delete_options.getValue());
             SQL_connection.deleteWarehouse(Warehouse.current, 2, replacment);
+            observableList = FXCollections.observableArrayList();
             for (Map.Entry m : Warehouse.list.entrySet()) {
                 observableList.add((Warehouse) m.getValue());
             }
-            table.getItems().remove(Warehouse.current);
-            hideDelete();
+            table.setItems(observableList);
         }
     }
 
