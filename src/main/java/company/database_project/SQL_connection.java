@@ -70,9 +70,10 @@ public class SQL_connection {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()){
-            Warehouse.list.put(rs.getString(1), new Warehouse(rs.getString(1), rs.getString(2),
-                    rs.getString(3), Integer.parseInt(rs.getString(4))));
-            System.out.println(rs.getString(1) + " " + rs.getString(2));
+            if(rs.getString(5).equals("1")) {
+                Warehouse.list.put(rs.getString(1), new Warehouse(rs.getString(1), rs.getString(2),
+                        rs.getString(3), Integer.parseInt(rs.getString(4))));
+            }
         }
         rs.close();
         stmt.close();

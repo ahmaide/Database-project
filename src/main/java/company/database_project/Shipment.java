@@ -12,6 +12,7 @@ public class Shipment {
     private double costs;
     private Map<String, Machine> machines_list;
     public static Map<Integer, Shipment> list;
+    public static int last = 0;
 
     public Shipment(int shipment_id, int driver_id, String shipment_date, String warehouse_name, double costs) {
         this.shipment_id = shipment_id;
@@ -20,6 +21,8 @@ public class Shipment {
         this.warehouse_name = warehouse_name;
         this.costs = costs;
         this.machines_list = new HashMap<String, Machine>();
+        if(shipment_id > last)
+            last = shipment_id;
     }
 
     public int getShipment_id() {
