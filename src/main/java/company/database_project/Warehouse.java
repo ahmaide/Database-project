@@ -12,6 +12,8 @@ public class Warehouse {
     private int floors;
     private Map<String, Machine> machines_list;
     public static Map<String, Warehouse> list;
+    public static Warehouse current;
+    public static int m = 0;
 
     public Warehouse(String name, String address, String type_building, int floors) {
         this.name = name;

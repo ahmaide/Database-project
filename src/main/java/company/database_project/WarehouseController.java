@@ -1,5 +1,7 @@
 package company.database_project;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,11 +10,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class WarehouseController implements Initializable {
@@ -89,9 +94,19 @@ public class WarehouseController implements Initializable {
     @FXML
     private Button ok;
 
+    private ObservableList<Warehouse> observableList = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        for(Map.Entry m : Warehouse.list.entrySet()){
+            observableList.add((Warehouse) m.getValue());
+        }
+        warehouse_name.setCellValueFactory(new PropertyValueFactory<Warehouse, String>("name"));
+        warehouse_address.setCellValueFactory(new PropertyValueFactory<Warehouse, String>("Address"));
+        warehouse_type.setCellValueFactory(new PropertyValueFactory<Warehouse, String>("type_building"));
+        warehouse_floors.setCellValueFactory(new PropertyValueFactory<Warehouse, Integer>("Floors"));
+        table.setItems(observableList);
+        hide();
     }
 
     public void back(ActionEvent e) throws IOException {
@@ -106,4 +121,47 @@ public class WarehouseController implements Initializable {
         stage = (Stage) pane.getScene().getWindow();
         stage.close();
     }
+
+
+    public void editShow(){
+        Warehouse.m=1;
+        Warehouse.current = table.getSelectionModel().getSelectedItem();
+        if(Warehouse.current == null)
+            error_text.setText("Please select an item from the table");
+        else {
+            show("Edit " + Warehouse.current.getName() + ":");
+            System.out.println(Warehouse.current.getName());
+            error_text.setText("");
+        }
+    }
+
+    public void hide(){
+        visible_label.setText("");
+        name_label.setText("");
+        address_label.setText("");
+        type_label.setText("");
+        floors_label.setText("");
+        error_text.setText("");
+        name_text.setVisible(false);
+        address_text.setVisible(false);
+        type_text.setVisible(false);
+        floors_text.setVisible(false);
+        ok.setVisible(false);
+    }
+
+    public void show(String title){
+        System.out.println(title);
+        visible_label.setText(title);
+        name_label.setText("Name:");
+        address_label.setText("Address:");
+        type_label.setText("Type:");
+        floors_label.setText("Floors:");
+        name_text.setVisible(true);
+        address_text.setVisible(true);
+        type_text.setVisible(true);
+        floors_text.setVisible(true);
+        ok.setVisible(true);
+        ok.setText("Edit");
+    }
+
 }
