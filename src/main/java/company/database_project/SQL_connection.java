@@ -377,5 +377,53 @@ public class SQL_connection {
 
         }
     }
+    public static void editdrink(String drink_name, String company, String price) throws SQLException, ClassNotFoundException {
+        if (company!=""){
+            connectDB();
+            ExecuteStatement("update Drinks set companyName = '" + company + "' where drink_id = '"
+                    + Drinks.current.getDrink_id() + "';");
+            Drinks.current.getCompany(company);
+            con.close();
+        }
+        if (drink_name!=""){
+            connectDB();
+            ExecuteStatement("update Drinks set drink_name = '" + drink_name + "' where drink_id = '"
+                    + Drinks.current.getDrink_id() + "';");
+            Drinks.current.setDrink_name(drink_name);
+            con.close();
+        }
+        if (price!=""){
+            Double drink_price;
+            drink_price= Double.parseDouble(price);
+            connectDB();
+            ExecuteStatement("update Drinks set price = " + drink_price + " where drink_id = '"
+                    + Drinks.current.getDrink_id() + "';");
+            Drinks.current.setPrice(drink_price);
+            con.close();
+        }
 
+    }
+
+    public static void adddrinks(String drink_id, String drink_name, String company, String price) throws SQLException, ClassNotFoundException {
+        Double drink_price;
+        drink_price= Double.parseDouble(price);
+        if (Drinks.notActive.contains(drink_id)){
+            connectDB();
+            ExecuteStatement("update Drinks set activity = true where drink_id = '"
+                    + drink_id + "';");
+            ExecuteStatement("update Drinks set drink_name = '" + drink_name + "' where drink_id = '"
+                    + drink_id + "';");
+            ExecuteStatement("update Drinks set company = '" + company + "' where drink_id = '"
+                    + drink_id + "';");
+            ExecuteStatement("update Drinks set price = " + drink_price + " where drink_id = '"
+                    + drink_id + "';");
+            con.close();
+            Drinks.list.put(drink_id, new Drinks(drink_id, drink_name, company, drink_price));
+            Drinks.notActive.remove(drink_id);
+        }
+        connectDB();
+        ExecuteStatement("insert into Drinks values('"+ drink_id +"', '"+ drink_name +"', '"+ company +"', " + price +", 1);");
+        con.close();
+        Drinks.list.put(drink_id, new Drinks(drink_id, drink_name, company, drink_price));
+    }
 }

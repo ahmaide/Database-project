@@ -38,6 +38,7 @@ public class Main extends Application {
         SQL_connection.storeMachines();
         SQL_connection.storeDelivery();
         SQL_connection.storeOrders();
+
     }
 
 

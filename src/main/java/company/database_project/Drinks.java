@@ -1,10 +1,16 @@
 package company.database_project;
+
+
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Drinks {
+    public static ArrayList <String> notActive;
     private String drink_id;
     private String drink_name;
     private String company;
+    public static Drinks current;
+    public static int d = 0;
     private double price;
     public static Map<String, Drinks> list;
 
@@ -31,8 +37,8 @@ public class Drinks {
         this.drink_name = drink_name;
     }
 
-    public String getCompany() {
-        return company;
+    public String getCompany(String company) {
+        return this.company;
     }
 
     public void setCompany(String company) {
