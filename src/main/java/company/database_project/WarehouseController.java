@@ -169,7 +169,7 @@ public class WarehouseController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage2 = new Stage();
             stage2.setScene(scene);
-            stage2.setTitle("Deactiviate");
+            stage2.setTitle("Machines");
             stage2.initStyle(StageStyle.UNDECORATED);
             stage2.show();
         }

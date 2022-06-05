@@ -349,10 +349,12 @@ public class SQL_connection {
             Warehouse.list.put(name, new Warehouse(name, address, type, floor));
             Warehouse.notActive.remove(name);
         }
-        connectDB();
-        ExecuteStatement("insert into warehouse values('"+ name +"', '"+ address +"', '"+ type +"', " + floors +", 1);");
-        con.close();
-        Warehouse.list.put(name, new Warehouse(name, address, type, floor));
+        else {
+            connectDB();
+            ExecuteStatement("insert into warehouse values('" + name + "', '" + address + "', '" + type + "', " + floors + ", 1);");
+            con.close();
+            Warehouse.list.put(name, new Warehouse(name, address, type, floor));
+        }
     }
 
     public static void deleteWarehouse(Warehouse w, int num, Warehouse replacment) throws SQLException, ClassNotFoundException {
@@ -366,6 +368,7 @@ public class SQL_connection {
         else{
             for(Map.Entry m : w.getMachines_list().entrySet()){
                 Stored_machine.list.get(m.getKey()).setWarehouse_name(replacment.getName());
+                Warehouse.list.get(replacment.getName()).addToMachines_list(Stored_machine.list.get(m.getKey()));
             }
             Warehouse.list.remove(w.getName());
             connectDB();
