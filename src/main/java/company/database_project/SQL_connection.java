@@ -62,6 +62,7 @@ public class SQL_connection {
 
     public static void storeWarehouse() throws SQLException, ClassNotFoundException {
         Warehouse.list = new HashMap<String, Warehouse>();
+        Warehouse.notActive = new ArrayList<String>();
         connectDB();
         String sql = "select * from warehouse";
         Statement stmt = con.createStatement();
@@ -72,6 +73,9 @@ public class SQL_connection {
                 Warehouse.list.put(rs.getString(1), new Warehouse(rs.getString(1), rs.getString(2),
                         rs.getString(3), Integer.parseInt(rs.getString(4))));
 
+            }
+            else{
+                Warehouse.notActive.add(rs.getString(1));
             }
         }
         rs.close();
@@ -331,6 +335,20 @@ public class SQL_connection {
     public static void addWarehouse(String name, String address, String type, String floors) throws SQLException, ClassNotFoundException {
         int floor;
         floor= Integer.parseInt(floors);
+        if (Warehouse.notActive.contains(name)){
+            connectDB();
+            ExecuteStatement("update warehouse set activity = true where warehouse_name = '"
+                    + name + "';");
+            ExecuteStatement("update warehouse set warehouse_address = '" + address + "' where warehouse_name = '"
+                    + name + "';");
+            ExecuteStatement("update warehouse set building_type = '" + type + "' where warehouse_name = '"
+                    + name + "';");
+            ExecuteStatement("update warehouse set floors = " + floor + " where warehouse_name = '"
+                    + name + "';");
+            con.close();
+            Warehouse.list.put(name, new Warehouse(name, address, type, floor));
+            Warehouse.notActive.remove(name);
+        }
         connectDB();
         ExecuteStatement("insert into warehouse values('"+ name +"', '"+ address +"', '"+ type +"', " + floors +", 1);");
         con.close();

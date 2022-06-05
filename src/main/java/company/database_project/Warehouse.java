@@ -12,6 +12,7 @@ public class Warehouse {
     private int floors;
     private Map<String, Machine> machines_list;
     public static Map<String, Warehouse> list;
+    public static ArrayList<String> notActive;
     public static Warehouse current;
     public static int m = 0;
 
