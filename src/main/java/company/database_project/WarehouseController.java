@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
@@ -156,7 +157,7 @@ public class WarehouseController implements Initializable {
         ok.setText("Add");
     }
 
-    public void showMachines(ActionEvent e){
+    public void showMachines(ActionEvent e) throws IOException {
         hideDelete();
         hide();
         Warehouse.current = table.getSelectionModel().getSelectedItem();
@@ -164,6 +165,13 @@ public class WarehouseController implements Initializable {
             error_text.setText("Please select a warehouse from the table");
         else{
             error_text.setText("");
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("machineForWarehouse.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage2 = new Stage();
+            stage2.setScene(scene);
+            stage2.setTitle("Machines");
+            stage2.initStyle(StageStyle.UNDECORATED);
+            stage2.show();
         }
     }
 
