@@ -46,13 +46,13 @@ public class DrinksController implements Initializable {
     private Button back;
 
     @FXML
-    private TableColumn<Drinks, String> companyName;
+    private TableColumn<Drinks, String> countryName;
 
     @FXML
-    private Label company_label;
+    private Label country_label;
 
     @FXML
-    private TextField company_text;
+    private TextField country_text;
 
     @FXML
     private Button delete;
@@ -99,9 +99,9 @@ public class DrinksController implements Initializable {
         for (Map.Entry m : Drinks.list.entrySet()) {
             observableList.add((Drinks) m.getValue());
         }
-        DrinkID.setCellValueFactory(new PropertyValueFactory<Drinks, Integer>("ID"));
-        DrinkName.setCellValueFactory(new PropertyValueFactory<Drinks, String>("Name"));
-        companyName.setCellValueFactory(new PropertyValueFactory<Drinks, String>("company Name"));
+        DrinkID.setCellValueFactory(new PropertyValueFactory<Drinks, Integer>("drink_id"));
+        DrinkName.setCellValueFactory(new PropertyValueFactory<Drinks, String>("drink_name"));
+        countryName.setCellValueFactory(new PropertyValueFactory<Drinks, String>("country"));
         priceNum.setCellValueFactory(new PropertyValueFactory<Drinks, Double>("price"));
         table.setItems(observableList);
         hide();
@@ -150,12 +150,12 @@ public class DrinksController implements Initializable {
             }
         }
         else if(Drinks.d == 3){
-            if(!company_text.getText().equals("") &&
-                    !company_text.getText().equals("") && !price_text.getText().equals("")){
+            if(!country_text.getText().equals("") &&
+                    !country_text.getText().equals("") && !price_text.getText().equals("")){
                 if(!Drinks.list.containsKey(name_text.getText())){
                     if(isNumeric(price_text.getText())){
                         if(Integer.parseInt(price_text.getText()) > 0){
-                            //SQL_connection.editdrink(name_text.getText(), company_text.getText(), price_text.getText());
+                            SQL_connection.editdrink(name_text.getText(), country_text.getText(), price_text.getText());
                             Drinks.d=0;
                             hide();
                             observableList = FXCollections.observableArrayList();
@@ -184,11 +184,11 @@ public class DrinksController implements Initializable {
     public void hide(){
         visible_label.setText("");
         name_label.setText("");
-        company_label.setText("");
+        country_label.setText("");
         price_label.setText("");
         error_text.setText("");
         name_text.setVisible(false);
-        company_text.setVisible(false);
+        country_text.setVisible(false);
         price_text.setVisible(false);
         ok.setVisible(false);
     }
@@ -197,12 +197,12 @@ public class DrinksController implements Initializable {
         System.out.println(title);
         visible_label.setText(title);
         name_label.setText("Name:");
-        company_label.setText("Company:");
+        country_label.setText("Country:");
         price_label.setText("Price:");
         name_text.setVisible(true);
         name_text.setText("");
-        company_text.setVisible(true);
-        company_text.setText("");
+        country_text.setVisible(true);
+        country_text.setText("");
         price_text.setVisible(true);
         price_text.setText("");
         ok.setVisible(true);
@@ -212,12 +212,12 @@ public class DrinksController implements Initializable {
 
         System.out.println(title);
         visible_label.setText(title);
-        company_label.setText("Company:");
+        country_label.setText("Country:");
         name_label.setText("");
         price_label.setText("Price:");
         name_text.setVisible(false);
-        company_text.setVisible(true);
-        company_text.setText("");
+        country_text.setVisible(true);
+        country_text.setText("");
         price_text.setVisible(true);
         price_text.setText("");
         ok.setVisible(true);

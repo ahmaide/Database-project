@@ -381,5 +381,31 @@ public class SQL_connection {
         }
     }
 
+    public static void editdrink(String name, String country, String p) throws SQLException, ClassNotFoundException {
+        if (name!=""){
+            connectDB();
+            ExecuteStatement("update drink set drink_name = '" + name + "' where drink_id = '"
+                    + Drinks.current.getDrink_id() + "';");
+            Drinks.current.setDrink_name(name);
+            con.close();
+        }
+        if (country!=""){
+            connectDB();
+            ExecuteStatement("update drink set country = '" + country + "' where drink_id = '"
+                    + Drinks.current.getDrink_id() + "';");
+            Drinks.current.setDrink_name(name);
+            con.close();
+        }
+        if (p!=""){
+            double price;
+            price= Double.parseDouble(p);
+            connectDB();
+            ExecuteStatement("update warehouse set price = " + price + " where warehouse_name = '"
+                    + Warehouse.current.getName() + "';");
+            Drinks.current.setPrice(price);
+            con.close();
+        }
+    }
+
 
 }

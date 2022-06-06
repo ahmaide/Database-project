@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="463.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.DrinksController">
+<AnchorPane fx:id="pane" prefHeight="463.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.DrinksController">
    <children>
       <Label layoutX="32.0" layoutY="14.0" prefHeight="39.0" prefWidth="275.0" text="View Drinks ">
          <font>
@@ -24,7 +24,7 @@
         <columns>
           <TableColumn fx:id="DrinkID" prefWidth="139.0" text="Drink ID" />
           <TableColumn fx:id="DrinkName" prefWidth="128.0" text="Drink Name" />
-            <TableColumn fx:id="companyName" prefWidth="124.0" text="Company Name" />
+            <TableColumn fx:id="countryName" prefWidth="124.0" text="Company Name" />
             <TableColumn fx:id="priceNum" prefWidth="107.0" text="Price" />
         </columns>
       </TableView>
@@ -54,10 +54,10 @@
          </font>
       </Label>
       <Label fx:id="name_label" layoutX="89.0" layoutY="335.0" text="Drink Name :" />
-      <Label fx:id="company_label" layoutX="239.0" layoutY="335.0" text="Company Name :" />
+      <Label fx:id="country_label" layoutX="239.0" layoutY="335.0" text="Country Name :" />
       <Label fx:id="price_label" layoutX="402.0" layoutY="335.0" text="Price :" />
       <TextField fx:id="name_text" layoutX="89.0" layoutY="369.0" prefHeight="25.0" prefWidth="111.0" />
-      <TextField fx:id="company_text" layoutX="229.0" layoutY="369.0" prefHeight="25.0" prefWidth="135.0" />
+      <TextField fx:id="country_text" layoutX="229.0" layoutY="369.0" prefHeight="25.0" prefWidth="135.0" />
       <TextField fx:id="price_text" layoutX="393.0" layoutY="369.0" prefHeight="25.0" prefWidth="111.0" />
       <Button fx:id="ok" layoutX="584.0" layoutY="369.0" mnemonicParsing="false" onAction="#execute" text="Edit">
          <font>
