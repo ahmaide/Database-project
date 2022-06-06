@@ -155,7 +155,7 @@ public class DrinksController implements Initializable {
                 if(!Drinks.list.containsKey(name_text.getText())){
                     if(isNumeric(price_text.getText())){
                         if(Integer.parseInt(price_text.getText()) > 0){
-                            SQL_connection.editdrink(name_text.getText(), company_text.getText(), price_text.getText());
+                            //SQL_connection.editdrink(name_text.getText(), company_text.getText(), price_text.getText());
                             Drinks.d=0;
                             hide();
                             observableList = FXCollections.observableArrayList();
