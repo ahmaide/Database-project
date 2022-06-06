@@ -83,6 +83,5 @@ public class Machine_warehousrController implements Initializable {
     }
 
     public void clickDelete(ActionEvent e){
-
     }
 }

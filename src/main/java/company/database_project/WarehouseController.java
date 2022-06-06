@@ -14,7 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -246,6 +245,7 @@ public class WarehouseController implements Initializable {
                 error_text.setText("Please enter a valid floors number");
             }
         }
+
         else if(Warehouse.m == 3){
             if(!name_text.getText().equals("") && !address_text.getText().equals("") &&
             !type_text.getText().equals("") && !floors_text.getText().equals("")){

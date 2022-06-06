@@ -1,8 +1,10 @@
 package company.database_project;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Customer {
+
 
     private int customer_id;
     private String customer_name;
@@ -10,6 +12,9 @@ public class Customer {
     private String buisness_type;
     private int customer_phone;
     public static Map<Integer, Customer> list;
+    public static ArrayList<String> notActive;
+    public static Customer current1;
+    public static int n = 0;
 
 
     public Customer(int customer_id, String customer_name, String customer_address, String buisness_type, int customer_phone){
@@ -59,4 +64,6 @@ public class Customer {
     public void setCustomer_phone(int customer_phone) {
         this.customer_phone = customer_phone;
     }
+
+
 }

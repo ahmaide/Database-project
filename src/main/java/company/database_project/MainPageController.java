@@ -59,6 +59,14 @@ public class MainPageController implements Initializable {
         stage.show();
     }
 
+    public void customerPage(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("customer.fxml"));
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     public void exit(ActionEvent e) throws IOException {
         stage = (Stage) pane.getScene().getWindow();

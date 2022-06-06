@@ -13,6 +13,7 @@ public class SQL_connection {
     private static String dbName = "final_project"; //database on mysql to connect to
     private static Connection con;
     public static int m =0;
+    public static int n = 0;
 
     public static void ExecuteStatement(String SQL) throws SQLException {
 
@@ -405,6 +406,59 @@ public class SQL_connection {
             Drinks.current.setPrice(price);
             con.close();
         }
+    }
+
+    public static void addCustomer(int customer_id, String customer_name, String customer_address, String buisness_type, int customer_phone) throws SQLException, ClassNotFoundException {
+
+        if (Customer.notActive.contains(customer_name)) {
+            connectDB();
+            ExecuteStatement("update customer set activity = true where customer_id = '" + customer_id + "';");
+            ExecuteStatement("update customer set customer_name = '" + customer_name + " ' where customer_id = '" + customer_id + "';");
+            ExecuteStatement("update customer set customer_address = '" + customer_address + "' where customer_id = '" + customer_id + "';");
+            ExecuteStatement("update customer set buisness_type = '" + buisness_type + "' where customer_id = '" + customer_id + "';");
+            ExecuteStatement("update customer set customer_phone = " + customer_phone + " where customer_id = '" + customer_id + "';");
+            con.close();
+            Customer.list.put(customer_id, new Customer(customer_id, customer_name, customer_address, buisness_type, customer_phone));
+            Customer.notActive.remove(customer_id);
+        }
+        connectDB();
+        ExecuteStatement("insert into customer values('" + customer_id + "', '" + customer_name + "', '" + customer_address + "', " + buisness_type + "' , " + customer_phone + ", 1);");
+        con.close();
+        Customer.list.put(customer_id, new Customer(customer_id, customer_name, customer_address, buisness_type, customer_phone));
+    }
+
+    public static void editCustomer(String customer_name, String customer_address, String buisness_type, String customer_phone) throws SQLException, ClassNotFoundException {
+        if (customer_name != "") {
+            connectDB();
+            ExecuteStatement("update customer set customer_name = '" + customer_name + "' where customer_name = '"
+                    + Customer.current1.getCustomer_id() + "';");
+            Customer.current1.setCustomer_name(customer_name);
+            con.close();
+        }
+        if (customer_address != "") {
+            connectDB();
+            ExecuteStatement("update customer set customer_address = '" + customer_address + "' where customer_address = '"
+                    + Customer.current1.getCustomer_id() + "';");
+            Customer.current1.setCustomer_address(customer_address);
+            con.close();
+        }
+        if (buisness_type != "") {
+            connectDB();
+            ExecuteStatement("update customer set buisness_type = '" + buisness_type + "' where buisness_type = '"
+                    + Customer.current1.getCustomer_id() + "';");
+            Customer.current1.setBuisness_type(buisness_type);
+            con.close();
+        }
+        if (customer_phone != "") {
+            int customerphone;
+            customerphone = Integer.parseInt(customer_phone);
+            connectDB();
+            ExecuteStatement("update customer set customer_phone = " + customerphone + " where customer_phone = '"
+                    + Customer.current1.getCustomer_id() + "';");
+            Customer.current1.setCustomer_phone(customerphone);
+            con.close();
+        }
+
     }
 
 

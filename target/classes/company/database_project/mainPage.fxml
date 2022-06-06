@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="370.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.MainPageController">
+<AnchorPane fx:id="pane" prefHeight="370.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.MainPageController">
     <children>
         <ImageView fitHeight="353.0" fitWidth="238.0" layoutX="14.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -50,7 +50,7 @@
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="Vcustomers" layoutX="277.0" layoutY="200.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Customers" textAlignment="CENTER">
+      <Button fx:id="Vcustomers" layoutX="277.0" layoutY="200.0" mnemonicParsing="false" onAction="#customerPage" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Customers" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>
