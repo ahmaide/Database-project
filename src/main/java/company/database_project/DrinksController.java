@@ -119,25 +119,7 @@ public class DrinksController implements Initializable {
         stage.show();
     }
 
-    public void editShow(){
-        Drinks.d=1;
-        Drinks.current = table.getSelectionModel().getSelectedItem();
-        if(Drinks.current == null)
-            error_text.setText("Please select a Drink from the table");
-        else {
-            show2("Edit " + Drinks.current.getDrink_id() + ":");
-            System.out.println(Drinks.current.getDrink_id());
-            error_text.setText("");
-            ok.setText("Edit");
-        }
-    }
 
-    public void addShow(){
-        Drinks.d = 3;
-        show("New Drink:");
-        error_text.setText("");
-        ok.setText("Add");
-    }
 
     public void execute(ActionEvent e) throws SQLException, ClassNotFoundException {
         if(Drinks.d==1){
@@ -250,5 +232,28 @@ public class DrinksController implements Initializable {
             return false;
         }
         return true;
+    }
+
+    public void addshow(ActionEvent actionEvent) {
+        Drinks.d = 3;
+        show("New Drink:");
+        error_text.setText("");
+        ok.setText("Add");
+    }
+
+    public void editshow(ActionEvent actionEvent) {
+        Drinks.d=1;
+        Drinks.current = table.getSelectionModel().getSelectedItem();
+        if(Drinks.current == null)
+            error_text.setText("Please select a Drink from the table");
+        else {
+            show2("Edit " + Drinks.current.getDrink_id() + ":");
+            System.out.println(Drinks.current.getDrink_id());
+            error_text.setText("");
+            ok.setText("Edit");
+        }
+    }
+
+    public void delete(ActionEvent actionEvent) {
     }
 }

@@ -1,11 +1,14 @@
 package company.database_project;
 
 
+
+import javafx.event.ActionEvent;
+
 import java.util.ArrayList;
 import java.util.Map;
 
 public class Drinks {
-    public static ArrayList <String> notActive;
+    
     private String drink_id;
     private String drink_name;
     private String company;
@@ -13,7 +16,7 @@ public class Drinks {
     public static int d = 0;
     private double price;
     public static Map<String, Drinks> list;
-
+    public static ArrayList <String> notActive;
     public Drinks(String drink_id, String drink_name, String company, double price){
         this.drink_id = drink_id;
         this.drink_name = drink_name;
