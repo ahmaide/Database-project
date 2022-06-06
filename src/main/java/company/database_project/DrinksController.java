@@ -209,6 +209,7 @@ public class DrinksController implements Initializable {
     }
 
     public void show2(String title){
+
         System.out.println(title);
         visible_label.setText(title);
         company_label.setText("Company:");
