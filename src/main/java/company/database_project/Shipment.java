@@ -12,6 +12,7 @@ public class Shipment {
     private double costs;
     private Map<String, Machine> machines_list;
     public static Map<Integer, Shipment> list;
+    public static Map<String, Integer> dates;
     public static int last = 0;
 
     public Shipment(int shipment_id, int driver_id, String shipment_date, String warehouse_name, double costs) {

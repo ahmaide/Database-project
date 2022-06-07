@@ -13,7 +13,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
         storeAll();
-        System.out.println(SQL_connection.dateToday());
+        System.out.println(Dates.dateToday());
+        System.out.println(Dates.stripDay(Dates.dateToday()));
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Company Database");

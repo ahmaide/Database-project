@@ -1,8 +1,10 @@
 package company.database_project;
 
 import java.sql.*;
-import java.util.*;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 public class SQL_connection {
     private static String dbURL;
@@ -41,7 +43,7 @@ public class SQL_connection {
     }
 
     public static void checkOrderDates() throws SQLException, ClassNotFoundException {
-        String date = dateToday();
+        String date = Dates.dateToday();
         connectDB();
         ExecuteStatement("update arranged_orders set passed = true where delivery_date < '" + date + "' and passed = false;");
         con.close();
@@ -86,6 +88,7 @@ public class SQL_connection {
 
     public static void storeShipment() throws SQLException, ClassNotFoundException {
         Shipment.list = new HashMap<Integer, Shipment>();
+        Shipment.dates = new HashMap<String, Integer>();
         connectDB();
         String sql = "select * from shipment";
         Statement stmt = con.createStatement();
@@ -94,6 +97,9 @@ public class SQL_connection {
             Shipment.list.put(Integer.parseInt(rs.getString(1)), new Shipment(Integer.parseInt(rs.getString(1)),
                     Integer.parseInt(rs.getString(2)), rs.getString(3), rs.getString(4),
                     Double.parseDouble(rs.getString(5))));
+            if(!Shipment.dates.containsKey(Dates.stringMonth(rs.getString(3)))){
+                Shipment.dates.put(Dates.stringMonth(rs.getString(3)), Dates.stripDay(rs.getString(3)));
+            }
         }
         rs.close();
         stmt.close();
@@ -279,12 +285,6 @@ public class SQL_connection {
         rs.close();
         stmt.close();
         con.close();
-    }
-
-    public static String dateToday(){
-        Date d = new Date();
-        String s = Integer.toString(d.getYear() + 1900) + "=" + Integer.toString(d.getMonth() + 1) + "=" + Integer.toString(d.getDate());
-        return s;
     }
 
     public static void addNewUser(String username, String password) throws SQLException, ClassNotFoundException {
