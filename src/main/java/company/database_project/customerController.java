@@ -101,6 +101,9 @@ public class customerController implements Initializable {
     @FXML
     private Button x;
 
+    @FXML
+    private ListView<String> ordersList;
+
     private ObservableList<Customer> observableList = FXCollections.observableArrayList();
 
     @Override
@@ -115,6 +118,8 @@ public class customerController implements Initializable {
             customer_phone.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customer_phone"));
             table.setItems(observableList);
             hide();
+        ordersList.setVisible(false);
+        ordersList.getItems().clear();
     }
     public void back(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("mainPage.fxml"));
@@ -143,6 +148,8 @@ public class customerController implements Initializable {
     }
 
     public void addshow(ActionEvent actionEvent) {
+        ordersList.setVisible(false);
+        ordersList.getItems().clear();
         Customer.n = 3;
         show("New Customer:");
         error_text.setText("");
@@ -150,6 +157,8 @@ public class customerController implements Initializable {
     }
 
     public void edit() {
+        ordersList.setVisible(false);
+        ordersList.getItems().clear();
         Customer.n = 1;
         Customer.current1 = table.getSelectionModel().getSelectedItem();
         if (Customer.current1 == null)
@@ -159,6 +168,23 @@ public class customerController implements Initializable {
             System.out.println(Customer.current1.getCustomer_id());
             error_text.setText("");
             ok.setText("Edit");
+        }
+    }
+
+    public void showOrders(ActionEvent e){
+        error_text.setText("");
+        hide();
+        Customer.current1 = table.getSelectionModel().getSelectedItem();
+        if(Customer.current1 == null)
+            error_text.setText("Please select a customer from the table");
+        else{
+            ordersList.setVisible(true);
+            for (Map.Entry n : Customer.current1.getOrders_list().entrySet()) {
+                Order o = Order.all.get(n.getKey());
+                String text = ("Machine type: " + o.getMachine_type() +
+                        ", Sold by: " + Seller.list.get(o.getWorker_id()).getWorker_name() + ", on: " + o.getOrder_date());
+                ordersList.getItems().add(text);
+            }
         }
     }
 

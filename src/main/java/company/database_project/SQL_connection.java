@@ -211,6 +211,7 @@ public class SQL_connection {
 
     public static void storeOrders() throws SQLException, ClassNotFoundException {
         Order.notSet = new HashMap<Integer, Order>();
+        Order.all = new HashMap<Integer, Order>();
         Arranged_Order.not_Passed = new HashMap<Integer, Order>();
         Arranged_Order.passed_list = new HashMap<Integer, Order>();
 
@@ -219,9 +220,12 @@ public class SQL_connection {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()){
-            Order.notSet.put(Integer.parseInt(rs.getString(1)), new Order(Integer.parseInt(rs.getString(1)),
+            Order o = new Order(Integer.parseInt(rs.getString(1)),
                     rs.getString(2), rs.getString(3), rs.getString(4), Double.parseDouble(rs.getString(5)),
-                    Integer.parseInt(rs.getString(6)), Integer.parseInt(rs.getString(7)), false));
+                    Integer.parseInt(rs.getString(6)), Integer.parseInt(rs.getString(7)), false);
+            Order.notSet.put(Integer.parseInt(rs.getString(1)), o);
+            Order.all.put(Integer.parseInt(rs.getString(1)), o);
+            Customer.list.get(Integer.parseInt(rs.getString(6))).addToOrders_list(o);
         }
 
         sql = "select o.order_id, o.order_date, o.type_id, o.pay_method, o.discount, o.customer_id, o.worker_id, " +
@@ -247,6 +251,8 @@ public class SQL_connection {
                 Arranged_Order.passed_list.put(o.getOrder_id(), o);
             else
                 Arranged_Order.not_Passed.put(o.getOrder_id(), o);
+            Order.all.put(Integer.parseInt(rs.getString(1)), o);
+            Customer.list.get(Integer.parseInt(rs.getString(6))).addToOrders_list(o);
         }
         rs.close();
         stmt.close();

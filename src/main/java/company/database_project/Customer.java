@@ -1,6 +1,7 @@
 package company.database_project;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Customer {
@@ -11,6 +12,7 @@ public class Customer {
     private String customer_address;
     private String buisness_type;
     private int customer_phone;
+    private Map<Integer, Order> orders_list;
     public static Map<Integer, Customer> list;
     public static ArrayList<String> notActive;
     public static Customer current1;
@@ -23,6 +25,7 @@ public class Customer {
         this.customer_address = customer_address;
         this.buisness_type = buisness_type;
         this.customer_phone = customer_phone;
+        this.orders_list = new HashMap<>();
     }
 
     public int getCustomer_id() {
@@ -65,5 +68,11 @@ public class Customer {
         this.customer_phone = customer_phone;
     }
 
+    public Map<Integer, Order> getOrders_list() {
+        return orders_list;
+    }
 
+    public void addToOrders_list(Order o) {
+        this.orders_list.put(o.getOrder_id(), o);
+    }
 }

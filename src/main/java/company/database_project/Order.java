@@ -13,6 +13,7 @@ public class Order {
     private int worker_id;
     private boolean arranged;
     public static Map<Integer, Order> notSet;
+    public static Map<Integer, Order> all;
     public static int last;
     public static ArrayList<Integer> months;
 
