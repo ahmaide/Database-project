@@ -16,7 +16,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -126,6 +128,58 @@ public class shipmentController implements Initializable {
             }
         }
         table.setItems(observableList);
+    }
+
+    public void delete(ActionEvent e) throws SQLException, ClassNotFoundException {
+        hide();
+        Shipment.current = table.getSelectionModel().getSelectedItem();
+        if(Shipment.current==null)
+            error_text.setText("Please select a shipment to delete");
+        else {
+            boolean f = true;
+            for (Map.Entry m : Shipment.current.getMachines_list().entrySet()) {
+                Machine M = (Machine) m.getValue();
+                if (M instanceof Sold_machine) {
+                    f = false;
+                    break;
+                }
+            }
+            if (f) {
+                error_text.setText("");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Deleting a shipment");
+                alert.setContentText("Deleting this shipment will delete its machines too");
+                Optional<ButtonType> result = alert.showAndWait();
+                if(result.get() == ButtonType.OK) {
+                    SQL_connection.deleteShipment();
+                    observableList = FXCollections.observableArrayList();
+                    String s = month_selector.getSelectionModel().getSelectedItem().toString();
+                    for(Map.Entry m : Shipment.list.entrySet()){
+                        Shipment w = (Shipment) m.getValue();
+                        if(Dates.stringMonth(w.getShipment_date()).equals(s)){
+                            observableList.add(w);
+                        }
+                    }
+                    table.setItems(observableList);
+                }
+            }
+            else
+                error_text.setText("This shipment contains machines that have already been sold");
+        }
+    }
+
+    public void showMachines(ActionEvent e) throws IOException {
+        hide();
+        Shipment.current = table.getSelectionModel().getSelectedItem();
+        if(Shipment.current==null)
+            error_text.setText("No shipment is selected");
+        else{
+            Parent root = FXMLLoader.load(getClass().getResource("machineForShipment.fxml"));
+            stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     public void back(ActionEvent e) throws IOException {

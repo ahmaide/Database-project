@@ -13,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -164,13 +163,11 @@ public class WarehouseController implements Initializable {
             error_text.setText("Please select a warehouse from the table");
         else{
             error_text.setText("");
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("machineForWarehouse.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage2 = new Stage();
-            stage2.setScene(scene);
-            stage2.setTitle("Machines");
-            stage2.initStyle(StageStyle.UNDECORATED);
-            stage2.show();
+            Parent root = FXMLLoader.load(getClass().getResource("machineForWarehouse.fxml"));
+            stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }
     }
 

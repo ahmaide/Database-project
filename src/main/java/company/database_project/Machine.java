@@ -1,9 +1,10 @@
 package company.database_project;
 
 public abstract class Machine {
-    String machine_id;
-    int shipment_id;
-    String type_id;
+    private String machine_id;
+    private int shipment_id;
+    private String type_id;
+    private String status;
 
     public Machine(String machine_id, String type_id, int shipment_id) {
         this.machine_id = machine_id;
@@ -11,6 +12,10 @@ public abstract class Machine {
         this.type_id = type_id;
         if(Machine_type.list.get(type_id).getLast() < IntId(machine_id))
             Machine_type.list.get(type_id).setLast(IntId(machine_id));
+        if (this instanceof Sold_machine)
+            this.status = "Sold";
+        else
+            this.status = "Stored";
     }
 
     public String getMachine_id() {
@@ -50,5 +55,9 @@ public abstract class Machine {
     public int IntId(String s){
         int m = Integer.parseInt(s.substring(2, 7));
         return m;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

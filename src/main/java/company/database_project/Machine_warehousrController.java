@@ -4,11 +4,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -51,17 +57,15 @@ public class Machine_warehousrController implements Initializable {
     @FXML
     private TableColumn<Stored_machine, Integer> machine_shipment;
 
-    @FXML
-    private Button ok2;
-
-    @FXML
-    private ChoiceBox<?> other_types;
 
     @FXML
     private ChoiceBox<?> other_warehouses;
 
     @FXML
     private Button ok1;
+
+    @FXML
+    private Stage stage;
 
     private ObservableList<Stored_machine> observableList = FXCollections.observableArrayList();
 
@@ -76,10 +80,21 @@ public class Machine_warehousrController implements Initializable {
         machine_shipment.setCellValueFactory(new PropertyValueFactory<Stored_machine, Integer>("shipment_id"));
         table.setItems(observableList);
         other_warehouses.setVisible(false);
-        other_types.setVisible(false);
         ok1.setVisible(false);
-        ok2.setVisible(false);
         error_text.setText("");
+    }
+
+    public void back(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("warehouse.fxml"));
+        stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void exit(ActionEvent e){
+        stage = (Stage) pane.getScene().getWindow();
+        stage.close();
     }
 
     public void clickDelete(ActionEvent e){

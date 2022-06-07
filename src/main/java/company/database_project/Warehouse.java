@@ -61,7 +61,7 @@ public class Warehouse {
     }
 
     public void addToMachines_list(Machine machine) {
-        this.machines_list.put(machine.machine_id, machine);
+        this.machines_list.put(machine.getMachine_id(), machine);
     }
 
     public void deleteFromMachine_list(String machine){

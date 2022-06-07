@@ -468,5 +468,15 @@ public class SQL_connection {
 
     }
 
-
+    public static void deleteShipment() throws SQLException, ClassNotFoundException {
+        Shipment.list.remove(Shipment.current.getShipment_id());
+        connectDB();
+        for(Map.Entry m : Shipment.current.getMachines_list().entrySet()){
+            Machine M = (Machine) m.getValue();
+            ExecuteStatement("delete from stored_machine where machine_id = '" + M.getMachine_id() + "';");
+        }
+        ExecuteStatement("delete from machine where shipment_id = " + Shipment.current.getShipment_id() + ";");
+        ExecuteStatement("delete from shipment where shipment_id = " + Shipment.current.getShipment_id() + ";");
+        con.close();
+    }
 }
