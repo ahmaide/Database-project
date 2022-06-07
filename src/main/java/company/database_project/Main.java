@@ -14,7 +14,10 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
         storeAll();
         System.out.println(Dates.dateToday());
-        System.out.println(Dates.stripDay(Dates.dateToday()));
+        String [] w = Dates.pastWeekList();
+        for(int i=0 ; i< w.length ; i++){
+            System.out.println(w[i]);
+        }
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Company Database");

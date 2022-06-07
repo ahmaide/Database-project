@@ -18,7 +18,7 @@ public class Dates {
         else
             day = String.valueOf((d.getDate()));
 
-        String s = Integer.toString(d.getYear() + 1900) + "=" + month + "=" + day;
+        String s = Integer.toString(d.getYear() + 1900) + "-" + month + "-" + day;
         return s;
     }
 
@@ -58,6 +58,39 @@ public class Dates {
             default: s="";
         }
         return s;
+    }
+
+    public static String[] pastWeekList(){
+        String [] week = new String[8];
+        int today = dateInt(dateToday());
+        int thisMonth = (today%10000)/100;
+        int lastPastMonth = 30;
+        if(thisMonth == 5 || thisMonth == 7 || thisMonth == 10 || thisMonth == 12)
+            lastPastMonth=29;
+        else if(thisMonth == 3)
+            lastPastMonth=27;
+        for(int i=0 ; i<8 ; i++){
+            week[i] = stringDate(today);
+            if(today%100 != 1)
+                today--;
+            else{
+                if(today%10000 > 0200){
+                    today-=100;
+                    today+=lastPastMonth;
+                }
+                else{
+                    today-=10000;
+                    today+= 1100;
+                    today+=thisMonth;
+                }
+            }
+        }
+        return week;
+    }
+
+    public static String stringDate(int date){
+        String w = Integer.toString(date);
+        return w.substring(0,4)+ "-" + w.substring(4,6) + "-" + w.substring(6,8);
     }
 
 }
