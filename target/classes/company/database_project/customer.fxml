@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="507.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.customerController">
+<AnchorPane fx:id="pane" prefHeight="507.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.customerController">
     <children>
         <Label fx:id="title" layoutX="24.0" layoutY="19.0" prefHeight="39.0" prefWidth="616.0" text="View Customer">
             <font>
@@ -18,10 +18,10 @@
         <TableView fx:id="table" layoutX="24.0" layoutY="82.0" prefHeight="287.0" prefWidth="542.0">
             <columns>
                 <TableColumn fx:id="customerId" prefWidth="99.0" text="Customer_ID" />
-                <TableColumn fx:id="customerName" prefWidth="119.0" text="Customer_Name" />
-                <TableColumn fx:id="customerAddress" prefWidth="81.0" text="Address" />
-                <TableColumn fx:id="buisnessType" prefWidth="117.0" text="Buisness_Type" />
-                <TableColumn fx:id="customerPhone" prefWidth="125.0" text="Phone_Number" />
+                <TableColumn fx:id="customer_name" prefWidth="119.0" text="Customer_Name" />
+                <TableColumn fx:id="customer_address" prefWidth="81.0" text="Address" />
+                <TableColumn fx:id="buisness_type" prefWidth="117.0" text="Buisness_Type" />
+                <TableColumn fx:id="customer_phone" prefWidth="125.0" text="Phone_Number" />
             </columns>
         </TableView>
         <Button fx:id="edit" layoutX="601.0" layoutY="121.0" mnemonicParsing="false" onAction="#edit" prefHeight="35.0" prefWidth="172.0" style="-fx-background-color: #f5e082;" text="Edit Customer">
@@ -75,7 +75,7 @@
         <TextField fx:id="phone_text" layoutX="556.0" layoutY="422.0" prefHeight="31.0" prefWidth="102.0" />
         <Button fx:id="ok" layoutX="710.0" layoutY="430.0" mnemonicParsing="false" onAction="#execute" prefHeight="29.0" prefWidth="57.0" text="Edit" textAlignment="CENTER">
             <font>
-                <Font name="Britannic Bold"  size="16.0" />
+                <Font name="Britannic Bold" size="16.0" />
             </font>
         </Button>
         <Label fx:id="error_text" layoutX="24.0" layoutY="464.0" prefHeight="29.0" prefWidth="523.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />

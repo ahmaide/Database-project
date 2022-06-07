@@ -107,16 +107,14 @@ public class customerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         for (Map.Entry n : Customer.list.entrySet()) {
             observableList.add((Customer) n.getValue());
+        }
             customerId.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customer_id"));
             customer_name.setCellValueFactory(new PropertyValueFactory<Customer, String>("customer_name"));
             customer_address.setCellValueFactory(new PropertyValueFactory<Customer, String>("customer_address"));
-            buisness_type.setCellValueFactory(new PropertyValueFactory<Customer, String>("business_type"));
+            buisness_type.setCellValueFactory(new PropertyValueFactory<Customer, String>("buisness_type"));
             customer_phone.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customer_phone"));
             table.setItems(observableList);
             hide();
-
-
-        }
     }
     public void back(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("mainPage.fxml"));
