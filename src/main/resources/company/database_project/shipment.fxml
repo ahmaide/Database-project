@@ -17,7 +17,7 @@
                 <Font name="Calibri Light" size="27.0" />
             </font>
         </Label>
-        <Button fx:id="insert" layoutX="600.0" layoutY="164.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="175.0" style="-fx-background-color: #f5e082;" text="New Shipment" textAlignment="CENTER">
+        <Button fx:id="insert" layoutX="600.0" layoutY="164.0" mnemonicParsing="false" onAction="#newShipment" prefHeight="29.0" prefWidth="175.0" style="-fx-background-color: #f5e082;" text="New Shipment" textAlignment="CENTER">
             <font>
                 <Font name="Britannic Bold" size="16.0" />
             </font>
@@ -42,7 +42,7 @@
             <TableColumn fx:id="shipment_costs" prefWidth="73.0" text="Costs" />
             </columns>
         </TableView>
-      <ChoiceBox fx:id="checker_selector" layoutX="662.0" layoutY="203.0" prefHeight="31.0" prefWidth="112.0" />
+      <ChoiceBox fx:id="checker_selector" layoutX="645.0" layoutY="203.0" prefHeight="31.0" prefWidth="129.0" />
       <ChoiceBox fx:id="date_selector" layoutX="662.0" layoutY="243.0" prefHeight="31.0" prefWidth="112.0" />
       <ChoiceBox fx:id="warehouse_selector" layoutX="662.0" layoutY="283.0" prefHeight="31.0" prefWidth="112.0" />
       <Label fx:id="costs_label" layoutX="574.0" layoutY="326.0" text="Costs:">
@@ -76,7 +76,7 @@
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="add_machines" layoutX="703.0" layoutY="324.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="80.0" style="-fx-background-color: #f5e082;" text="Add Machines" textAlignment="CENTER">
+      <Button fx:id="add_machines" layoutX="703.0" layoutY="324.0" mnemonicParsing="false" onAction="#MachinesForNewShipment" prefHeight="29.0" prefWidth="80.0" style="-fx-background-color: #f5e082;" text="Add Machines" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="10.0" />
          </font>

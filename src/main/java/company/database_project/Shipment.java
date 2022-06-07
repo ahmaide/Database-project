@@ -29,6 +29,17 @@ public class Shipment {
             last = shipment_id;
     }
 
+    public Shipment(int driver_id, String shipment_date, String warehouse_name, double costs){
+        this.Driver_id = driver_id;
+        this.Driver_name = Driver.list.get(this.Driver_id).getWorker_name();
+        this.shipment_date = shipment_date;
+        this.warehouse_name = warehouse_name;
+        this.costs = costs;
+        this.machines_list = new HashMap<String, Machine>();
+        this.shipment_id = last+1;
+        last++;
+    }
+
     public int getShipment_id() {
         return shipment_id;
     }
@@ -78,6 +89,7 @@ public class Shipment {
 
     public void addToMachines_list(Machine machine) {
         this.machines_list.put(machine.getMachine_id(), machine);
+        this.costs+= Machine_type.list.get(machine.getType_id()).getPrice();
     }
 
     public void deleteFromMachines_list(String machine){

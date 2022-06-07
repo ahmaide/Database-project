@@ -1,7 +1,5 @@
 package company.database_project;
 
-import java.util.Map;
-
 public abstract class Employee {
     private int worker_id;
     private String worker_name;
@@ -19,7 +17,10 @@ public abstract class Employee {
         this.worker_phone = worker_phone;
         this.activity = activity;
         this.start_date = start_date;
-        this.leave_date = leave_date;
+        if(leave_date == null)
+            this.leave_date="";
+        else
+            this.leave_date = leave_date;
     }
 
     public int getWorker_id() {

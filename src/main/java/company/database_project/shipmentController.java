@@ -182,6 +182,52 @@ public class shipmentController implements Initializable {
         }
     }
 
+    public void newShipment(ActionEvent e){
+        show();
+        checker_selector.getItems().clear();
+        date_selector.getItems().clear();
+        warehouse_selector.getItems().clear();
+        costs_box.setText("");
+        for(Map.Entry m : Driver.active.entrySet()){
+            Driver d = (Driver) m.getValue();
+            checker_selector.getItems().add(d.getWorker_name());
+        }
+        String [] dates = Dates.pastWeekList();
+        for(int m=0; m<8 ; m++){
+            date_selector.getItems().add(dates[m]);
+        }
+        for(Map.Entry m : Warehouse.list.entrySet()){
+            Warehouse w = (Warehouse) m.getValue();
+            warehouse_selector.getItems().add(w.getName());
+        }
+    }
+
+    public void MachinesForNewShipment(ActionEvent e) throws IOException, SQLException, ClassNotFoundException {
+        if(checker_selector.getValue()==null || date_selector.getValue()==null || warehouse_selector.getValue()==null ||
+                costs_box.getText().equals("") || !isNumeric(costs_box.getText()))
+            error_text.setText("Please choose the data right (Numeric cost and nun empty fields)");
+        else{
+            Driver d = null;
+            for(Map.Entry m : Driver.active.entrySet()){
+                Driver de = (Driver) m.getValue();
+                if(checker_selector.getValue().equals(de.getWorker_name())) {
+                    d = de;
+                    break;
+                }
+            }
+            Shipment.current = new Shipment(d.getWorker_id(), date_selector.getValue(), warehouse_selector.getValue(),
+                    Double.parseDouble(costs_box.getText()));
+            SQL_connection.createShipment();
+            Parent root = FXMLLoader.load(getClass().getResource("addMachinesToShipment.fxml"));
+            stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+
+
+    }
+
     public void back(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("mainPage.fxml"));
         stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
@@ -219,5 +265,19 @@ public class shipmentController implements Initializable {
         costs_box.setVisible(true);
         add_machines.setVisible(true);
         error_text.setText("");
+    }
+
+    public boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+            if (d <= 0)
+                return false;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }

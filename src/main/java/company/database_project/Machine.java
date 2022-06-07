@@ -18,6 +18,16 @@ public abstract class Machine {
             this.status = "Stored";
     }
 
+    public Machine(String type_id, int shipment_id) {
+        this.shipment_id = shipment_id;
+        this.type_id = type_id;
+        generateId(type_id);
+        if (this instanceof Sold_machine)
+            this.status = "Sold";
+        else
+            this.status = "Stored";
+    }
+
     public String getMachine_id() {
         return machine_id;
     }
@@ -42,14 +52,14 @@ public abstract class Machine {
         this.type_id = type_id;
     }
 
-    public void generateId(){
-        String w = String.valueOf(Machine_type.list.get(this.type_id).getLast() + 1);
+    public void generateId(String type_id){
+        String w = String.valueOf(Machine_type.list.get(type_id).getLast() + 1);
         while(w.length()<5){
             w = "0" + w;
         }
-        w = this.type_id + w;
+        w = type_id + w;
         this.machine_id = w;
-        Machine_type.list.get(this.type_id).setLast(Machine_type.list.get(this.type_id).getLast() + 1);
+        Machine_type.list.get(type_id).setLast(Machine_type.list.get(type_id).getLast() + 1);
     }
 
     public int IntId(String s){

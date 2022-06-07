@@ -93,10 +93,10 @@ public class SQL_connection {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()){
+            System.out.println(rs.getString(1));
             Shipment.list.put(Integer.parseInt(rs.getString(1)), new Shipment(Integer.parseInt(rs.getString(1)),
                     Integer.parseInt(rs.getString(2)), rs.getString(3), rs.getString(4),
                     Double.parseDouble(rs.getString(5))));
-            System.out.println(rs.getString(1));
             if(!Shipment.dates.containsKey(Dates.stringMonth(rs.getString(3)))){
                 Shipment.dates.put(Dates.stringMonth(rs.getString(3)), Dates.stripDay(rs.getString(3)));
             }
@@ -147,7 +147,7 @@ public class SQL_connection {
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()){
             boolean activity = false;
-            if(rs.getString(6)=="1")
+            if(rs.getString(6).equals("1"))
                 activity = true;
             if(rs.getString(5).equals("driver")){
                 Driver d = new Driver(Integer.parseInt(rs.getString(1)), rs.getString(2), Integer.parseInt(rs.getString(3)),
@@ -477,6 +477,30 @@ public class SQL_connection {
         }
         ExecuteStatement("delete from machine where shipment_id = " + Shipment.current.getShipment_id() + ";");
         ExecuteStatement("delete from shipment where shipment_id = " + Shipment.current.getShipment_id() + ";");
+        con.close();
+    }
+
+    public static void createShipment() throws SQLException, ClassNotFoundException {
+        connectDB();
+        Shipment s = Shipment.current;
+        Shipment.list.put(s.getShipment_id(), s);
+        ExecuteStatement("insert into shipment values(" + s.getShipment_id() + ", " + s.getDriver_id() +
+                ", '" + s.getShipment_date() + "', '" + s.getWarehouse_name() + "', " + s.getCosts() + ");");
+        con.close();
+    }
+
+    public static void addMachines(String type_id, int num) throws SQLException, ClassNotFoundException {
+        connectDB();
+        for(int i=0 ; i<num ; i++) {
+            Machine m = new Stored_machine(type_id, Shipment.current.getShipment_id(), Shipment.current.getWarehouse_name());
+            Stored_machine.list.put(m.getMachine_id(), (Stored_machine) m);
+            Warehouse.list.get(Shipment.current.getWarehouse_name()).addToMachines_list(m);
+            Shipment.current.addToMachines_list(m);
+            ExecuteStatement("insert into machine values('" + m.getMachine_id() + "', " + m.getShipment_id() +
+                    ", '" + m.getType_id() + "');");
+            ExecuteStatement("insert into stored_machine values('" + m.getMachine_id() + "', '" +
+                    ((Stored_machine) m).getWarehouse_name() + "');");
+        }
         con.close();
     }
 }

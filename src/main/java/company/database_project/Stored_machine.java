@@ -12,6 +12,11 @@ public class Stored_machine extends Machine {
         this.warehouse_name = warehouse_name;
     }
 
+    public Stored_machine(String type_id, int shipment_id,  String warehouse_name) {
+        super(type_id, shipment_id);
+        this.warehouse_name = warehouse_name;
+    }
+
     public String getWarehouse_name() {
         return warehouse_name;
     }
