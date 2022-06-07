@@ -13,7 +13,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
         storeAll();
-        System.out.println(Dates.dateToday());
         String [] w = Dates.pastWeekList();
         for(int i=0 ; i< w.length ; i++){
             System.out.println(w[i]);
@@ -34,10 +33,10 @@ public class Main extends Application {
         SQL_connection.checkOrderDates();
         SQL_connection.storeUsers();
         SQL_connection.storeWarehouse();
+        SQL_connection.storeEmployee();
         SQL_connection.storeShipment();
         SQL_connection.storeCustomers();
         SQL_connection.storeDrink();
-        SQL_connection.storeEmployee();
         SQL_connection.storeType_of_machine();
         SQL_connection.storeMachines();
         SQL_connection.storeDelivery();

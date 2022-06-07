@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="413.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.shipmentController">
+    <children>
+        <Label layoutX="19.0" layoutY="20.0" prefHeight="29.0" prefWidth="664.0" text="View Shipments" textOverrun="WORD_ELLIPSIS">
+            <font>
+                <Font name="Calibri Light" size="27.0" />
+            </font>
+        </Label>
+        <Button fx:id="insert" layoutX="600.0" layoutY="164.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="175.0" style="-fx-background-color: #f5e082;" text="New Shipment" textAlignment="CENTER">
+            <font>
+                <Font name="Britannic Bold" size="16.0" />
+            </font>
+        </Button>
+        <Button fx:id="view" layoutX="600.0" layoutY="80.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="175.0" style="-fx-background-color: #f5e082;" text="View Machines" textAlignment="CENTER">
+            <font>
+                <Font name="Britannic Bold" size="16.0" />
+            </font>
+        </Button>
+        <Button layoutX="762.0" layoutY="13.0" mnemonicParsing="false" onAction="#exit" prefHeight="22.0" prefWidth="19.0" style="-fx-background-color: #f5e082;" text="X" textAlignment="CENTER" fx:id="x">
+            <font>
+                <Font name="Calibri" size="12.0" />
+            </font>
+        </Button>
+        <Label fx:id="error_text" layoutX="19.0" layoutY="385.0" prefHeight="29.0" prefWidth="625.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
+        <TableView fx:id="table" editable="true" layoutX="18.0" layoutY="81.0" prefHeight="271.0" prefWidth="551.0">
+            <columns>
+                <TableColumn fx:id="shipment_id" prefWidth="101.0" text="Shipment ID" />
+                <TableColumn fx:id="shipment_employee" prefWidth="145.0" text="Checking Employee" />
+                <TableColumn fx:id="shipment_date" prefWidth="76.0" text="Date" />
+                <TableColumn fx:id="shipment_warehouse" prefWidth="155.0" text="Warehouse" />
+            <TableColumn fx:id="shipment_costs" prefWidth="73.0" text="Costs" />
+            </columns>
+        </TableView>
+      <ChoiceBox fx:id="checker_selector" layoutX="662.0" layoutY="203.0" prefHeight="31.0" prefWidth="112.0" />
+      <ChoiceBox fx:id="date_selector" layoutX="662.0" layoutY="243.0" prefHeight="31.0" prefWidth="112.0" />
+      <ChoiceBox fx:id="warehouse_selector" layoutX="662.0" layoutY="283.0" prefHeight="31.0" prefWidth="112.0" />
+      <Label fx:id="costs_label" layoutX="574.0" layoutY="326.0" text="Costs:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="costs_box" layoutX="633.0" layoutY="323.0" prefHeight="31.0" prefWidth="61.0" />
+      <Label fx:id="checker_label" layoutX="574.0" layoutY="206.0" text="Checker:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="date_label" layoutX="574.0" layoutY="246.0" prefHeight="25.0" prefWidth="47.0" text="Date:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="warehouse_label" layoutX="574.0" layoutY="286.0" prefHeight="25.0" prefWidth="86.0" text="Warehouse:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="back" layoutX="716.0" layoutY="371.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="67.0" style="-fx-background-color: #f5e082;" text="Back" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="delete" layoutX="600.0" layoutY="122.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="175.0" style="-fx-background-color: #f5e082;" text="Delete Shipment" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="add_machines" layoutX="703.0" layoutY="324.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="80.0" style="-fx-background-color: #f5e082;" text="Add Machines" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="10.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="month_selector" layoutX="381.0" layoutY="42.0" onAction="#display" prefHeight="31.0" prefWidth="188.0" promptText="Month" />
+    </children>
+</AnchorPane>

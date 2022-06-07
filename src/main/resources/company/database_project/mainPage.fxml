@@ -60,7 +60,7 @@
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="Vshipments" layoutX="488.0" layoutY="140.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Shipments" textAlignment="CENTER">
+      <Button fx:id="Vshipments" layoutX="488.0" layoutY="140.0" mnemonicParsing="false" onAction="#shipmentPage" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Shipments" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>

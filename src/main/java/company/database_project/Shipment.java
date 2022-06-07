@@ -7,17 +7,20 @@ public class Shipment {
 
     private int shipment_id;
     private int Driver_id;
+    private String Driver_name;
     private String shipment_date;
     private String warehouse_name;
     private double costs;
     private Map<String, Machine> machines_list;
     public static Map<Integer, Shipment> list;
     public static Map<String, Integer> dates;
+    public static Shipment current;
     public static int last = 0;
 
     public Shipment(int shipment_id, int driver_id, String shipment_date, String warehouse_name, double costs) {
         this.shipment_id = shipment_id;
-        Driver_id = driver_id;
+        this.Driver_id = driver_id;
+        this.Driver_name = Driver.list.get(this.Driver_id).getWorker_name();
         this.shipment_date = shipment_date;
         this.warehouse_name = warehouse_name;
         this.costs = costs;
@@ -38,8 +41,11 @@ public class Shipment {
         return Driver_id;
     }
 
+    public String getDriver_name(){ return  Driver_name;}
+
     public void setDriver_id(int driver_id) {
         Driver_id = driver_id;
+        Driver_name = Driver.list.get(driver_id).getWorker_name();
     }
 
     public String getShipment_date() {

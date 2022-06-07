@@ -72,7 +72,6 @@ public class SQL_connection {
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()){
             if(rs.getString(5).equals("1")) {
-                System.out.println(rs.getString(1));
                 Warehouse.list.put(rs.getString(1), new Warehouse(rs.getString(1), rs.getString(2),
                         rs.getString(3), Integer.parseInt(rs.getString(4))));
 
@@ -97,6 +96,7 @@ public class SQL_connection {
             Shipment.list.put(Integer.parseInt(rs.getString(1)), new Shipment(Integer.parseInt(rs.getString(1)),
                     Integer.parseInt(rs.getString(2)), rs.getString(3), rs.getString(4),
                     Double.parseDouble(rs.getString(5))));
+            System.out.println(rs.getString(1));
             if(!Shipment.dates.containsKey(Dates.stringMonth(rs.getString(3)))){
                 Shipment.dates.put(Dates.stringMonth(rs.getString(3)), Dates.stripDay(rs.getString(3)));
             }
@@ -153,6 +153,7 @@ public class SQL_connection {
                 Driver d = new Driver(Integer.parseInt(rs.getString(1)), rs.getString(2), Integer.parseInt(rs.getString(3)),
                         Integer.parseInt(rs.getString(4)), activity, rs.getString(7), rs.getString(8));
                 Driver.list.put(d.getWorker_id(), d);
+                System.out.println(d.getWorker_id() + " " + d.getWorker_name());
                 if (activity)
                     Driver.active.put(d.getWorker_id(), d);
             }
@@ -180,8 +181,8 @@ public class SQL_connection {
         while (rs.next()){
             Stored_machine.list.put(rs.getString(1), new Stored_machine(rs.getString(1),
                     rs.getString(2), Integer.parseInt(rs.getString(3)), rs.getString(4)));
-            System.out.println(rs.getString(4) + "  " + rs.getString(1));
             Warehouse.list.get(rs.getString(4)).addToMachines_list(Stored_machine.list.get(rs.getString(1)));
+            System.out.println(rs.getString(1) + " " + rs.getString(3));
             Shipment.list.get(Integer.parseInt(rs.getString(3))).addToMachines_list(Stored_machine.list.get(rs.getString(1)));
         }
 
