@@ -503,4 +503,48 @@ public class SQL_connection {
         }
         con.close();
     }
+
+    public static void addOrder(String date, String type, String pay, Double discount, int customer_id, String customer_name,
+                                String address, String buisness, int phone, int seller, String delivery, boolean isCust,
+                                boolean isDel) throws SQLException, ClassNotFoundException {
+        connectDB();
+        if(!isCust){
+            Customer.list.put(customer_id, new Customer(customer_id, customer_name,address, buisness, phone));
+            ExecuteStatement("insert into customer values (" + customer_id + ", '" + customer_name + "', '" + address +
+                    "', '" + buisness + "', " + phone + ");");
+        }
+
+        if(!isDel) {
+            Order o = new Order(date, type, pay, discount, customer_id, seller, isDel);
+            Order.all.put(o.getOrder_id(),o);
+            Order.notSet.put(o.getOrder_id(),o);
+            ExecuteStatement("insert into orders values(" + o.getOrder_id() + ", '" + date + "', '" + type + "', '" +
+                    pay +"', " + discount + ", " + customer_id + ", " + seller + ", false);");
+            Customer.list.get(customer_id).addToOrders_list(o);
+        }
+        else{
+            Stored_machine sm = null;
+            for(Map.Entry m : Stored_machine.list.entrySet()){
+                Stored_machine M = (Stored_machine) m.getValue();
+                if(M.getType_id().equals(type))
+                    sm = M;
+            }
+            Sold_machine Sm = new Sold_machine(sm.getMachine_id(), sm.getType_id(), sm.getShipment_id(), customer_id);
+            Warehouse.list.get(sm.getWarehouse_name()).deleteFromMachine_list(sm.getMachine_id());
+            Stored_machine.list.remove(sm.getMachine_id());
+            Sold_machine.list.put(Sm.getMachine_id(), Sm);
+            ExecuteStatement("delete from stored_machine where machine_id = '" + sm.getMachine_id() + "';");
+            ExecuteStatement("insert into sold_machine values('" + Sm.getMachine_id() + "', " + Sm.getCustomer_id() + ");");
+            Arranged_Order o = new Arranged_Order(date, type, pay, discount, customer_id, seller, delivery,
+                    sm.getMachine_id(), false);
+            Arranged_Order.not_Passed.put(o.getOrder_id(), o);
+            Order.all.put(o.getOrder_id(),o);
+            ExecuteStatement("insert into orders values(" + o.getOrder_id() + ", '" + date + "', '" + type + "', '" +
+                    pay +"', " + discount + ", " + customer_id + ", " + seller + ", true);");
+            ExecuteStatement("insert into arranged_orders values(" + o.getOrder_id() + ", '" + delivery + "', '" +
+                    sm.getMachine_id() + "', false);");
+            Customer.list.get(customer_id).addToOrders_list(o);
+        }
+        con.close();
+    }
 }

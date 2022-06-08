@@ -179,6 +179,7 @@ public class customerController implements Initializable {
             error_text.setText("Please select a customer from the table");
         else{
             ordersList.setVisible(true);
+            ordersList.getItems().clear();
             for (Map.Entry n : Customer.current1.getOrders_list().entrySet()) {
                 Order o = Order.all.get(n.getKey());
                 String text = ("Machine type: " + o.getMachine_type() +

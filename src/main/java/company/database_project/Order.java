@@ -31,6 +31,19 @@ public class Order {
             last=order_id;
     }
 
+    public Order( String order_date, String machine_type, String pay_method, double discount, int customer_id, int worker_id,
+                  boolean arranged){
+        this.order_date = order_date;
+        this.machine_type = machine_type;
+        this.pay_method = pay_method;
+        this.discount = discount;
+        this.customer_id = customer_id;
+        this.worker_id = worker_id;
+        this.arranged = arranged;
+        this.order_id = last+1;
+        last++;
+    }
+
     public int getOrder_id() {
         return order_id;
     }

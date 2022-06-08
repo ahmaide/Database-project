@@ -25,7 +25,7 @@
                 <Font name="Calibri" size="12.0" />
             </font>
         </Button>
-        <Label fx:id="error_text" layoutX="14.0" layoutY="370.0" prefHeight="29.0" prefWidth="348.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
+        <Label fx:id="error_text" layoutX="14.0" layoutY="370.0" prefHeight="29.0" prefWidth="570.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
         <ChoiceBox fx:id="date_selector" layoutX="210.0" layoutY="89.0" prefHeight="30.0" prefWidth="77.0" />
         <Label fx:id="date_label" layoutX="210.0" layoutY="58.0" prefHeight="29.0" prefWidth="44.0" text="Date:" />
         <TextField fx:id="discount_box" layoutX="514.0" layoutY="89.0" prefHeight="31.0" prefWidth="77.0" />
@@ -39,7 +39,7 @@
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="change_password111" layoutX="20.0" layoutY="83.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" style="-fx-background-color: #f5e082;" text="Make a New Order" textAlignment="CENTER">
+      <Button fx:id="change_password111" layoutX="20.0" layoutY="83.0" mnemonicParsing="false" onAction="#newOrder" prefHeight="37.0" prefWidth="175.0" style="-fx-background-color: #f5e082;" text="Make a New Order" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
@@ -54,7 +54,7 @@
       <ChoiceBox fx:id="pay_selector" layoutX="408.0" layoutY="89.0" prefHeight="30.0" prefWidth="97.0" />
       <Label fx:id="payMethod_label" layoutX="408.0" layoutY="58.0" prefHeight="29.0" prefWidth="97.0" text="Pay method:" />
       <Label fx:id="discount_label" layoutX="514.0" layoutY="58.0" prefHeight="29.0" prefWidth="97.0" text="Discount:" />
-      <TextField fx:id="customerId_box" layoutX="598.0" layoutY="88.0" prefHeight="13.0" prefWidth="131.0" />
+      <TextField fx:id="customerId_box" layoutX="598.0" layoutY="88.0" prefHeight="31.0" prefWidth="131.0" />
       <Label fx:id="customerId_label" layoutX="598.0" layoutY="58.0" prefHeight="29.0" prefWidth="97.0" text="Customer ID:" />
       <ChoiceBox fx:id="seller_selector" layoutX="210.0" layoutY="152.0" prefHeight="31.0" prefWidth="106.0" />
       <Label fx:id="seller_label" layoutX="210.0" layoutY="127.0" prefHeight="29.0" prefWidth="97.0" text="Seller:" />
@@ -66,13 +66,14 @@
       <TextField fx:id="buisness_box" layoutX="598.0" layoutY="283.0" prefHeight="31.0" prefWidth="131.0" />
       <Label fx:id="phone_label" layoutX="598.0" layoutY="318.0" prefHeight="29.0" prefWidth="117.0" text="Phone number:" />
       <TextField fx:id="phone_box" layoutX="598.0" layoutY="348.0" prefHeight="31.0" prefWidth="131.0" />
-      <RadioButton fx:id="delivery_radioButton" layoutX="340.0" layoutY="152.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="131.0" text="Set Delivery" />
+      <RadioButton fx:id="delivery_radioButton" layoutX="340.0" layoutY="152.0" mnemonicParsing="false" onAction="#deliveries" prefHeight="29.0" prefWidth="131.0" text="Set Delivery" />
       <ChoiceBox fx:id="deliveries_selector" layoutX="340.0" layoutY="218.0" prefHeight="31.0" prefWidth="131.0" />
       <Label fx:id="available_label" layoutX="340.0" layoutY="188.0" prefHeight="29.0" prefWidth="131.0" text="Available Deliveries:" />
-      <Button fx:id="addOrder" layoutX="340.0" layoutY="267.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="156.0" style="-fx-background-color: #f5e082;" text="Add Order" textAlignment="CENTER">
+      <Button fx:id="addOrder" layoutX="340.0" layoutY="267.0" mnemonicParsing="false" onAction="#addNewOrder" prefHeight="37.0" prefWidth="156.0" style="-fx-background-color: #f5e082;" text="Add Order" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
+      <Label fx:id="check_text" layoutX="20.0" layoutY="123.0" prefHeight="29.0" prefWidth="266.0" text="Order has been saved!" textFill="#19d300" />
     </children>
 </AnchorPane>
