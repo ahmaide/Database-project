@@ -224,7 +224,7 @@ public class OrdersController implements Initializable {
                             }
                         }
                         int p;
-                        if(phone_box.getText().equals(""))
+                        if(phone_box.getText().equals("") || !isNumeric(phone_box.getText()))
                             p=0;
                         else
                             p=Integer.parseInt(phone_box.getText());
