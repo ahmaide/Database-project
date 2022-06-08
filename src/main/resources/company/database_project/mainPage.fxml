@@ -45,7 +45,7 @@
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="Vorders" layoutX="488.0" layoutY="200.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Orders" textAlignment="CENTER">
+      <Button fx:id="Vorders" layoutX="488.0" layoutY="200.0" mnemonicParsing="false" onAction="#ordersPage" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Orders" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>

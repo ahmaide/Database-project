@@ -14,7 +14,7 @@ public class Order {
     private boolean arranged;
     public static Map<Integer, Order> notSet;
     public static Map<Integer, Order> all;
-    public static int last;
+    public static int last = 0;
     public static ArrayList<Integer> months;
 
     public Order(int order_id, String order_date, String machine_type, String pay_method, double discount, int customer_id, int worker_id,
@@ -27,6 +27,8 @@ public class Order {
         this.customer_id = customer_id;
         this.worker_id = worker_id;
         this.arranged = arranged;
+        if(order_id>last)
+            last=order_id;
     }
 
     public int getOrder_id() {
