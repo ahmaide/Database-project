@@ -103,6 +103,10 @@ public class WarehouseController implements Initializable {
     @FXML
     private Button delete_ok;
 
+    @FXML
+    private Label nOfMachines;
+
+
     private ObservableList<Warehouse> observableList = FXCollections.observableArrayList();
 
     @Override
@@ -213,6 +217,15 @@ public class WarehouseController implements Initializable {
         }
     }
 
+    public void showNumberOfMachines(ActionEvent e){
+        hide();
+        Warehouse.current = table.getSelectionModel().getSelectedItem();
+        if(Warehouse.current!=null)
+            nOfMachines.setText(String.valueOf(Warehouse.current.getMachines_list().size()));
+        else
+            error_text.setText("Please select a warehouse");
+    }
+
     public void execute(ActionEvent e) throws SQLException, ClassNotFoundException {
         if(Warehouse.m==1){
             boolean num = false;
@@ -288,6 +301,7 @@ public class WarehouseController implements Initializable {
         type_text.setVisible(false);
         floors_text.setVisible(false);
         ok.setVisible(false);
+        nOfMachines.setText("");
     }
 
     public void hideDelete(){
@@ -312,6 +326,7 @@ public class WarehouseController implements Initializable {
         floors_text.setVisible(true);
         floors_text.setText("");
         ok.setVisible(true);
+
     }
 
     public void show2(String title){

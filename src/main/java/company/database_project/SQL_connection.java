@@ -486,6 +486,9 @@ public class SQL_connection {
         Shipment.list.put(s.getShipment_id(), s);
         ExecuteStatement("insert into shipment values(" + s.getShipment_id() + ", " + s.getDriver_id() +
                 ", '" + s.getShipment_date() + "', '" + s.getWarehouse_name() + "', " + s.getCosts() + ");");
+        if(!Shipment.dates.containsKey(s.getShipment_date())){
+            Shipment.dates.put(Dates.stringMonth(s.getShipment_date()), Dates.stripDay(s.getShipment_date()));
+        }
         con.close();
     }
 

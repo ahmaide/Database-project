@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="413.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.shipmentController">
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="443.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.shipmentController">
     <children>
         <Label layoutX="19.0" layoutY="20.0" prefHeight="29.0" prefWidth="664.0" text="View Shipments" textOverrun="WORD_ELLIPSIS">
             <font>
@@ -32,7 +32,7 @@
                 <Font name="Calibri" size="12.0" />
             </font>
         </Button>
-        <Label fx:id="error_text" layoutX="19.0" layoutY="385.0" prefHeight="29.0" prefWidth="625.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
+        <Label fx:id="error_text" layoutX="19.0" layoutY="415.0" prefHeight="29.0" prefWidth="625.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
         <TableView fx:id="table" editable="true" layoutX="18.0" layoutY="81.0" prefHeight="271.0" prefWidth="551.0">
             <columns>
                 <TableColumn fx:id="shipment_id" prefWidth="101.0" text="Shipment ID" />
@@ -66,9 +66,9 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="back" layoutX="716.0" layoutY="371.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="67.0" style="-fx-background-color: #f5e082;" text="Back" textAlignment="CENTER">
+      <Button fx:id="back" layoutX="736.0" layoutY="408.0" mnemonicParsing="false" onAction="#back" prefHeight="22.0" prefWidth="47.0" style="-fx-background-color: #f5e082;" text="Back" textAlignment="CENTER">
          <font>
-            <Font name="Britannic Bold" size="16.0" />
+            <Font name="Britannic Bold" size="12.0" />
          </font>
       </Button>
       <Button fx:id="delete" layoutX="600.0" layoutY="122.0" mnemonicParsing="false" onAction="#delete" prefHeight="12.0" prefWidth="175.0" style="-fx-background-color: #f5e082;" text="Delete Shipment" textAlignment="CENTER">
@@ -82,5 +82,11 @@
          </font>
       </Button>
       <ComboBox fx:id="month_selector" layoutX="381.0" layoutY="42.0" onAction="#display" prefHeight="31.0" prefWidth="188.0" promptText="Month" />
+      <Button fx:id="numberOfmachines_button" layoutX="581.0" layoutY="368.0" mnemonicParsing="false" onAction="#getNumberOfMachines" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #f5e082;" text="Number of Machines" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="10.0" />
+         </font>
+      </Button>
+      <Label fx:id="machineNum_label" layoutX="701.0" layoutY="372.0" text="Label" />
     </children>
 </AnchorPane>

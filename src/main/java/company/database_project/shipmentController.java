@@ -99,11 +99,15 @@ public class shipmentController implements Initializable {
     @FXML
     private Map<MenuItem, String> menu;
 
+    @FXML
+    private Label machineNum_label;
+
     private ObservableList<Shipment> observableList = FXCollections.observableArrayList();
     private ObservableList<String> monthsList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        machineNum_label.setText("");
         shipment_id.setCellValueFactory(new PropertyValueFactory<Shipment, Integer>("shipment_id"));
         shipment_employee.setCellValueFactory(new PropertyValueFactory<Shipment, String>("Driver_name"));
         shipment_date.setCellValueFactory(new PropertyValueFactory<Shipment, String>("shipment_date"));
@@ -128,6 +132,15 @@ public class shipmentController implements Initializable {
             }
         }
         table.setItems(observableList);
+    }
+
+    public void getNumberOfMachines(ActionEvent e){
+        hide();
+        Shipment.current = table.getSelectionModel().getSelectedItem();
+        if(Shipment.current==null)
+            error_text.setText("Please select a shipment to delete");
+        else
+            machineNum_label.setText(String.valueOf(Shipment.current.getMachines_list().size()));
     }
 
     public void delete(ActionEvent e) throws SQLException, ClassNotFoundException {
@@ -204,7 +217,7 @@ public class shipmentController implements Initializable {
 
     public void MachinesForNewShipment(ActionEvent e) throws IOException, SQLException, ClassNotFoundException {
         if(checker_selector.getValue()==null || date_selector.getValue()==null || warehouse_selector.getValue()==null ||
-                costs_box.getText().equals("") || !isNumeric(costs_box.getText()))
+                costs_box.getText().equals("") || (!isNumeric(costs_box.getText()) && !costs_box.getText().equals("0")))
             error_text.setText("Please choose the data right (Numeric cost and nun empty fields)");
         else{
             Driver d = null;

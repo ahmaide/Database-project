@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="413.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.WarehouseController">
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="443.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.WarehouseController">
     <children>
-        <Button fx:id="back" layoutX="690.0" layoutY="300.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="67.0" style="-fx-background-color: #f5e082;" text="Back" textAlignment="CENTER">
+        <Button fx:id="back" layoutX="734.0" layoutY="412.0" mnemonicParsing="false" onAction="#back" prefHeight="17.0" prefWidth="57.0" style="-fx-background-color: #f5e082;" text="Back" textAlignment="CENTER">
             <font>
-                <Font name="Britannic Bold" size="16.0" />
+                <Font name="Britannic Bold" size="13.0" />
             </font>
         </Button>
         <Label layoutX="20.0" layoutY="8.0" prefHeight="29.0" prefWidth="664.0" text="View Warehouse" textOverrun="WORD_ELLIPSIS">
@@ -41,7 +41,7 @@
                 <Font name="Calibri" size="12.0" />
             </font>
         </Button>
-        <Label fx:id="error_text" layoutX="20.0" layoutY="377.0" prefHeight="29.0" prefWidth="523.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
+        <Label fx:id="error_text" layoutX="20.0" layoutY="412.0" prefHeight="29.0" prefWidth="523.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
       <Button fx:id="add" layoutX="600.0" layoutY="260.0" mnemonicParsing="false" onAction="#addShow" prefHeight="29.0" prefWidth="157.0" style="-fx-background-color: #f5e082;" text="New Warehouse" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
@@ -55,32 +55,32 @@
             <TableColumn fx:id="warehouse_floors" prefWidth="87.0" text="Floors" />
         </columns>
       </TableView>
-      <Label fx:id="visible_label" layoutX="20.0" layoutY="313.0" prefHeight="29.0" prefWidth="131.0" text="Edit:" textOverrun="WORD_ELLIPSIS">
+      <Label fx:id="visible_label" layoutX="20.0" layoutY="343.0" prefHeight="29.0" prefWidth="131.0" text="Edit:" textOverrun="WORD_ELLIPSIS">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="name_label" layoutX="155.0" layoutY="317.0" text="Name:">
+      <Label fx:id="name_label" layoutX="155.0" layoutY="347.0" text="Name:">
          <font>
             <Font size="12.0" />
          </font></Label>
-      <TextField fx:id="name_text" layoutX="155.0" layoutY="344.0" prefHeight="31.0" prefWidth="138.0" />
-      <Label fx:id="address_label" layoutX="305.0" layoutY="317.0" text="Address:">
+      <TextField fx:id="name_text" layoutX="155.0" layoutY="374.0" prefHeight="31.0" prefWidth="138.0" />
+      <Label fx:id="address_label" layoutX="305.0" layoutY="347.0" text="Address:">
          <font>
             <Font size="12.0" />
          </font></Label>
-      <TextField fx:id="address_text" layoutX="305.0" layoutY="344.0" prefHeight="31.0" prefWidth="175.0" />
-      <Label fx:id="type_label" layoutX="492.0" layoutY="317.0" prefHeight="21.0" prefWidth="43.0" text="Type:">
+      <TextField fx:id="address_text" layoutX="305.0" layoutY="374.0" prefHeight="31.0" prefWidth="175.0" />
+      <Label fx:id="type_label" layoutX="492.0" layoutY="347.0" prefHeight="21.0" prefWidth="43.0" text="Type:">
          <font>
             <Font size="12.0" />
          </font></Label>
-      <TextField fx:id="type_text" layoutX="492.0" layoutY="344.0" prefHeight="31.0" prefWidth="108.0" />
-      <Label fx:id="floors_label" layoutX="612.0" layoutY="317.0" prefHeight="21.0" prefWidth="57.0" text="Floors:">
+      <TextField fx:id="type_text" layoutX="492.0" layoutY="374.0" prefHeight="31.0" prefWidth="108.0" />
+      <Label fx:id="floors_label" layoutX="612.0" layoutY="347.0" prefHeight="21.0" prefWidth="57.0" text="Floors:">
          <font>
             <Font size="12.0" />
          </font></Label>
-      <TextField fx:id="floors_text" layoutX="612.0" layoutY="344.0" prefHeight="31.0" prefWidth="67.0" />
-      <Button fx:id="ok" layoutX="700.0" layoutY="345.0" mnemonicParsing="false" onAction="#execute" prefHeight="29.0" prefWidth="57.0" text="Edit" textAlignment="CENTER">
+      <TextField fx:id="floors_text" layoutX="612.0" layoutY="374.0" prefHeight="31.0" prefWidth="67.0" />
+      <Button fx:id="ok" layoutX="700.0" layoutY="375.0" mnemonicParsing="false" onAction="#execute" prefHeight="29.0" prefWidth="57.0" text="Edit" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>
@@ -96,5 +96,11 @@
          </font>
       </Button>
       <ChoiceBox fx:id="delete_options" layoutX="600.0" layoutY="208.0" prefHeight="31.0" prefWidth="149.0" />
+      <Button fx:id="numberOfMachines" layoutX="600.0" layoutY="304.0" mnemonicParsing="false" onAction="#showNumberOfMachines" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #f5e082;" text="Number of Machines" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="11.0" />
+         </font>
+      </Button>
+      <Label fx:id="nOfMachines" layoutX="732.0" layoutY="308.0" />
     </children>
 </AnchorPane>
