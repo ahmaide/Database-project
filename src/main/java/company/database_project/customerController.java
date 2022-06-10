@@ -51,15 +51,6 @@ public class customerController implements Initializable {
     private TableColumn<Customer, Integer> customer_phone;
 
     @FXML
-    private Label delete_label;
-
-    @FXML
-    private Button delete_ok;
-
-    @FXML
-    private ChoiceBox<?> delete_option;
-
-    @FXML
     private Button edit;
 
     @FXML
@@ -79,7 +70,13 @@ public class customerController implements Initializable {
 
     @FXML
     private TextField name_text;
+    @FXML
+    private Label customer_id_label;
 
+    @FXML
+    private Button add;
+    @FXML
+    private TextField customer_id_text;
     @FXML
     private Button ok;
 
@@ -111,13 +108,13 @@ public class customerController implements Initializable {
         for (Map.Entry n : Customer.list.entrySet()) {
             observableList.add((Customer) n.getValue());
         }
-            customerId.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customer_id"));
-            customer_name.setCellValueFactory(new PropertyValueFactory<Customer, String>("customer_name"));
-            customer_address.setCellValueFactory(new PropertyValueFactory<Customer, String>("customer_address"));
-            buisness_type.setCellValueFactory(new PropertyValueFactory<Customer, String>("buisness_type"));
-            customer_phone.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customer_phone"));
-            table.setItems(observableList);
-            hide();
+        customerId.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customer_id"));
+        customer_name.setCellValueFactory(new PropertyValueFactory<Customer, String>("customer_name"));
+        customer_address.setCellValueFactory(new PropertyValueFactory<Customer, String>("customer_address"));
+        buisness_type.setCellValueFactory(new PropertyValueFactory<Customer, String>("buisness_type"));
+        customer_phone.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customer_phone"));
+        table.setItems(observableList);
+        hide();
         ordersList.setVisible(false);
         ordersList.getItems().clear();
     }
@@ -153,7 +150,7 @@ public class customerController implements Initializable {
         Customer.n = 3;
         show("New Customer:");
         error_text.setText("");
-        ok.setText("Add");
+        add.setText("Add");
     }
 
     public void edit() {
@@ -167,7 +164,7 @@ public class customerController implements Initializable {
             show2("Edit " + Customer.current1.getCustomer_id() + ":");
             System.out.println(Customer.current1.getCustomer_id());
             error_text.setText("");
-            ok.setText("Edit");
+            edit.setText("Edit");
         }
     }
 
@@ -223,10 +220,10 @@ public class customerController implements Initializable {
         else if(Customer.n == 3){
             if(!name_text.getText().equals("") && !address_text.getText().equals("") &&
                     !type_text.getText().equals("") && !phone_text.getText().equals("")){
-                if(!Warehouse.list.containsKey(name_text.getText())){
+                if(!Customer.list.containsKey(name_text.getText())){
                     if(isNumeric(phone_text.getText())){
                         if(Integer.parseInt(phone_text.getText()) > 0){
-                            SQL_connection.addWarehouse(name_text.getText(), address_text.getText(),
+                            SQL_connection.addCustomer(customer_id_text.getText(),name_text.getText(), address_text.getText(),
                                     type_text.getText(), phone_text.getText());
                             Customer.n=0;
                             hide();
@@ -253,41 +250,46 @@ public class customerController implements Initializable {
         }
     }
 
-        public void show(String title){
-            System.out.println(title);
-            visible_label.setText(title);
-            name_label.setText("Name:");
-            address_label.setText("Address:");
-            type_label.setText("Type:");
-            phone_label.setText("Floors:");
-            name_text.setVisible(true);
-            name_text.setText("");
-            address_text.setVisible(true);
-            address_text.setText("");
-            type_text.setVisible(true);
-            type_text.setText("");
-            phone_text.setVisible(true);
-            phone_text.setText("");
-            ok.setVisible(true);
-        }
+    public void show(String title){
+        System.out.println(title);
+        visible_label.setText(title);
+        customer_id_label.setText("Customer_id:");
+        name_label.setText("Name:");
+        address_label.setText("Address:");
+        type_label.setText("Type:");
+        phone_label.setText("Floors:");
+        customer_id_text.setVisible(true);
+        customer_id_text.setText("");
+        name_text.setVisible(true);
+        name_text.setText("");
+        address_text.setVisible(true);
+        address_text.setText("");
+        type_text.setVisible(true);
+        type_text.setText("");
+        phone_text.setVisible(true);
+        phone_text.setText("");
+        add.setVisible(true);
+    }
 
-        public void show2(String title){
-            System.out.println(title);
-            visible_label.setText(title);
-            name_label.setText("Name:");
-            address_label.setText("Address:");
-            name_label.setText("");
-            type_label.setText("Type:");
-            phone_label.setText("Phone:");
-            name_text.setVisible(false);
-            address_text.setVisible(true);
-            address_text.setText("");
-            type_text.setVisible(true);
-            type_text.setText("");
-            phone_text.setVisible(true);
-            phone_text.setText("");
-            ok.setVisible(true);
-        }
+    public void show2(String title){
+        System.out.println(title);
+        visible_label.setText(title);
+        name_label.setText("Name:");
+        address_label.setText("Address:");
+        type_label.setText("Type:");
+        phone_label.setText("Phone:");
+        customer_id_text.setVisible(false);
+        customer_id_label.setText("");
+        name_text.setVisible(true);
+        name_text.setText("");
+        address_text.setVisible(true);
+        address_text.setText("");
+        type_text.setVisible(true);
+        type_text.setText("");
+        phone_text.setVisible(true);
+        phone_text.setText("");
+        ok.setVisible(true);
+    }
 
     public boolean isNumeric(String strNum) {
         if (strNum == null) {
