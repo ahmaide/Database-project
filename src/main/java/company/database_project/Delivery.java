@@ -10,6 +10,7 @@ public class Delivery {
     private double expences;
     private Map<Integer, Order> orders;
     private String city;
+    public static Delivery current;
     public static Map<String, Delivery> list;
     public static ArrayList<Integer> months;
 
