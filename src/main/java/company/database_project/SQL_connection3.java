@@ -64,9 +64,9 @@ public class SQL_connection3 {
             Stored_machine s = new Stored_machine(sm.getMachine_id(), sm.getType_id(), sm.getShipment_id(), "Main warehouse");
             ExecuteStatement("insert into stored_machine values('" + s.getMachine_id() + "', 'Main warehouse');");
             Warehouse.list.get("Main warehouse").addToMachines_list(s);
-            Delivery.list.remove(Delivery.current);
-            ExecuteStatement("delete from delivery where delivery_date = " + Delivery.current.getDate() + ";");
         }
+        Delivery.list.remove(Delivery.current);
+        ExecuteStatement("delete from delivery where delivery_date = " + Delivery.current.getDate() + ";");
         con.close();
     }
 }
