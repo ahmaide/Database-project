@@ -75,4 +75,8 @@ public class Customer {
     public void addToOrders_list(Order o) {
         this.orders_list.put(o.getOrder_id(), o);
     }
+
+    public void removeFromOrders_list(int o) {
+        this.orders_list.remove(o);
+    }
 }
