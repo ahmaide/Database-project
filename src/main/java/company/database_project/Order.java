@@ -1,6 +1,5 @@
 package company.database_project;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class Order {
@@ -11,11 +10,12 @@ public class Order {
     private double discount;
     private int customer_id;
     private int worker_id;
+    private String worker_name;
     private boolean arranged;
     public static Map<Integer, Order> notSet;
     public static Map<Integer, Order> all;
     public static int last = 0;
-    public static ArrayList<Integer> months;
+    public static Order current;
 
     public Order(int order_id, String order_date, String machine_type, String pay_method, double discount, int customer_id, int worker_id,
                  boolean arranged) {
@@ -26,6 +26,7 @@ public class Order {
         this.discount = discount;
         this.customer_id = customer_id;
         this.worker_id = worker_id;
+        this.worker_name = Seller.list.get(this.worker_id).getWorker_name();
         this.arranged = arranged;
         if(order_id>last)
             last=order_id;
@@ -39,6 +40,7 @@ public class Order {
         this.discount = discount;
         this.customer_id = customer_id;
         this.worker_id = worker_id;
+        this.worker_name = Seller.list.get(this.worker_id).getWorker_name();
         this.arranged = arranged;
         this.order_id = last+1;
         last++;
@@ -107,4 +109,9 @@ public class Order {
     public void setArranged(boolean arranged) {
         this.arranged = arranged;
     }
+
+    public String getWorker_name() {
+        return worker_name;
+    }
+
 }

@@ -93,7 +93,6 @@ public class SQL_connection {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()){
-            System.out.println(rs.getString(1));
             Shipment.list.put(Integer.parseInt(rs.getString(1)), new Shipment(Integer.parseInt(rs.getString(1)),
                     Integer.parseInt(rs.getString(2)), rs.getString(3), rs.getString(4),
                     Double.parseDouble(rs.getString(5))));
@@ -153,7 +152,6 @@ public class SQL_connection {
                 Driver d = new Driver(Integer.parseInt(rs.getString(1)), rs.getString(2), Integer.parseInt(rs.getString(3)),
                         Integer.parseInt(rs.getString(4)), activity, rs.getString(7), rs.getString(8));
                 Driver.list.put(d.getWorker_id(), d);
-                System.out.println(d.getWorker_id() + " " + d.getWorker_name());
                 if (activity)
                     Driver.active.put(d.getWorker_id(), d);
             }
@@ -182,7 +180,6 @@ public class SQL_connection {
             Stored_machine.list.put(rs.getString(1), new Stored_machine(rs.getString(1),
                     rs.getString(2), Integer.parseInt(rs.getString(3)), rs.getString(4)));
             Warehouse.list.get(rs.getString(4)).addToMachines_list(Stored_machine.list.get(rs.getString(1)));
-            System.out.println(rs.getString(1) + " " + rs.getString(3));
             Shipment.list.get(Integer.parseInt(rs.getString(3))).addToMachines_list(Stored_machine.list.get(rs.getString(1)));
         }
 
@@ -221,7 +218,7 @@ public class SQL_connection {
         Order.all = new HashMap<Integer, Order>();
         Arranged_Order.not_Passed = new HashMap<Integer, Order>();
         Arranged_Order.passed_list = new HashMap<Integer, Order>();
-
+        Arranged_Order.dates = new HashMap<String, Integer>();
         connectDB();
         String sql = "select * from orders where arranged = false";
         Statement stmt = con.createStatement();
@@ -243,10 +240,12 @@ public class SQL_connection {
         rs = stmt.executeQuery(sql);
         while(rs.next()){
             boolean passed;
-            if(rs.getString(10) == "0"){
+            if(rs.getString(10).equals("0")){
+                System.out.println(rs.getString(1) + "No");
                 passed = false;
             }
             else{
+                System.out.println(rs.getString(1) + "Yes");
                 passed = true;
             }
             Arranged_Order o = new Arranged_Order(Integer.parseInt(rs.getString(1)),
@@ -254,10 +253,18 @@ public class SQL_connection {
                     Integer.parseInt(rs.getString(6)), Integer.parseInt(rs.getString(7)), rs.getString(8),
                     rs.getString(9), passed);
             Delivery.list.get(o.getDelivery_date()).addToOrders(o);
-            if (passed)
+            if (passed) {
+                System.out.println(rs.getString(1) + "Yes");
                 Arranged_Order.passed_list.put(o.getOrder_id(), o);
-            else
+                if(!Arranged_Order.dates.containsKey(Dates.stringMonth(rs.getString(2)))){
+                    Arranged_Order.dates.put(Dates.stringMonth(rs.getString(2)), Dates.stripDay(rs.getString(2)));
+                }
+            }
+            else {
+                System.out.println(rs.getString(1) + "No");
                 Arranged_Order.not_Passed.put(o.getOrder_id(), o);
+            }
+            System.out.println(" ");
             Order.all.put(Integer.parseInt(rs.getString(1)), o);
             Customer.list.get(Integer.parseInt(rs.getString(6))).addToOrders_list(o);
         }
@@ -415,44 +422,38 @@ public class SQL_connection {
         }
     }
 
-    public static void addCustomer(int customer_id, String customer_name, String customer_address, String buisness_type, int customer_phone) throws SQLException, ClassNotFoundException {
 
-        if (Customer.notActive.contains(customer_name)) {
-            connectDB();
-            ExecuteStatement("update customer set activity = true where customer_id = '" + customer_id + "';");
-            ExecuteStatement("update customer set customer_name = '" + customer_name + " ' where customer_id = '" + customer_id + "';");
-            ExecuteStatement("update customer set customer_address = '" + customer_address + "' where customer_id = '" + customer_id + "';");
-            ExecuteStatement("update customer set buisness_type = '" + buisness_type + "' where customer_id = '" + customer_id + "';");
-            ExecuteStatement("update customer set customer_phone = " + customer_phone + " where customer_id = '" + customer_id + "';");
-            con.close();
-            Customer.list.put(customer_id, new Customer(customer_id, customer_name, customer_address, buisness_type, customer_phone));
-            Customer.notActive.remove(customer_id);
-        }
+    public static void addCustomer(String customer_id, String customer_name, String customer_address, String buisness_type, String customer_phone) throws SQLException, ClassNotFoundException {
+        int customerid;
+        customerid= Integer.parseInt(customer_id);
+        int customrphone;
+        customrphone= Integer.parseInt(customer_phone);
+
         connectDB();
-        ExecuteStatement("insert into customer values('" + customer_id + "', '" + customer_name + "', '" + customer_address + "', " + buisness_type + "' , " + customer_phone + ", 1);");
+        ExecuteStatement("insert into customer values(" + customerid + ", '" + customer_name + "', '" + customer_address + "', '" + buisness_type + "' , " + customrphone + ", 1);");
         con.close();
-        Customer.list.put(customer_id, new Customer(customer_id, customer_name, customer_address, buisness_type, customer_phone));
+        Customer.list.put(customerid, new Customer(customerid, customer_name, customer_address, buisness_type, customrphone));
     }
 
     public static void editCustomer(String customer_name, String customer_address, String buisness_type, String customer_phone) throws SQLException, ClassNotFoundException {
         if (customer_name != "") {
             connectDB();
-            ExecuteStatement("update customer set customer_name = '" + customer_name + "' where customer_name = '"
-                    + Customer.current1.getCustomer_id() + "';");
+            ExecuteStatement("update customer set customer_name = '" + customer_name + "' where customer_id = "
+                    + Customer.current1.getCustomer_id() + ";");
             Customer.current1.setCustomer_name(customer_name);
             con.close();
         }
         if (customer_address != "") {
             connectDB();
-            ExecuteStatement("update customer set customer_address = '" + customer_address + "' where customer_address = '"
-                    + Customer.current1.getCustomer_id() + "';");
+            ExecuteStatement("update customer set customer_address = '" + customer_address + "' where customer_id = "
+                    + Customer.current1.getCustomer_id() + ";");
             Customer.current1.setCustomer_address(customer_address);
             con.close();
         }
         if (buisness_type != "") {
             connectDB();
-            ExecuteStatement("update customer set buisness_type = '" + buisness_type + "' where buisness_type = '"
-                    + Customer.current1.getCustomer_id() + "';");
+            ExecuteStatement("update customer set buisness_type = '" + buisness_type + "' where customer_id = "
+                    + Customer.current1.getCustomer_id() + ";");
             Customer.current1.setBuisness_type(buisness_type);
             con.close();
         }
@@ -460,8 +461,8 @@ public class SQL_connection {
             int customerphone;
             customerphone = Integer.parseInt(customer_phone);
             connectDB();
-            ExecuteStatement("update customer set customer_phone = " + customerphone + " where customer_phone = '"
-                    + Customer.current1.getCustomer_id() + "';");
+            ExecuteStatement("update customer set customer_phone = " + customerphone + " where customer_id = "
+                    + Customer.current1.getCustomer_id() + ";");
             Customer.current1.setCustomer_phone(customerphone);
             con.close();
         }
@@ -550,4 +551,92 @@ public class SQL_connection {
         }
         con.close();
     }
+
+    public static void deleteDeliveredOrder(boolean passed) throws SQLException, ClassNotFoundException {
+        if (passed)
+            Arranged_Order.passed_list.remove(Arranged_Order.currentA.getOrder_id());
+        else
+            Arranged_Order.not_Passed.remove(Arranged_Order.currentA.getOrder_id());
+        Order.all.remove(Arranged_Order.currentA.getOrder_id());
+        Delivery.list.get(Arranged_Order.currentA.getDelivery_date()).deleteFromOrders(Arranged_Order.currentA.getOrder_id());
+        Sold_machine.list.remove(Arranged_Order.currentA.getMachine_id());
+        Customer.list.get(Arranged_Order.currentA.getCustomer_id()).removeFromOrders_list(Arranged_Order.currentA.getOrder_id());
+        connectDB();
+        ExecuteStatement("delete from arranged_orders where order_id = " + Arranged_Order.currentA.getOrder_id() + " ;");
+        ExecuteStatement("delete from orders where order_id = " + Arranged_Order.currentA.getOrder_id() + " ;");
+        ExecuteStatement("delete from sold_machine where machine_id = '" + Arranged_Order.currentA.getMachine_id() + "' ;");
+        ExecuteStatement("delete from machine where machine_id = '" + Arranged_Order.currentA.getMachine_id() + "' ;");
+        if(Customer.list.get(Arranged_Order.currentA.getCustomer_id()).getOrders_list().size() ==0){
+            Customer.list.remove(Arranged_Order.currentA.getCustomer_id());
+            ExecuteStatement("delete from customer where customer_id = " + Arranged_Order.currentA.getCustomer_id() +" ;");
+        }
+        con.close();
+    }
+
+    public static void retreaveMachineForOrder(String warehouse_name, boolean passed) throws SQLException, ClassNotFoundException {
+        if(passed)
+            Arranged_Order.passed_list.remove(Arranged_Order.currentA.getOrder_id());
+        else
+            Arranged_Order.not_Passed.remove(Arranged_Order.currentA.getOrder_id());
+        Sold_machine s = Sold_machine.list.get(Arranged_Order.currentA.getMachine_id());
+        Order.all.remove(Arranged_Order.currentA.getOrder_id());
+        Delivery.list.get(Arranged_Order.currentA.getDelivery_date()).deleteFromOrders(Arranged_Order.currentA.getOrder_id());
+        Sold_machine.list.remove(s.getMachine_id());
+        Stored_machine sm = new Stored_machine(s.getMachine_id(), s.getType_id(), s.getShipment_id(), warehouse_name);
+        Stored_machine.list.put(sm.getMachine_id(), sm);
+        Warehouse.list.get(warehouse_name).addToMachines_list(sm);
+        Customer.list.get(Arranged_Order.currentA.getCustomer_id()).removeFromOrders_list(Arranged_Order.currentA.getOrder_id());
+        connectDB();
+        ExecuteStatement("delete from arranged_orders where order_id = " + Arranged_Order.currentA.getOrder_id() + " ;");
+        ExecuteStatement("delete from orders where order_id = " + Arranged_Order.currentA.getOrder_id() + " ;");
+        ExecuteStatement("delete from sold_machine where machine_id = '" + Arranged_Order.currentA.getMachine_id() + "' ;");
+        ExecuteStatement("insert into stored_machine values('" + s.getMachine_id() + "', '" + warehouse_name + "');");
+        if(Customer.list.get(Arranged_Order.currentA.getCustomer_id()).getOrders_list().size() ==0){
+            Customer.list.remove(Arranged_Order.currentA.getCustomer_id());
+            ExecuteStatement("delete from customer where customer_id = " + Arranged_Order.currentA.getCustomer_id() +" ;");
+        }
+        con.close();
+    }
+
+
+    public static void cancelOrder() throws SQLException, ClassNotFoundException {
+        connectDB();
+        Order.all.remove(Order.current.getOrder_id());
+        Order.notSet.remove(Order.current.getOrder_id());
+        Customer.list.get(Order.current.getCustomer_id()).removeFromOrders_list(Order.current.getOrder_id());
+        ExecuteStatement("delete from orders where order_id = " + Order.current.getOrder_id() + ";");
+        con.close();
+    }
+
+    public static void changeMachineTypeForOrder(String machine_type) throws SQLException, ClassNotFoundException {
+        Order o = Order.current;
+        connectDB();
+        Order.notSet.get(o.getOrder_id()).setMachine_type(machine_type);
+        ExecuteStatement("update orders set type_id = '" + machine_type + "' where order_id = " +
+                Order.current.getOrder_id() + " ;");
+        con.close();
+    }
+
+    public static void setDeliveryForOrder(String delivery_date, String machine_id) throws SQLException, ClassNotFoundException {
+        Order o = Order.current;
+        connectDB();
+        Stored_machine s = Stored_machine.list.get(machine_id);
+        Sold_machine SM = new Sold_machine(s.getMachine_id(), s.getType_id(), s.getShipment_id(), o.getCustomer_id());
+        Stored_machine.list.remove(s);
+        Warehouse.list.get(s.getWarehouse_name()).deleteFromMachine_list(s.getMachine_id());
+        Shipment.list.get(s.getShipment_id()).getMachines_list().replace(s.getMachine_id(), SM);
+        ExecuteStatement("delete from stored_machine where machine_id = '" + s.getMachine_id() + "' ;");
+        ExecuteStatement("insert into sold_machine values('" + SM.getMachine_id() + "', " + SM.getCustomer_id() + ");");
+        Arranged_Order O = new Arranged_Order(o.getOrder_id(), o.getOrder_date(), o.getMachine_type(), o.getPay_method(),
+                o.getDiscount(), o.getCustomer_id(), o.getWorker_id(), delivery_date, machine_id, false);
+        Order.all.remove(o.getOrder_id());
+        Order.all.put(O.getOrder_id(), O);
+        Order.notSet.remove(o.getOrder_id());
+        Arranged_Order.not_Passed.put(O.getOrder_id(), O);
+        ExecuteStatement("insert into arranged_orders values(" + O.getOrder_id() + ", '"  + delivery_date +
+                "', '" + machine_id + "', false);");
+        ExecuteStatement("update orders set arranged = true where order_id = " + O.getOrder_id() + ";");
+        Delivery.list.get(delivery_date).addToOrders(O);
+    }
+
 }

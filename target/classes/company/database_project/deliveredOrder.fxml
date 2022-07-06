@@ -4,64 +4,65 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="422.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.shipmentController">
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="459.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.database_project.Delivered_OrderController">
     <children>
         <Label layoutX="19.0" layoutY="20.0" prefHeight="29.0" prefWidth="664.0" text="Delivered Orders" textOverrun="WORD_ELLIPSIS">
             <font>
                 <Font name="Calibri Light" size="27.0" />
             </font>
         </Label>
-        <Button fx:id="insert" layoutX="780.0" layoutY="157.0" mnemonicParsing="false" onAction="#newShipment" prefHeight="29.0" prefWidth="143.0" style="-fx-background-color: #f5e082;" text="New Shipment" textAlignment="CENTER">
+        <Button layoutX="800.0" layoutY="90.0" mnemonicParsing="false" onAction="#deleteOrder" prefHeight="29.0" prefWidth="160.0" style="-fx-background-color: #f5e082;" text="Delete " textAlignment="CENTER">
             <font>
                 <Font name="Britannic Bold" size="16.0" />
             </font>
         </Button>
-        <Button layoutX="895.0" layoutY="9.0" mnemonicParsing="false" onAction="#exit" prefHeight="22.0" prefWidth="19.0" style="-fx-background-color: #f5e082;" text="X" textAlignment="CENTER" fx:id="x">
+        <Button layoutX="941.0" layoutY="9.0" mnemonicParsing="false" onAction="#exit" prefHeight="22.0" prefWidth="19.0" style="-fx-background-color: #f5e082;" text="X" textAlignment="CENTER" fx:id="x">
             <font>
                 <Font name="Calibri" size="12.0" />
             </font>
         </Button>
-        <Label fx:id="error_text" layoutX="19.0" layoutY="394.0" prefHeight="29.0" prefWidth="625.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
-        <TableView fx:id="table" editable="true" layoutX="18.0" layoutY="81.0" prefHeight="271.0" prefWidth="756.0">
+        <Label fx:id="error_text" layoutX="14.0" layoutY="427.0" prefHeight="29.0" prefWidth="352.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
+        <TableView fx:id="table" editable="true" layoutX="18.0" layoutY="81.0" prefHeight="332.0" prefWidth="773.0">
          <columns>
-            <TableColumn prefWidth="84.0" text="Order ID" />
-            <TableColumn prefWidth="99.0" text="Order Date" />
-            <TableColumn prefWidth="112.0" text="Machine Type" />
-            <TableColumn prefWidth="100.0" text="Pay Method" />
-            <TableColumn prefWidth="75.0" text="Discount" />
-            <TableColumn prefWidth="107.0" text="Customer ID" />
-            <TableColumn prefWidth="75.0" text="Seller ID" />
-            <TableColumn prefWidth="103.0" text="Delivery Date" />
+            <TableColumn fx:id="order_id" prefWidth="84.0" text="Order ID" />
+            <TableColumn fx:id="order_date" prefWidth="99.0" text="Order Date" />
+            <TableColumn fx:id="order_machineType" prefWidth="112.0" text="Machine Type" />
+            <TableColumn fx:id="order_pay" prefWidth="100.0" text="Pay Method" />
+            <TableColumn fx:id="order_discount" prefWidth="75.0" text="Discount" />
+            <TableColumn fx:id="order_customer" prefWidth="95.0" text="Customer ID" />
+            <TableColumn fx:id="order_seller" prefWidth="94.0" text="Seller Name" />
+            <TableColumn fx:id="order_delivery" prefWidth="113.0" text="Delivery Date" />
          </columns>
         </TableView>
-        <ChoiceBox fx:id="warehouse_selector" layoutX="776.0" layoutY="283.0" prefHeight="31.0" prefWidth="80.0" />
-        <Label fx:id="costs_label" layoutX="573.0" layoutY="373.0" text="Costs:">
-            <font>
-                <Font size="16.0" />
-            </font>
-        </Label>
-        <TextField fx:id="costs_box" layoutX="644.0" layoutY="370.0" prefHeight="31.0" prefWidth="61.0" />
-        <Label fx:id="warehouse_label" layoutX="725.0" layoutY="373.0" prefHeight="25.0" prefWidth="61.0" text="Warehouse:">
-            <font>
-                <Font size="16.0" />
-            </font>
-        </Label>
-        <Button fx:id="back" layoutX="800.0" layoutY="371.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="67.0" style="-fx-background-color: #f5e082;" text="Back" textAlignment="CENTER">
+        <ChoiceBox fx:id="warehouse_selector" layoutX="800.0" layoutY="196.0" prefHeight="31.0" prefWidth="119.0" />
+        <Button fx:id="back" layoutX="890.0" layoutY="420.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="67.0" style="-fx-background-color: #f5e082;" text="Back" textAlignment="CENTER">
             <font>
                 <Font name="Britannic Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="add_machines" layoutX="776.0" layoutY="323.0" mnemonicParsing="false" onAction="#MachinesForNewShipment" prefHeight="29.0" prefWidth="80.0" style="-fx-background-color: #f5e082;" text="Add Machines" textAlignment="CENTER">
-            <font>
-                <Font name="Britannic Bold" size="10.0" />
-            </font>
-        </Button>
-        <ComboBox fx:id="month_selector" layoutX="381.0" layoutY="42.0" onAction="#display" prefHeight="31.0" prefWidth="188.0" promptText="Month" />
+        <ComboBox fx:id="month_selector" layoutX="589.0" layoutY="42.0" onAction="#display" prefHeight="31.0" prefWidth="188.0" promptText="Month" />
+      <Button layoutX="800.0" layoutY="138.0" mnemonicParsing="false" onAction="#retreaveDisplay" prefHeight="29.0" prefWidth="160.0" style="-fx-background-color: #f5e082;" text="Retreave Machine" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="warehouse_label" layoutX="797.0" layoutY="175.0" text="Select warehouse:" />
+      <Button fx:id="warehouse_ok" layoutX="923.0" layoutY="196.0" mnemonicParsing="false" onAction="#restoreMachine" prefHeight="29.0" prefWidth="35.0" style="-fx-background-color: #f5e082;" text="Ok" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="800.0" layoutY="243.0" mnemonicParsing="false" onAction="#customerInfo" prefHeight="29.0" prefWidth="160.0" style="-fx-background-color: #f5e082;" text="Customer info" textAlignment="CENTER">
+         <font>
+            <Font name="Britannic Bold" size="16.0" />
+         </font>
+      </Button>
+      <ListView fx:id="info_list" layoutX="800.0" layoutY="285.0" prefHeight="127.0" prefWidth="160.0" />
     </children>
 </AnchorPane>

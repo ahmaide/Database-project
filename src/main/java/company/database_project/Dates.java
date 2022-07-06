@@ -88,6 +88,8 @@ public class Dates {
         return week;
     }
 
+    //public static String[]
+
     public static String stringDate(int date){
         String w = Integer.toString(date);
         return w.substring(0,4)+ "-" + w.substring(4,6) + "-" + w.substring(6,8);

@@ -52,8 +52,15 @@ public class DrinksController implements Initializable {
     private Label country_label;
 
     @FXML
-    private TextField country_text;
+    private Button adddrink;
 
+    @FXML
+    private TextField country_text;
+    @FXML
+    private Label id_label;
+
+    @FXML
+    private TextField id_text;
     @FXML
     private Button delete;
 
@@ -126,54 +133,60 @@ public class DrinksController implements Initializable {
             boolean num = false;
             if(price_text.getText().equals(""))
                 num = true;
+
             else {
                 num = isNumeric(price_text.getText());
             }
 
             if(num){
-                if( price_text.getText().equals("") || Double.parseDouble(price_text.getText()) > 0){
+                if( price_text.getText().equals("") || Integer.parseInt(price_text.getText()) > 0){
 
-                    Drinks.d=0;
+                    SQL_connection.editdrink(name_text.getText(), country_text.getText(), price_text.getText());
+                    Drinks.d = 0;
                     hide();
                     observableList = FXCollections.observableArrayList();
-                    for(Map.Entry m : Drinks.list.entrySet()){
-                        observableList.add((Drinks) m.getValue());
+                    for (Map.Entry d : Drinks.list.entrySet()) {
+                        observableList.add((Drinks) d.getValue());
                     }
                     table.refresh();
+
                 }
                 else{
-                    error_text.setText("Please enter a valid price");
+                    error_text.setText("Please enter a valid price number");
                 }
             }
             else{
-                error_text.setText("Please enter a valid price");
+                error_text.setText("Please enter a valid price number");
             }
         }
+
         else if(Drinks.d == 3){
-            if(!country_text.getText().equals("") &&
-                    !country_text.getText().equals("") && !price_text.getText().equals("")){
-                if(!Drinks.list.containsKey(name_text.getText())){
-                    if(isNumeric(price_text.getText())){
-                        if(Integer.parseInt(price_text.getText()) > 0){
-                            SQL_connection.editdrink(name_text.getText(), country_text.getText(), price_text.getText());
+            if(!id_text.getText().equals("")&&!name_text.getText().equals("") && !country_text.getText().equals("") &&
+                    !price_text.getText().equals("")){
+
+                if(!Drinks.list.containsKey(id_text.getText())){
+                    if(isNumeric((price_text.getText()))){
+                        if(Double.parseDouble(price_text.getText()) > 0 ){
+                            SQL_connection3.addDrink(id_text.getText(),name_text.getText(), country_text.getText(),
+                                    price_text.getText());
                             Drinks.d=0;
                             hide();
                             observableList = FXCollections.observableArrayList();
-                            for(Map.Entry m : Drinks.list.entrySet()){
-                                observableList.add((Drinks) m.getValue());
+                            for(Map.Entry d : Drinks.list.entrySet()){
+                                observableList.add((Drinks) d.getValue());
                             }
                             table.setItems(observableList);
                         }
-                        else
-                            error_text.setText("Please enter a valid price: ");
+                        else error_text.setText("this Drink doesn't exist");
                     }
-                    else{
-                        error_text.setText("Please enter a valid price:");
-                    }
+                    else
+                        error_text.setText("Please enter a valid id number");
                 }
                 else{
-                    error_text.setText("This ID Drink already exists, try another");
+                    error_text.setText("This Drink already existsmvx" +
+                            "mvx");
                 }
+
             }
             else{
                 error_text.setText("Please fill all fields");
@@ -181,12 +194,15 @@ public class DrinksController implements Initializable {
         }
     }
 
+
     public void hide(){
         visible_label.setText("");
+        id_label.setText("");
         name_label.setText("");
         country_label.setText("");
         price_label.setText("");
         error_text.setText("");
+        id_text.setVisible(false);
         name_text.setVisible(false);
         country_text.setVisible(false);
         price_text.setVisible(false);
@@ -196,9 +212,30 @@ public class DrinksController implements Initializable {
     public void show(String title){
         System.out.println(title);
         visible_label.setText(title);
+        id_label.setText("Drink_Id:");
         name_label.setText("Name:");
         country_label.setText("Country:");
         price_label.setText("Price:");
+        id_text.setVisible(true);
+        id_text.setText("");
+        name_text.setVisible(true);
+        name_text.setText("");
+        country_text.setVisible(true);
+        country_text.setText("");
+        price_text.setVisible(true);
+        price_text.setText("");
+        add.setVisible(true);
+        ok.setVisible(false);
+    }
+
+    public void show2(String title){
+        System.out.println(title);
+        visible_label.setText(title);
+        id_label.setText("");
+        name_label.setText("Name:");
+        country_label.setText("Country:");
+        price_label.setText("Price:");
+        id_text.setVisible(false);
         name_text.setVisible(true);
         name_text.setText("");
         country_text.setVisible(true);
@@ -206,21 +243,7 @@ public class DrinksController implements Initializable {
         price_text.setVisible(true);
         price_text.setText("");
         ok.setVisible(true);
-    }
-
-    public void show2(String title){
-
-        System.out.println(title);
-        visible_label.setText(title);
-        country_label.setText("Country:");
-        name_label.setText("");
-        price_label.setText("Price:");
-        name_text.setVisible(false);
-        country_text.setVisible(true);
-        country_text.setText("");
-        price_text.setVisible(true);
-        price_text.setText("");
-        ok.setVisible(true);
+        add.setVisible(false);
     }
 
     public boolean isNumeric(String strNum) {
@@ -239,7 +262,7 @@ public class DrinksController implements Initializable {
         Drinks.d = 3;
         show("New Drink:");
         error_text.setText("");
-        ok.setText("Add");
+        add.setText("Add");
     }
 
     public void editshow(ActionEvent actionEvent) {
@@ -253,8 +276,5 @@ public class DrinksController implements Initializable {
             error_text.setText("");
             ok.setText("Edit");
         }
-    }
-
-    public void delete(ActionEvent actionEvent) {
     }
 }

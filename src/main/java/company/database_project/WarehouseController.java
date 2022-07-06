@@ -208,12 +208,16 @@ public class WarehouseController implements Initializable {
         else {
             error_text.setText("");
             Warehouse replacment = Warehouse.list.get(delete_options.getValue());
-            SQL_connection.deleteWarehouse(Warehouse.current, 2, replacment);
-            observableList = FXCollections.observableArrayList();
-            for (Map.Entry m : Warehouse.list.entrySet()) {
-                observableList.add((Warehouse) m.getValue());
+            if(Warehouse.current.getName().equals("Main warehouse"))
+                error_text.setText("This is the main warehosue and it can't be deleted");
+            else {
+                SQL_connection.deleteWarehouse(Warehouse.current, 2, replacment);
+                observableList = FXCollections.observableArrayList();
+                for (Map.Entry m : Warehouse.list.entrySet()) {
+                    observableList.add((Warehouse) m.getValue());
+                }
+                table.setItems(observableList);
             }
-            table.setItems(observableList);
         }
     }
 

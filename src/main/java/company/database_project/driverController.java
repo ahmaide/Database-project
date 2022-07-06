@@ -45,7 +45,7 @@ public class driverController implements Initializable {
     private TextField actual_text;
 
     @FXML
-    private Button add;
+    private Button add_ex;
 
     @FXML
     private Button back;
@@ -56,21 +56,13 @@ public class driverController implements Initializable {
 
     @FXML
     private Label error_text;
-
+    @FXML
+    private Button ok;
     @FXML
     private Label id_label;
 
     @FXML
     private TextField id_text;
-
-    @FXML
-    private TableColumn<Driver, Dates> leave_date;
-
-    @FXML
-    private Label leave_label;
-
-    @FXML
-    private TextField leave_text;
 
     @FXML
     private Label name_label;
@@ -118,6 +110,7 @@ public class driverController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         for(Map.Entry m : Driver.list.entrySet()){
             observableList.add((Driver) m.getValue());
         }
@@ -127,7 +120,6 @@ public class driverController implements Initializable {
         worker_phone.setCellValueFactory(new PropertyValueFactory<Driver, Integer>("worker_phone"));
         Activtiy.setCellValueFactory(new PropertyValueFactory<Driver, Boolean>("Activity"));
         start_date.setCellValueFactory(new PropertyValueFactory<Driver, Dates>("start_date"));
-        leave_date.setCellValueFactory(new PropertyValueFactory<Driver, Dates>("leave_date"));
         table.setItems(observableList);
         hide();
 
@@ -138,7 +130,7 @@ public class driverController implements Initializable {
     }
 
     public void back(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("mainPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("employee.fxml"));
         stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -151,18 +143,16 @@ public class driverController implements Initializable {
         actual_label.setText("");
         phone_label.setText("");
         activity_label.setText("");
-        leave_label.setText("");
-        start_date.setText("");
+        start_label.setText("");
         error_text.setText("");
         name_text.setVisible(false);
         id_text.setVisible(false);
         phone_text.setVisible(false);
         actual_text.setVisible(false);
         activity_text.setVisible(false);
-        leave_text.setVisible(false);
         start_text.setVisible(false);
-        edit.setVisible(false);
-        add.setVisible(false);
+        ok.setVisible(false);
+        add_ex.setVisible(false);
 
     }
 
@@ -185,22 +175,22 @@ public class driverController implements Initializable {
         Driver.m = 3;
         show("New Warehouse Worker:");
         error_text.setText("");
-        add.setText("Add");
+        add_ex.setText("Add");
     }
 
     public void execute(ActionEvent e) throws SQLException, ClassNotFoundException {
         if(Driver.m==1){
             boolean num = false;
-            if(id_text.getText().equals(""))
+            if(phone_label.getText().equals(""))
                 num = true;
             else {
-                num = isNumeric(id_text.getText());
+                num = isNumeric(phone_label.getText());
             }
 
             if(num){
                 if( id_text.getText().equals("") || Integer.parseInt(id_text.getText()) > 0){
                     SQL_connection2.editDriver(name_text.getText(),
-                            actual_text.getText(), phone_text.getText(),activity_text.getText(), start_text.getText(), leave_label.getText());
+                            actual_text.getText(), phone_text.getText(),activity_text.getText(), start_text.getText());
                     Driver.m=0;
                     hide();
                     observableList = FXCollections.observableArrayList();
@@ -210,22 +200,22 @@ public class driverController implements Initializable {
                     table.refresh();
                 }
                 else{
-                    error_text.setText("Please enter a valid id number");
+                    error_text.setText("Please enter a valid phone number");
                 }
             }
             else{
-                error_text.setText("Please enter a valid id number");
+                error_text.setText("Please enter a valid phone number");
             }
         }
 
         else if(Driver.m == 3){
             if(!id_text.getText().equals("") && !name_text.getText().equals("") &&
-                    !actual_text.getText().equals("") && !phone_text.getText().equals("") && !start_text.getText().equals("") && !activity_text.getText().equals("") && !leave_text.getText().equals("")){
+                    !actual_text.getText().equals("") && !phone_text.getText().equals("") && !start_text.getText().equals("") && !activity_text.getText().equals("")){
                 if(!Driver.list.containsKey(id_text.getText())){
-                    if(isNumeric(id_text.getText())){
+                    if(isNumeric(id_text.getText()) && isNumeric(actual_text.getText()) && isNumeric(phone_text.getText())){
                         if(Integer.parseInt(id_text.getText()) > 0){
                             SQL_connection2.addDriver(id_text.getText(),name_text.getText(), actual_text.getText(),
-                                    phone_text.getText(),activity_text.getText(), start_text.getText(), leave_text.getText());
+                                    phone_text.getText(),activity_text.getText(), start_text.getText());
                             Driver.m=0;
                             hide();
                             observableList = FXCollections.observableArrayList();
@@ -266,12 +256,11 @@ public class driverController implements Initializable {
     public void show2(String title){
         System.out.println(title);
         visible_label.setText(title);
-        name_label.setText("Worker_name");
+        name_label.setText("Worker_name:");
         actual_label.setText("ActualID:");
         phone_label.setText("Worker_phone:");
         start_label.setText("Start_date:");
-        leave_label.setText("Leave_date:");
-        activity_label.setText("Leave_date:");
+        activity_label.setText("Activity:");
         name_text.setVisible(true);
         name_text.setText("");
         id_text.setVisible(false);
@@ -282,11 +271,10 @@ public class driverController implements Initializable {
         phone_text.setText("");
         start_text.setVisible(true);
         start_text.setText("");
-        leave_text.setVisible(true);
-        leave_text.setText("");
         activity_text.setVisible(true);
         activity_text.setText("");
-        edit.setVisible(true);
+        ok.setVisible(true);
+        add_ex.setVisible(false);
     }
     public void show(String title){
         System.out.println(title);
@@ -296,7 +284,6 @@ public class driverController implements Initializable {
         actual_label.setText("ActualID:");
         phone_label.setText("Phone_number:");
         start_label.setText("Start_date:");
-        leave_label.setText("Leave_date:");
         activity_label.setText("Activity:");
         name_text.setVisible(true);
         name_text.setText("");
@@ -308,11 +295,10 @@ public class driverController implements Initializable {
         phone_text.setText("");
         start_text.setVisible(true);
         start_text.setText("");
-        leave_text.setVisible(true);
-        leave_text.setText("");
         activity_text.setVisible(true);
         activity_text.setText("");
-        add.setVisible(true);
+        add_ex.setVisible(true);
+        ok.setVisible(false);
     }
 
 

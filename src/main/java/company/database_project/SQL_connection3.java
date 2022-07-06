@@ -15,8 +15,6 @@ public class SQL_connection3 {
     private static String port = "3306"; // port that mysql uses
     private static String dbName = "final_project"; //database on mysql to connect to
     private static Connection con;
-    public static int m =0;
-    public static int n = 0;
 
     public static void ExecuteStatement(String SQL) throws SQLException {
 
@@ -24,8 +22,7 @@ public class SQL_connection3 {
             Statement stmt = con.createStatement();
             stmt.executeUpdate(SQL);
             stmt.close();
-        }
-        catch(SQLException s) {
+        } catch (SQLException s) {
             s.printStackTrace();
             System.out.println("SQL statement is not executed!");
 
@@ -40,9 +37,47 @@ public class SQL_connection3 {
         p.setProperty("useSSL", "false");
         p.setProperty("autoReconnect", "true");
         Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection (dbURL, p);
+        con = DriverManager.getConnection(dbURL, p);
     }
 
+    public static void editDelivery(String worker_id, String expences, String city) throws SQLException, ClassNotFoundException {
+        if (worker_id!=""){
+            int workerid;
+            workerid= Integer.parseInt(worker_id);
+            connectDB();
+            ExecuteStatement("update delivery set worker_id = " + worker_id + " where worker_id = "
+                    + Delivery.current.getDate() + ";");
+            Delivery.current.setWorker_id(workerid);
+            con.close();
+        }
+        if (expences!=""){
+            double expence;
+            expence= Double.parseDouble(expences);
+            connectDB();
+            ExecuteStatement("update delivery set expences = " + expence + " where worker_id = "
+                    + Delivery.current.getWorker_id() + ";");
+            Delivery.current.setExpences(expence);
+            con.close();
+        }
+        if (city!=""){
+            connectDB();
+            ExecuteStatement("update delivery set city = '" + city + "' where worker_id = "
+                    + Delivery.current.getWorker_id() + ";");
+            Delivery.current.setCity(city);
+            con.close();
+        }
+
+    }
+    public static void addDelivery(String date, String worker_id, String expences, String city) throws SQLException, ClassNotFoundException {
+        int workerid;
+        workerid=Integer.parseInt(worker_id);
+        double expence;
+        expence=Double.parseDouble(expences);
+        connectDB();
+        ExecuteStatement("insert into delivery values('" + date + "', " + worker_id + ", " + expences + ", '" + city +  "' );");
+        con.close();
+        Delivery.list.put(date, new Delivery(date, workerid, expence, city));
+    }
 
     public static void deleteDelivery() throws ClassNotFoundException, SQLException{
         connectDB();
@@ -65,8 +100,27 @@ public class SQL_connection3 {
             ExecuteStatement("insert into stored_machine values('" + s.getMachine_id() + "', 'Main warehouse');");
             Warehouse.list.get("Main warehouse").addToMachines_list(s);
         }
-        Delivery.list.remove(Delivery.current);
-        ExecuteStatement("delete from delivery where delivery_date = " + Delivery.current.getDate() + ";");
+        Delivery.list.remove(Delivery.current.getDate());
+        System.out.println("'delete from delivery where delivery_date = '" + Delivery.current.getDate() + "';'");
+        ExecuteStatement("delete from delivery where delivery_date = '" + Delivery.current.getDate() + "';");
         con.close();
+
+    }
+    public static void addDrink(String  drink_id, String drink_name, String country, String price) throws SQLException, ClassNotFoundException {
+        double prices;
+        prices= Double.parseDouble(price);
+        connectDB();
+        ExecuteStatement("insert into drink values('" + drink_id + "', '" + drink_name + "', '" + country + "', " + prices + ");");
+        con.close();
+        Drinks.list.put(drink_id, new Drinks(drink_id, drink_name, country, prices));
+    }
+
+    public static void addType(String type_id, String price, String cups, String color)throws SQLException, ClassNotFoundException{
+        double prices;
+        prices= Double.parseDouble(price);
+        connectDB();
+        ExecuteStatement("insert into machine_type values('" + type_id + "', " + price + ", '" + cups + "', '" + color + "');");
+        con.close();
+        Machine_type.list.put(type_id, new Machine_type(type_id, prices, cups, color));
     }
 }

@@ -1,25 +1,19 @@
 package company.database_project;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class employeeController implements Initializable {
-    @FXML
-    Stage stage;
 
-    @FXML
-    private AnchorPane pane;
+public class employeeController {
 
     @FXML
     private Button back;
@@ -28,36 +22,48 @@ public class employeeController implements Initializable {
     private Button driver;
 
     @FXML
-    private Button sallers;
+    private AnchorPane pane;
+
+    @FXML
+    private Button sellers;
 
     @FXML
     private Button x;
 
-    public void exit(ActionEvent e) {
-        stage = (Stage) pane.getScene().getWindow();
-        stage.close();
-
-    }
-
-    public void back(ActionEvent e) throws IOException {
+    @FXML
+    void back(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("mainPage.fxml"));
-        stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
+    @FXML
+    void driver(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("driver.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene driver = new Scene(root);
+        stage.setScene(driver);
+        stage.show();
+        stage.setTitle("driver");
+    }
 
-    public void driver(ActionEvent actionEvent) {
+    @FXML
+    void exit(ActionEvent event) {
+        Stage stage = (Stage) pane.getScene().getWindow();
+        stage.close();
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
+    @FXML
+    void sellers(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("seller.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene seller = new Scene(root);
+        stage.setScene(seller);
+        stage.show();
+        stage.setTitle("seller");
     }
 
-    public void sellers(ActionEvent actionEvent) {
-
-    }
 }

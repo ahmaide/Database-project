@@ -43,8 +43,31 @@ public class MainPageController implements Initializable {
         stage.show();
     }
 
+    public void employeePage(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("employee.fxml"));
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void warehousePage(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("warehouse.fxml"));
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void deliveryPage(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Delivery.fxml"));
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void Type_of_Machine_page(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Type_of_machine.fxml"));
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

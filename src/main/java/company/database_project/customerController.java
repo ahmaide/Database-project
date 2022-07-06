@@ -128,15 +128,18 @@ public class customerController implements Initializable {
     private void hide() {
         visible_label.setText("");
         name_label.setText("");
+        customer_id_label.setText("");
         address_label.setText("");
         type_label.setText("");
         phone_label.setText("");
         error_text.setText("");
         name_text.setVisible(false);
+        customer_id_text.setVisible(false);
         address_text.setVisible(false);
         type_text.setVisible(false);
         phone_text.setVisible(false);
         ok.setVisible(false);
+        add.setVisible(false);
     }
 
     public void exit(ActionEvent e){
@@ -199,14 +202,16 @@ public class customerController implements Initializable {
 
             if(num){
                 if( phone_text.getText().equals("") || Integer.parseInt(phone_text.getText()) > 0){
-                    SQL_connection.editCustomer(name_text.getText(),address_text.getText(), type_text.getText(), phone_text.getText());
-                    Customer.n=0;
+
+                    SQL_connection.editCustomer(name_text.getText(), address_text.getText(), type_text.getText(), phone_text.getText());
+                    Customer.n = 0;
                     hide();
                     observableList = FXCollections.observableArrayList();
-                    for(Map.Entry m : Customer.list.entrySet()){
-                        observableList.add((Customer) m.getValue());
+                    for (Map.Entry n : Customer.list.entrySet()) {
+                        observableList.add((Customer) n.getValue());
                     }
                     table.refresh();
+
                 }
                 else{
                     error_text.setText("Please enter a valid phone number");
@@ -218,11 +223,12 @@ public class customerController implements Initializable {
         }
 
         else if(Customer.n == 3){
-            if(!name_text.getText().equals("") && !address_text.getText().equals("") &&
+            if(!customer_id_text.getText().equals("")&&!name_text.getText().equals("") && !address_text.getText().equals("") &&
                     !type_text.getText().equals("") && !phone_text.getText().equals("")){
-                if(!Customer.list.containsKey(name_text.getText())){
-                    if(isNumeric(phone_text.getText())){
-                        if(Integer.parseInt(phone_text.getText()) > 0){
+
+                if(!Customer.list.containsKey(customer_id_text.getText())){
+                    if(isNumeric(customer_id_text.getText())&& isNumeric((phone_text.getText()))){
+                        if(Integer.parseInt(customer_id_text.getText()) > 0 && Integer.parseInt(phone_text.getText()) > 0 ){
                             SQL_connection.addCustomer(customer_id_text.getText(),name_text.getText(), address_text.getText(),
                                     type_text.getText(), phone_text.getText());
                             Customer.n=0;
@@ -233,16 +239,16 @@ public class customerController implements Initializable {
                             }
                             table.setItems(observableList);
                         }
-                        else
-                            error_text.setText("Please enter a valid phone number");
+                        else error_text.setText("this customer doesn't exist");
                     }
-                    else{
-                        error_text.setText("Please enter a valid phone number");
-                    }
+                    else
+                        error_text.setText("Please enter a valid id number");
                 }
                 else{
-                    error_text.setText("This warehouse name already exists, try another");
+                    error_text.setText("This customer already existsmvx" +
+                            "mvx");
                 }
+
             }
             else{
                 error_text.setText("Please fill all fields");
@@ -257,7 +263,7 @@ public class customerController implements Initializable {
         name_label.setText("Name:");
         address_label.setText("Address:");
         type_label.setText("Type:");
-        phone_label.setText("Floors:");
+        phone_label.setText("Phone:");
         customer_id_text.setVisible(true);
         customer_id_text.setText("");
         name_text.setVisible(true);
@@ -269,6 +275,8 @@ public class customerController implements Initializable {
         phone_text.setVisible(true);
         phone_text.setText("");
         add.setVisible(true);
+        ok.setVisible(false);
+
     }
 
     public void show2(String title){
@@ -289,6 +297,8 @@ public class customerController implements Initializable {
         phone_text.setVisible(true);
         phone_text.setText("");
         ok.setVisible(true);
+        add.setVisible(false);
+
     }
 
     public boolean isNumeric(String strNum) {

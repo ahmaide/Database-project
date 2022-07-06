@@ -15,7 +15,7 @@
                 <Font name="Calibri Light" size="40.0" />
             </font>
         </Label>
-        <Button fx:id="change_password" layoutX="20.0" layoutY="217.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="228.0" style="-fx-background-color: #f5e082;" text="View Delivered Orders" textAlignment="CENTER">
+        <Button fx:id="change_password" layoutX="20.0" layoutY="217.0" mnemonicParsing="false" onAction="#deliveredOrders" prefHeight="37.0" prefWidth="228.0" style="-fx-background-color: #f5e082;" text="View Delivered Orders" textAlignment="CENTER">
             <font>
                 <Font name="Britannic Bold" size="18.0" />
             </font>
@@ -29,12 +29,12 @@
         <ChoiceBox fx:id="date_selector" layoutX="210.0" layoutY="89.0" prefHeight="30.0" prefWidth="77.0" />
         <Label fx:id="date_label" layoutX="210.0" layoutY="58.0" prefHeight="29.0" prefWidth="44.0" text="Date:" />
         <TextField fx:id="discount_box" layoutX="514.0" layoutY="89.0" prefHeight="31.0" prefWidth="77.0" />
-        <Button fx:id="change_password1" layoutX="20.0" layoutY="267.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="228.0" style="-fx-background-color: #f5e082;" text="View Arranged Orders" textAlignment="CENTER">
+        <Button fx:id="change_password1" layoutX="20.0" layoutY="267.0" mnemonicParsing="false" onAction="#arrangedOrders" prefHeight="37.0" prefWidth="228.0" style="-fx-background-color: #f5e082;" text="View Arranged Orders" textAlignment="CENTER">
             <font>
                 <Font name="Britannic Bold" size="18.0" />
             </font>
         </Button>
-      <Button fx:id="change_password11" layoutX="20.0" layoutY="313.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="228.0" style="-fx-background-color: #f5e082;" text="View Un-arranged Orders" textAlignment="CENTER">
+      <Button fx:id="change_password11" layoutX="20.0" layoutY="313.0" mnemonicParsing="false" onAction="#UnarrangedOrders" prefHeight="37.0" prefWidth="228.0" style="-fx-background-color: #f5e082;" text="View Un-arranged Orders" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>

@@ -31,19 +31,7 @@ public class Machine_warehousrController implements Initializable {
     private Label title;
 
     @FXML
-    private Button send;
-
-    @FXML
-    private Button change;
-
-    @FXML
-    private Button delete;
-
-    @FXML
     private Button x;
-
-    @FXML
-    private Label error_text;
 
     @FXML
     private TableView<Stored_machine> table;
@@ -56,13 +44,6 @@ public class Machine_warehousrController implements Initializable {
 
     @FXML
     private TableColumn<Stored_machine, Integer> machine_shipment;
-
-
-    @FXML
-    private ChoiceBox<?> other_warehouses;
-
-    @FXML
-    private Button ok1;
 
     @FXML
     private Stage stage;
@@ -79,9 +60,6 @@ public class Machine_warehousrController implements Initializable {
         machine_type.setCellValueFactory(new PropertyValueFactory<Stored_machine, String>("type_id"));
         machine_shipment.setCellValueFactory(new PropertyValueFactory<Stored_machine, Integer>("shipment_id"));
         table.setItems(observableList);
-        other_warehouses.setVisible(false);
-        ok1.setVisible(false);
-        error_text.setText("");
     }
 
     public void back(ActionEvent e) throws IOException {

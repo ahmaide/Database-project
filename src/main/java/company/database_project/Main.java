@@ -13,10 +13,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
         storeAll();
-        String [] w = Dates.pastWeekList();
-        for(int i=0 ; i< w.length ; i++){
-            System.out.println(w[i]);
-        }
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Company Database");
@@ -30,7 +26,7 @@ public class Main extends Application {
     }
 
     public static void storeAll() throws SQLException, ClassNotFoundException {
-        SQL_connection.checkOrderDates();
+        //SQL_connection.checkOrderDates();
         SQL_connection.storeUsers();
         SQL_connection.storeWarehouse();
         SQL_connection.storeEmployee();

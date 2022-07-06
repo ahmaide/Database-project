@@ -55,7 +55,7 @@
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="Vdeliveries" layoutX="277.0" layoutY="260.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Deliveries" textAlignment="CENTER">
+      <Button fx:id="Vdeliveries" layoutX="277.0" layoutY="260.0" mnemonicParsing="false" onAction="#deliveryPage" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Deliveries" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>
@@ -65,12 +65,12 @@
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="Vtypes" layoutX="277.0" layoutY="140.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Types of Machines" textAlignment="CENTER">
+      <Button fx:id="Vtypes" layoutX="277.0" layoutY="140.0" mnemonicParsing="false" onAction="#Type_of_Machine_page" prefHeight="29.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Types of Machines" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="Vemployees" layoutX="488.0" layoutY="260.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Employees" textAlignment="CENTER">
+      <Button fx:id="Vemployees" layoutX="488.0" layoutY="260.0" mnemonicParsing="false" onAction="#employeePage" prefHeight="28.0" prefWidth="191.0" style="-fx-background-color: #f5e082;" text="View Employees" textAlignment="CENTER">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>

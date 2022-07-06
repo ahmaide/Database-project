@@ -46,7 +46,7 @@
          </font>
       </Button>
       <Label fx:id="error_text" layoutX="21.0" layoutY="414.0" prefHeight="29.0" prefWidth="523.0" text="That is the only account you have it can't be deleted" textFill="#d31414" />
-      <TableView fx:id="Seller" layoutX="11.0" layoutY="77.0" prefHeight="235.0" prefWidth="572.0">
+      <TableView fx:id="table" layoutX="11.0" layoutY="77.0" prefHeight="235.0" prefWidth="498.0">
          <columns>
             <TableColumn fx:id="worker_id" prefWidth="77.0" text="Worker_id" />
             <TableColumn fx:id="worker_name" prefWidth="83.0" text="Worker_name" />
@@ -54,7 +54,6 @@
             <TableColumn fx:id="worker_phone" prefWidth="91.0" text="Worker_phone" />
             <TableColumn fx:id="Activtiy" prefWidth="70.0" text="Activity " />
             <TableColumn fx:id="start_date" prefWidth="72.0" text="Start_date" />
-            <TableColumn fx:id="leave_date" prefWidth="75.0" text="Leave_date" />
          </columns>
       </TableView>
       <Label fx:id="id_label" layoutX="21.0" layoutY="352.0" text="Worker_id:">
@@ -93,12 +92,6 @@
          </font>
       </Label>
       <TextField fx:id="activity_text" layoutX="436.0" layoutY="375.0" prefHeight="31.0" prefWidth="88.0" />
-      <Label fx:id="leave_label" layoutX="603.0" layoutY="350.0" prefHeight="21.0" prefWidth="67.0" text="Leave_date:">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="leave_text" layoutX="603.0" layoutY="375.0" prefHeight="31.0" prefWidth="67.0" />
       <Button fx:id="add1" layoutX="619.0" layoutY="419.0" mnemonicParsing="false" text="Add">
          <font>
             <Font name="Britannic Bold" size="12.0" />

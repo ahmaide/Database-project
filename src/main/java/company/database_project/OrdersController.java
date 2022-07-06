@@ -185,6 +185,31 @@ public class OrdersController implements Initializable {
         stage.close();
     }
 
+    public void deliveredOrders(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("deliveredOrder.fxml"));
+        stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void UnarrangedOrders(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("unArrangedOrders.fxml"));
+        stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void arrangedOrders(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("arrangedOrders.fxml"));
+        stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
     public void addNewOrder(ActionEvent e) throws SQLException, ClassNotFoundException {
         boolean customer = false;
         boolean delivery = false;

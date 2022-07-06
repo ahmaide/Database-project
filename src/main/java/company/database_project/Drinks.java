@@ -15,6 +15,7 @@ public class Drinks {
     private double price;
     public static Map<String, Drinks> list;
     public static ArrayList <String> notActive;
+
     public Drinks(String drink_id, String drink_name, String country, double price){
         this.drink_id = drink_id;
         this.drink_name = drink_name;

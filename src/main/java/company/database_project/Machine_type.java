@@ -1,6 +1,5 @@
 package company.database_project;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +9,8 @@ public class Machine_type {
     private String cups;
     private String color;
     private int last =0;
+    public static int m = 0;
+    public static Machine_type current;
     private Map<String, Drinks> drink_list;
     public static Map<String, Machine_type> list;
 
